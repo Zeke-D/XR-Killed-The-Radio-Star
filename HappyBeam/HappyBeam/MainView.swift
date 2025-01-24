@@ -8,17 +8,32 @@
 import RealityKit
 import SwiftUI
 import HandGesture
+import HappyBeamAssets
 
 /// The Full Space that displays when someone plays the game.
 struct MainView:  View {
     @Environment(AppModel.self) var appModel
     
+    @State var leftHand: Entity?
     
     var body: some View {
         VStack {
             RealityView { content in
+                
+                let configuration = SpatialTrackingSession.Configuration(
+                                    tracking: [.hand])
+                
+                let session = SpatialTrackingSession()
+                await session.run(configuration)
+                self.leftHand = AnchorEntity(.hand(.left, location: .indexFingerTip))
+                content.add(self.leftHand!)
+//                let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
+//                content.add(spawnedSphere)
+
                 // The root entity.
                 content.add(spaceOrigin)
+                let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
+                spaceOrigin.addChild(spawnedSphere)
                 content.add(cameraRelativeAnchor)
                 
                 
@@ -35,6 +50,12 @@ struct MainView:  View {
                             appModel.leftStatus = "🫰"
                         case .postSnap:
                             appModel.leftStatus = "snap"
+                            let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
+                            
+                            spaceOrigin.addChild(spawnedSphere)
+                            spawnedSphere.setPosition(SIMD3(), relativeTo: leftHand!)
+                            
+                            leftHand?.addChild(spawnedSphere)
                         }
                         print(appModel.leftStatus)
                     }
