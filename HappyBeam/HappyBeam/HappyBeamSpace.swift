@@ -1,5 +1,5 @@
 /*
-See the LICENSE.txt file for this sample’s licensing information.
+See the LICENSE.txt file for this sample's licensing information.
 
 Abstract:
 The space where the game takes place.
@@ -35,6 +35,12 @@ struct HappyBeamSpace: View {
             content.add(spaceOrigin)
             content.add(cameraRelativeAnchor)
             spaceOrigin.addChild(beamIntermediate)
+            
+            // Add an immersive sphere
+            let sphere = ModelEntity(mesh: .generateSphere(radius: 0.2), 
+                                   materials: [SimpleMaterial(color: .blue, isMetallic: true)])
+            sphere.position = SIMD3<Float>(x: 0, y: 1.5, z: -2) // Position it in front of the user
+            content.add(sphere)
             
             // MARK: Events
             activationSubscription = content.subscribe(to: AccessibilityEvents.Activate.self, on: nil, componentType: nil) { activation in
