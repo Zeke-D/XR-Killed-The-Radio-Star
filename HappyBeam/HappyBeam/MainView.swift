@@ -41,8 +41,9 @@ struct MainView:  View {
             .handGesture(
                 MySnap(hand: .left)
                     .onChanged { value in
+                        let pos: SIMD3<Float> = value.position
                         print(value.pose == .postSnap ? "L post snap" : "L pre snap")
-                        guard appModel.gesture == HandGestures.snap else { return }
+//                        guard appModel.gesture == HandGestures.sna else { return }
                         switch value.pose {
                         case .noSnap:
                             appModel.leftStatus = "---"
@@ -51,13 +52,13 @@ struct MainView:  View {
                         case .postSnap:
                             appModel.leftStatus = "snap"
                             let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
-                            spawnedSphere.setPosition(value.position, relativeTo: nil)
-                           
                             spaceOrigin.addChild(spawnedSphere)
-                            
-                            leftHand?.addChild(spawnedSphere)
+                            print("\(value.position)")
+                            spawnedSphere.setPosition(value.position, relativeTo: nil)
+
                         }
                         print(appModel.leftStatus)
+                        print("pos: \(pos)")
                     }
             )
             ToggleImmersiveSpaceButton()
