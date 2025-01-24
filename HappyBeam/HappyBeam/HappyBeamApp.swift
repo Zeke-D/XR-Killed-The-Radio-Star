@@ -26,7 +26,8 @@ struct HappyBeamApp: App {
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             //MainView().environment(appModel)
-            SoundOrbView(soundFile: "MONOSTEM.mp3", x: 0, y: 1.5, z: -1)
+//            SoundOrbView(soundFile: "MONOSTEM.mp3", x: 0, y: 1.5, z: -1)
+            SoundOrbView(soundFile: "10TO3KSWEEP.wav", x: 0, y: 1.5, z: -1)
             //SoundOrbView(soundFile: "audio-2.wav", x: 0, y: 1.5, z: 1)
         }
         .immersionStyle(selection: $immersionState, in: .mixed)

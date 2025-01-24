@@ -53,6 +53,7 @@
 		E82F249A2D443E3800E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F24992D443E3800E69E98 /* HappyBeamAssets */; };
 		E82F249F2D44568C00E69E98 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = E82F249E2D44568C00E69E98 /* SoundpipeAudioKit */; };
 		E82F24A12D4458A700E69E98 /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */; };
+		E82F24A32D445E8200E69E98 /* 10TO3KSWEEP.wav in Resources */ = {isa = PBXBuildFile; fileRef = E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */; };
 		E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */; };
 		E8847F862D4429DA007562A3 /* OrbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F842D4429DA007562A3 /* OrbController.swift */; };
 		E8847F872D4429DA007562A3 /* SoundOrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F852D4429DA007562A3 /* SoundOrbView.swift */; };
@@ -108,6 +109,7 @@
 		B3D51D3D2D4460670063B603 /* SpatialTest.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpatialTest.MP4; sourceTree = SOURCE_ROOT; };
 		B3D51D412D4466D10063B603 /* SweetEmotion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SweetEmotion.mp3; sourceTree = "<group>"; };
 		E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioAnalyzer.swift; path = HappyBeam/AudioAnalyzer.swift; sourceTree = "<group>"; };
+		E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 10TO3KSWEEP.wav; sourceTree = "<group>"; };
 		E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MONOSTEM.mp3; sourceTree = "<group>"; };
 		E8847F842D4429DA007562A3 /* OrbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbController.swift; sourceTree = "<group>"; };
 		E8847F852D4429DA007562A3 /* SoundOrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundOrbView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				32BD3B67299C26E6005798DF /* GlobalEntities.swift */,
 				321C576729788A1900DBBE9E /* GameModel.swift */,
 				32BD3B69299C2729005798DF /* Extensions.swift */,
+				E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */,
 				E8847F842D4429DA007562A3 /* OrbController.swift */,
 				E8847F852D4429DA007562A3 /* SoundOrbView.swift */,
 				321A0C25291C09100042A987 /* HappyBeam.entitlements */,
@@ -203,6 +206,7 @@
 		322D5A842A057FBB003A32F3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */,
 				E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */,
 				329937052A12A8B50073F0B0 /* cloudHit1.m4a */,
 				329937092A12A8B60073F0B0 /* cloudHit2.m4a */,
@@ -365,6 +369,7 @@
 				1F8249602A16EEDA00C2F5D3 /* Cloud.usdz in Resources */,
 				3299370D2A12A8B60073F0B0 /* cloudHit1.m4a in Resources */,
 				329937102A12A8B60073F0B0 /* happyBeamGameplay.m4a in Resources */,
+				E82F24A32D445E8200E69E98 /* 10TO3KSWEEP.wav in Resources */,
 				321A0C19291C02B90042A987 /* Assets.xcassets in Resources */,
 				329937122A12A8B60073F0B0 /* cloudHit4.m4a in Resources */,
 				B3D51D402D44609B0063B603 /* SpatialTest.MP4 in Resources */,
