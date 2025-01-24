@@ -13,6 +13,10 @@ import RealityKit
 import SwiftUI
 import HappyBeamAssets
 
+struct AudioSphereComponent: Component {
+    var lastTime: Float = 0.0
+}
+
 /// The Full Space that displays when someone plays the game.
 struct HappyBeamSpace: View {
     @ObservedObject var gestureModel: HeartGestureModel
@@ -31,6 +35,8 @@ struct HappyBeamSpace: View {
     
     var body: some View {
         RealityView { content in
+            AudioSphereGlowSystem.registerSystem()
+            
             // The root entity.
             content.add(spaceOrigin)
             content.add(cameraRelativeAnchor)
@@ -41,6 +47,10 @@ struct HappyBeamSpace: View {
                                    materials: [SimpleMaterial(color: .blue, isMetallic: true)])
             sphere.position = SIMD3<Float>(x: 0, y: 1.5, z: -2) // Position it in front of the user
             content.add(sphere)
+            
+            let audioSphereScene = try! await Entity(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
+            audioSphereScene.components.set(AudioSphereComponent())
+            content.add(audioSphereScene)
             
             // MARK: Events
             activationSubscription = content.subscribe(to: AccessibilityEvents.Activate.self, on: nil, componentType: nil) { activation in
@@ -55,41 +65,6 @@ struct HappyBeamSpace: View {
                 }
             }
             
-            Task.detached {
-                for await _ in NotificationCenter.default.notifications(named: .GCControllerDidConnect) {
-                    Task { @MainActor in
-                        for controller in GCController.controllers() {
-                            controller.extendedGamepad?.valueChangedHandler = { pad, _ in
-                                Task { @MainActor in
-                                    if gameModel.isUsingControllerInput == false {
-                                        gameModel.isUsingControllerInput = true
-                                    }
-                                    gameModel.controllerInputX = pad.leftThumbstick.xAxis.value
-                                    gameModel.controllerInputY = pad.leftThumbstick.yAxis.value
-                                    if gameModel.controllerInputX != 0, gameModel.controllerInputY != 0 {
-                                        gameModel.controllerLastInput = Date.timeIntervalSinceReferenceDate
-                                    }
-                                }
-                            }
-                            
-                            if controller.extendedGamepad == nil {
-                                controller.microGamepad?.valueChangedHandler = { pad, _ in
-                                    Task { @MainActor in
-                                        if gameModel.isUsingControllerInput == false {
-                                            gameModel.isUsingControllerInput = true
-                                        }
-                                        gameModel.controllerInputX = pad.dpad.xAxis.value
-                                        gameModel.controllerInputY = pad.dpad.yAxis.value
-                                        if gameModel.controllerInputX != 0, gameModel.controllerInputY != 0 {
-                                            gameModel.controllerLastInput = Date.timeIntervalSinceReferenceDate
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         } update: { updateContent in
             let handsCenterTransform = gestureModel.computeTransformOfUserPerformedHeartGesture()
             if let handsCenter = handsCenterTransform {
@@ -119,23 +94,6 @@ struct HappyBeamSpace: View {
                 }
             }
             
-            let shouldShowBeam = handsCenterTransform != nil
-            if !gameModel.isPaused && gameModel.isPlaying {
-                if shouldShowBeam {
-                    if isShowingBeam == false {
-                        beamIntermediate.addChild(beam)
-                        startBlasterBeam(for: beam, beamType: .gesture)
-                    }
-                    isShowingBeam = true
-                    
-                } else if !shouldShowBeam && isShowingBeam == true {
-                    if Date.timeIntervalSinceReferenceDate > lastHeartDetectionTime + 0.1 {
-                        isShowingBeam = false
-                        beamIntermediate.removeChild(beam)
-                        endBlasterBeam()
-                    }
-                }
-            }
         }
         .gesture(DragGesture(minimumDistance: 0.0)
             .targetedToAnyEntity()
@@ -397,3 +355,23 @@ func eventHasTarget(event: CollisionEvents.Began, matching targetName: String) -
     
     return beam
 }
+
+class AudioSphereGlowSystem: System {
+    required init(scene: RealityKit.Scene) {
+    }
+    
+    static let query = EntityQuery(where: .has(AudioSphereComponent.self))
+    
+    func update(context: SceneUpdateContext) {
+        for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
+            entity.components[AudioSphereComponent.self]!.lastTime += Float(context.deltaTime)
+            let t = entity.components[AudioSphereComponent.self]!.lastTime
+            let sphere = entity.findEntity(named: "Sphere")!
+            var material = sphere.modelComponent!.materials.first! as! ShaderGraphMaterial
+            
+            try! material.setParameter(name: "emission", value: .float(Float(sin(t))))
+            sphere.modelComponent!.materials[0] = material
+        }
+    }
+}
+
