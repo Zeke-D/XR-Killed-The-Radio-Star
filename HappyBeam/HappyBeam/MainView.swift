@@ -13,13 +13,26 @@ import HandGesture
 struct MainView:  View {
     @Environment(AppModel.self) var appModel
     
+    @StateObject private var controller: OrbController
+    
+    init(soundFile: String, x: Float, y: Float, z: Float) {
+        // Initialize our OrbController here
+        _controller = StateObject(wrappedValue: OrbController(
+            soundFile: soundFile,
+            x: x,
+            y: y,
+            z: z
+        ))
+    }
+    
     
     var body: some View {
         VStack {
             RealityView { content in
                 // The root entity.
-                content.add(spaceOrigin)
-                content.add(cameraRelativeAnchor)
+//                content.add(spaceOrigin)
+//                content.add(cameraRelativeAnchor)
+                content.add(controller.orb)
                 
                 
             }
