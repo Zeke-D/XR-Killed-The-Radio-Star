@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,7 @@
 		B36AA6192D440F59000B742F /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA6182D440F53000B742F /* AppModel.swift */; };
 		B36AA61B2D4413F6000B742F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61A2D4413F6000B742F /* ContentView.swift */; };
 		B36AA61D2D441421000B742F /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61C2D441421000B742F /* ToggleImmersiveSpaceButton.swift */; };
-		E82F24972D443CF600E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F24962D443CF600E69E98 /* HappyBeamAssets */; };
+		E82F249C2D44420A00E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F249B2D44420A00E69E98 /* HappyBeamAssets */; };
 		E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */; };
 		E8847F862D4429DA007562A3 /* OrbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F842D4429DA007562A3 /* OrbController.swift */; };
 		E8847F872D4429DA007562A3 /* SoundOrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F852D4429DA007562A3 /* SoundOrbView.swift */; };
@@ -107,9 +107,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E82F24972D443CF600E69E98 /* HappyBeamAssets in Frameworks */,
 				E8847F882D442EB8007562A3 /* HappyBeamAssets in Frameworks */,
 				0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */,
+				E82F249C2D44420A00E69E98 /* HappyBeamAssets in Frameworks */,
 				B36AA6152D43FC99000B742F /* HandGesture in Frameworks */,
 				B36AA6122D43FC86000B742F /* ARUnderstanding in Frameworks */,
 			);
@@ -271,7 +271,7 @@
 				0A07FBCA2D43E5B800D26F6F /* AudioKit */,
 				B36AA6112D43FC86000B742F /* ARUnderstanding */,
 				B36AA6142D43FC99000B742F /* HandGesture */,
-				E82F24962D443CF600E69E98 /* HappyBeamAssets */,
+				E82F249B2D44420A00E69E98 /* HappyBeamAssets */,
 			);
 			productName = HappyBeamX;
 			productReference = 321A0C0B291C02B80042A987 /* HappyBeam.app */;
@@ -311,7 +311,6 @@
 				0A07FBC92D43E5B800D26F6F /* XCRemoteSwiftPackageReference "AudioKit" */,
 				B36AA6102D43FC86000B742F /* XCRemoteSwiftPackageReference "ARUnderstanding" */,
 				B36AA6132D43FC99000B742F /* XCRemoteSwiftPackageReference "HandGesture" */,
-				E82F24952D443CF600E69E98 /* XCLocalSwiftPackageReference "Packages/HappyBeamAssets" */,
 			);
 			productRefGroup = 321A0C0C291C02B80042A987 /* Products */;
 			projectDirPath = "";
@@ -597,13 +596,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		E82F24952D443CF600E69E98 /* XCLocalSwiftPackageReference "Packages/HappyBeamAssets" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/HappyBeamAssets;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		0A07FBC92D43E5B800D26F6F /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -647,7 +639,7 @@
 			package = B36AA6132D43FC99000B742F /* XCRemoteSwiftPackageReference "HandGesture" */;
 			productName = HandGesture;
 		};
-		E82F24962D443CF600E69E98 /* HappyBeamAssets */ = {
+		E82F249B2D44420A00E69E98 /* HappyBeamAssets */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HappyBeamAssets;
 		};
