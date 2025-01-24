@@ -39,7 +39,7 @@ struct MainView:  View {
                 
             }
             .handGesture(
-                SnapGesture(hand: .left)
+                MySnap(hand: .left)
                     .onChanged { value in
                         print(value.pose == .postSnap ? "L post snap" : "L pre snap")
                         guard appModel.gesture == HandGestures.snap else { return }
@@ -51,9 +51,9 @@ struct MainView:  View {
                         case .postSnap:
                             appModel.leftStatus = "snap"
                             let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
-                            
+                            spawnedSphere.setPosition(value.position, relativeTo: nil)
+                           
                             spaceOrigin.addChild(spawnedSphere)
-                            spawnedSphere.setPosition(SIMD3(), relativeTo: leftHand!)
                             
                             leftHand?.addChild(spawnedSphere)
                         }

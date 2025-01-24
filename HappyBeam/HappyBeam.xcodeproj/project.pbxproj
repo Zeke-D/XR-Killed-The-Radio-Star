@@ -47,6 +47,7 @@
 		B36AA6192D440F59000B742F /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA6182D440F53000B742F /* AppModel.swift */; };
 		B36AA61B2D4413F6000B742F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61A2D4413F6000B742F /* ContentView.swift */; };
 		B36AA61D2D441421000B742F /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61C2D441421000B742F /* ToggleImmersiveSpaceButton.swift */; };
+		B36AA61F2D443441000B742F /* MySnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61E2D443441000B742F /* MySnap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		B36AA6182D440F53000B742F /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		B36AA61A2D4413F6000B742F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B36AA61C2D441421000B742F /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
+		B36AA61E2D443441000B742F /* MySnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySnap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				321A0C12291C02B80042A987 /* HappyBeamApp.swift */,
 				B36AA61A2D4413F6000B742F /* ContentView.swift */,
 				32D0FA0E291EE85800FF07D8 /* HappyBeamSpace.swift */,
+				B36AA61E2D443441000B742F /* MySnap.swift */,
 				B36AA61C2D441421000B742F /* ToggleImmersiveSpaceButton.swift */,
 				B36AA6162D440E89000B742F /* MainView.swift */,
 				B36AA6182D440F53000B742F /* AppModel.swift */,
@@ -341,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32665A97299AB02200EBA549 /* Lobby.swift in Sources */,
+				B36AA61F2D443441000B742F /* MySnap.swift in Sources */,
 				B36AA6172D440E91000B742F /* MainView.swift in Sources */,
 				B36AA61B2D4413F6000B742F /* ContentView.swift in Sources */,
 				321A0C13291C02B80042A987 /* HappyBeamApp.swift in Sources */,
