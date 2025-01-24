@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,6 +48,7 @@
 		B36AA61B2D4413F6000B742F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61A2D4413F6000B742F /* ContentView.swift */; };
 		B36AA61D2D441421000B742F /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61C2D441421000B742F /* ToggleImmersiveSpaceButton.swift */; };
 		B36AA61F2D443441000B742F /* MySnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA61E2D443441000B742F /* MySnap.swift */; };
+		E82F249A2D443E3800E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F24992D443E3800E69E98 /* HappyBeamAssets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E82F249A2D443E3800E69E98 /* HappyBeamAssets in Frameworks */,
 				0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */,
 				B36AA6152D43FC99000B742F /* HandGesture in Frameworks */,
 				B36AA6122D43FC86000B742F /* ARUnderstanding in Frameworks */,
@@ -264,6 +266,7 @@
 				0A07FBCA2D43E5B800D26F6F /* AudioKit */,
 				B36AA6112D43FC86000B742F /* ARUnderstanding */,
 				B36AA6142D43FC99000B742F /* HandGesture */,
+				E82F24992D443E3800E69E98 /* HappyBeamAssets */,
 			);
 			productName = HappyBeamX;
 			productReference = 321A0C0B291C02B80042A987 /* HappyBeam.app */;
@@ -303,6 +306,7 @@
 				0A07FBC92D43E5B800D26F6F /* XCRemoteSwiftPackageReference "AudioKit" */,
 				B36AA6102D43FC86000B742F /* XCRemoteSwiftPackageReference "ARUnderstanding" */,
 				B36AA6132D43FC99000B742F /* XCRemoteSwiftPackageReference "HandGesture" */,
+				E82F24982D443E3800E69E98 /* XCLocalSwiftPackageReference "Packages/HappyBeamAssets" */,
 			);
 			productRefGroup = 321A0C0C291C02B80042A987 /* Products */;
 			projectDirPath = "";
@@ -586,6 +590,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		E82F24982D443E3800E69E98 /* XCLocalSwiftPackageReference "Packages/HappyBeamAssets" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/HappyBeamAssets;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		0A07FBC92D43E5B800D26F6F /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -632,6 +643,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B36AA6132D43FC99000B742F /* XCRemoteSwiftPackageReference "HandGesture" */;
 			productName = HandGesture;
+		};
+		E82F24992D443E3800E69E98 /* HappyBeamAssets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HappyBeamAssets;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
