@@ -49,6 +49,7 @@
 		E82F249C2D44420A00E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F249B2D44420A00E69E98 /* HappyBeamAssets */; };
 		E82F249F2D44568C00E69E98 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = E82F249E2D44568C00E69E98 /* SoundpipeAudioKit */; };
 		E82F24A12D4458A700E69E98 /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */; };
+		E82F24A32D445E8200E69E98 /* 10TO3KSWEEP.wav in Resources */ = {isa = PBXBuildFile; fileRef = E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */; };
 		E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */; };
 		E8847F862D4429DA007562A3 /* OrbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F842D4429DA007562A3 /* OrbController.swift */; };
 		E8847F872D4429DA007562A3 /* SoundOrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F852D4429DA007562A3 /* SoundOrbView.swift */; };
@@ -99,7 +100,8 @@
 		B36AA6182D440F53000B742F /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		B36AA61A2D4413F6000B742F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B36AA61C2D441421000B742F /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
-		E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioAnalyzer.swift; path = HappyBeam/AudioAnalyzer.swift; sourceTree = "<group>"; };
+		E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnalyzer.swift; sourceTree = "<group>"; };
+		E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 10TO3KSWEEP.wav; sourceTree = "<group>"; };
 		E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MONOSTEM.mp3; sourceTree = "<group>"; };
 		E8847F842D4429DA007562A3 /* OrbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbController.swift; sourceTree = "<group>"; };
 		E8847F852D4429DA007562A3 /* SoundOrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundOrbView.swift; sourceTree = "<group>"; };
@@ -133,7 +135,6 @@
 		321A0C02291C02B70042A987 = {
 			isa = PBXGroup;
 			children = (
-				E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */,
 				323FE0072B02EA5F0097340F /* README.md */,
 				321A0C0D291C02B80042A987 /* HappyBeam */,
 				32C96CBE2A2FED900030AA37 /* Packages */,
@@ -168,6 +169,7 @@
 				32BD3B67299C26E6005798DF /* GlobalEntities.swift */,
 				321C576729788A1900DBBE9E /* GameModel.swift */,
 				32BD3B69299C2729005798DF /* Extensions.swift */,
+				E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */,
 				E8847F842D4429DA007562A3 /* OrbController.swift */,
 				E8847F852D4429DA007562A3 /* SoundOrbView.swift */,
 				321A0C25291C09100042A987 /* HappyBeam.entitlements */,
@@ -191,6 +193,7 @@
 		322D5A842A057FBB003A32F3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */,
 				E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */,
 				329937052A12A8B50073F0B0 /* cloudHit1.m4a */,
 				329937092A12A8B60073F0B0 /* cloudHit2.m4a */,
@@ -344,6 +347,7 @@
 				1F8249602A16EEDA00C2F5D3 /* Cloud.usdz in Resources */,
 				3299370D2A12A8B60073F0B0 /* cloudHit1.m4a in Resources */,
 				329937102A12A8B60073F0B0 /* happyBeamGameplay.m4a in Resources */,
+				E82F24A32D445E8200E69E98 /* 10TO3KSWEEP.wav in Resources */,
 				321A0C19291C02B90042A987 /* Assets.xcassets in Resources */,
 				329937122A12A8B60073F0B0 /* cloudHit4.m4a in Resources */,
 				32745A162A02F4C1000035F8 /* UpdatedGrumpyScene2.usdz in Resources */,
