@@ -17,6 +17,17 @@ struct MainView:  View {
     @Environment(AppModel.self) var appModel
     
     @State var leftHand: Entity?
+    @StateObject private var controller: OrbController
+    
+    init(soundFile: String, x: Float, y: Float, z: Float) {
+        // Initialize our OrbController here
+        _controller = StateObject(wrappedValue: OrbController(
+            soundFile: soundFile,
+            x: x,
+            y: y,
+            z: z
+        ))
+    }
     
     var body: some View {
         RealityView { content in
@@ -40,6 +51,8 @@ struct MainView:  View {
             
             content.add(cameraRelativeAnchor)
             
+            content.add(controller.orb)
+                
         }
         .handGesture(
             MySnap(hand: .left)
@@ -49,6 +62,7 @@ struct MainView:  View {
                     }
                 }
         )
+        ToggleImmersiveSpaceButton()
     }
     
     func handleSnap(value: MySnap.Value) -> Void {
