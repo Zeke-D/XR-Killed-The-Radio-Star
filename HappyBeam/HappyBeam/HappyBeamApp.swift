@@ -17,8 +17,11 @@ struct HappyBeamApp: App {
     
     var body: some SwiftUI.Scene {
         WindowGroup {
-            ContentView()
-                .environment(appModel)
+            VStack{
+                PlayerView()
+                ContentView()
+                    .environment(appModel)
+            }
         }
         
         ImmersiveSpace(id: "mainView") {

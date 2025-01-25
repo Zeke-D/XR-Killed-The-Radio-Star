@@ -9,6 +9,8 @@ import RealityKit
 import SwiftUI
 import HandGesture
 import HappyBeamAssets
+import AVKit
+import AVFoundation
 
 /// The Full Space that displays when someone plays the game.
 struct MainView:  View {
@@ -17,51 +19,50 @@ struct MainView:  View {
     @State var leftHand: Entity?
     
     var body: some View {
-        VStack {
-            RealityView { content in
-                
-                let configuration = SpatialTrackingSession.Configuration(
-                                    tracking: [.hand])
-                
-                let session = SpatialTrackingSession()
-                await session.run(configuration)
-                self.leftHand = AnchorEntity(.hand(.left, location: .indexFingerTip))
-                content.add(self.leftHand!)
+        RealityView { content in
+            
+            let configuration = SpatialTrackingSession.Configuration(
+                                tracking: [.hand])
+            
+            let session = SpatialTrackingSession()
+            await session.run(configuration)
+            self.leftHand = AnchorEntity(.hand(.left, location: .indexFingerTip))
+            content.add(self.leftHand!)
 //                let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
 //                content.add(spawnedSphere)
 
-                // The root entity.
-                content.add(spaceOrigin)
-                let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
-                spaceOrigin.addChild(spawnedSphere)
-                content.add(cameraRelativeAnchor)
-                
-                
-            }
-            .handGesture(
-                MySnap(hand: .left)
-                    .onChanged { value in
-                        let pos: SIMD3<Float> = value.position
-                        print(value.pose == .postSnap ? "L post snap" : "L pre snap")
-//                        guard appModel.gesture == HandGestures.sna else { return }
-                        switch value.pose {
-                        case .noSnap:
-                            appModel.leftStatus = "---"
-                        case .preSnap:
-                            appModel.leftStatus = "🫰"
-                        case .postSnap:
-                            appModel.leftStatus = "snap"
-                            let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
-                            spaceOrigin.addChild(spawnedSphere)
-                            print("\(value.position)")
-                            spawnedSphere.setPosition(value.position, relativeTo: nil)
-
-                        }
-                        print(appModel.leftStatus)
-                        print("pos: \(pos)")
-                    }
-            )
-            ToggleImmersiveSpaceButton()
+            // The root entity.
+            content.add(spaceOrigin)
+            
+            // Create a URL that points to the movie file.
+            print("Added video!")
+            
+            
+            content.add(cameraRelativeAnchor)
+            
         }
+        .handGesture(
+            MySnap(hand: .left)
+                .onChanged { value in
+                    let pos: SIMD3<Float> = value.position
+                    print(value.pose == .postSnap ? "L post snap" : "L pre snap")
+//                        guard appModel.gesture == HandGestures.sna else { return }
+                    switch value.pose {
+                    case .noSnap:
+                        appModel.leftStatus = "---"
+                    case .preSnap:
+                        appModel.leftStatus = "🫰"
+                    case .postSnap:
+                        appModel.leftStatus = "snap"
+                        let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
+                        spaceOrigin.addChild(spawnedSphere)
+                        print("\(value.position)")
+                        spawnedSphere.setPosition(value.position, relativeTo: nil)
+
+                    }
+                    print(appModel.leftStatus)
+                    print("pos: \(pos)")
+                }
+        )
     }
 }
