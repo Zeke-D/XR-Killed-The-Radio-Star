@@ -1,6 +1,3 @@
-# Happy Beam
-Leverage an immersive space to create a fun game using ARKit.
-
-In visionOS, you can create fun, dynamic games and apps using several different frameworks to create new kinds of spatial experiences: RealityKit, ARKit, SwiftUI, and Group Activities. This sample introduces Happy Beam, a game where you and your friends can hop on a FaceTime call and play together. To learn more about the features that this sample implements, see [Happy Beam](https://developer.apple.com/documentation/visionos/happybeam).
-
-> Features in this sample that rely on ARKit or Group Activities only run on device, not in Simulator.
+version https://git-lfs.github.com/spec/v1
+oid sha256:9f9c2ed2336cf708446b957246c0deaeea71f59a160241c68261e89300cd2fa4
+size 622
