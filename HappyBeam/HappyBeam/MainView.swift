@@ -19,68 +19,33 @@ struct MainView:  View {
     @Environment(AppModel.self) var appModel
     @State private var engine = AudioEngine()
     @State private var player: AudioPlayer?
-    @State private var reverb: ZitaReverb?
-    @State private var mixer = Mixer()
-    @State private var reverbMix: Float = 0.0
     @State private var timer: Timer?
     @State private var isAudioSetup = false
     
-    
+    let root = Entity()
+    @State private var testCustomAudio : CustomAudioSource? = nil
     
     var body: some View {
         RealityView { content in
-            // Set up audio player and reverb
-            do {
-//                if let soundURL = Bundle.main.url(forResource: "10TO3KSWEEP", withExtension: "wav") {
-                if let soundURL = Bundle.main.url(forResource: "MONOSTEM", withExtension: "mp3") {
-                    player = AudioPlayer(url: soundURL)
-                    if let player = player {
-                        reverb = ZitaReverb(
-                            player,
-                            predelay: 60,              // 60ms predelay
-                            crossoverFrequency: 200,    // Crossover between low/mid
-                            lowReleaseTime: 3,         // Bass reverb time
-                            midReleaseTime: 2,         // Mid frequency reverb time
-                            dampingFrequency: 6000,    // High frequency damping
-                            equalizerFrequency1: 315,  // First EQ frequency
-                            equalizerLevel1: 0,        // First EQ level (dB)
-                            equalizerFrequency2: 1500, // Second EQ frequency
-                            equalizerLevel2: 0,        // Second EQ level (dB)
-                            dryWetMix: reverbMix       // Start dry
-                        )
-                        
-                        if let reverb = reverb {
-                            engine.output = reverb
-                            
-                            // Create timer to toggle reverb with smoother transitions
-                            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak reverb] _ in
-                                guard let reverb = reverb else { return }
-                                if reverbMix == 0.0 && reverb.dryWetMix < 0.7 {
-                                    // Gradually increase reverb
-                                    reverb.dryWetMix += 0.05
-                                    if reverb.dryWetMix >= 0.7 {
-                                        reverbMix = 0.7
-                                    }
-                                } else if reverbMix == 0.7 && reverb.dryWetMix > 0.0 {
-                                    // Gradually decrease reverb
-                                    reverb.dryWetMix -= 0.05
-                                    if reverb.dryWetMix <= 0.0 {
-                                        reverbMix = 0.0
-                                    }
-                                }
-                            }
-                            
-                            try engine.start()
-                            player.play()
-                            isAudioSetup = true
-                        }
-                    }
-                }
-            } catch {
-                print("Failed to load audio file: \(error)")
-            }
+            
+            // Example of loading audio file:
+            //            let soundURL = Bundle.main.url(forResource: "10TO3KSWEEP", withExtension: "wav")!
+            //            player = AudioPlayer(url: soundURL)
             
             content.add(spaceOrigin)
+            content.add(root)
+            
+            content.add(cameraRelativeAnchor)
+            let addExampleAudioEntity = false
+            if addExampleAudioEntity {
+                let exampleAudioEntity = Entity()
+                // Modify the entity here with location, gain, etc.
+                testCustomAudio = CustomAudioSource(entity: exampleAudioEntity)
+                // This can be any AudioKit node!
+                testCustomAudio?.setSource(source: WhiteNoise())
+                testCustomAudio?.start()
+                root.addChild(exampleAudioEntity)
+            }
             
             let movieScene = try! await Entity(named: "xrk/MovieScene", in: happyBeamAssetsBundle)
             appModel.movieScene = movieScene
