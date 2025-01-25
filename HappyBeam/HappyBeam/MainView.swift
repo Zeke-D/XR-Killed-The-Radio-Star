@@ -44,25 +44,34 @@ struct MainView:  View {
         .handGesture(
             MySnap(hand: .left)
                 .onChanged { value in
-                    let pos: SIMD3<Float> = value.position
-                    print(value.pose == .postSnap ? "L post snap" : "L pre snap")
-//                        guard appModel.gesture == HandGestures.sna else { return }
-                    switch value.pose {
-                    case .noSnap:
-                        appModel.leftStatus = "---"
-                    case .preSnap:
-                        appModel.leftStatus = "🫰"
-                    case .postSnap:
-                        appModel.leftStatus = "snap"
-                        let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
-                        spaceOrigin.addChild(spawnedSphere)
-                        print("\(value.position)")
-                        spawnedSphere.setPosition(value.position, relativeTo: nil)
-
+                    if (value.pose == .postSnap) {
+                        handleSnap(value: value)
                     }
-                    print(appModel.leftStatus)
-                    print("pos: \(pos)")
                 }
         )
+    }
+    
+    func handleSnap(value: MySnap.Value) -> Void {
+        print("From: ", self.appModel.playingState)
+        switch self.appModel.playingState {
+        case .notStarted:
+            self.appModel.playingState = .started
+        case .started:
+            self.appModel.playingState = .musicStart
+        case .musicStart:
+            self.appModel.playingState = .flatVideo
+        case .flatVideo:
+            self.appModel.playingState = .spatialVideo
+        case .spatialVideo:
+            self.appModel.playingState = .fullOuterSpace
+        case .fullOuterSpace:
+            self.appModel.playingState = .flying
+        case .flying:
+            self.appModel.playingState = .collaborative
+        case .collaborative:
+            print("Done!")
+        default: break
+        }
+        print("To: ", self.appModel.playingState)
     }
 }

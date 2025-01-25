@@ -15,4 +15,21 @@ class AppModel {
         case open
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
+    
+    
+    enum PlayingState {
+        case notStarted
+        case started
+        case spotlight
+        case musicStart
+        case flatVideo
+        case spatialVideo
+        case fullOuterSpace
+        case flying
+        case collaborative
+    }
+    
+    var playingState = PlayingState.notStarted
+    
+    
 }
