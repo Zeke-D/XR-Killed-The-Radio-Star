@@ -38,6 +38,7 @@ def Xform "Root"
     }
 
     def "Ground" (
+        active = false
         prepend apiSchemas = ["MaterialBindingAPI"]
         references = @../Ground.usda@
     )
@@ -86,8 +87,8 @@ def Xform "Root"
             )
             double size = 0.2
             quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (10, 6.666667, 0.015384615)
-            float3 xformOp:translate = (0, 0, -1.3114562)
+            float3 xformOp:scale = (20, 13.333334, 0.03076923)
+            float3 xformOp:translate = (0, -0.50631905, -8.206028)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "RCP_BehaviorsContainer"
@@ -145,6 +146,9 @@ def Xform "Root"
 
     def Xform "Lights"
     {
+        float3 xformOp:translate = (0, 2.7760584, 3.4430573)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
         def Xform "PointLight"
         {
             quatf xformOp:orient = (1, 0, 0, 0)
@@ -208,6 +212,142 @@ def Xform "Root"
                 float3 color = (0.8076743, 1, 0.9545373)
                 token info:id = "RealityKit.PointLight"
                 float intensity = 100000
+            }
+        }
+
+        def Xform "PointLight_4"
+        {
+            float2 ui:nodegraph:node:pos = (20, 20)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (-1.69173, -0.9526756, -10.241348)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (0.8076743, 1, 0.9545373)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
+            }
+        }
+
+        def Xform "PointLight_5"
+        {
+            float2 ui:nodegraph:node:pos = (236, 124.5)
+            int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (-0.33015525, -0.9526756, -10.241348)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (1, 0.88081515, 0.6541668)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
+            }
+        }
+
+        def Xform "PointLight_6"
+        {
+            float2 ui:nodegraph:node:pos = (256, 144.5)
+            int ui:nodegraph:node:stackingOrder = 3
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.86250377, -0.9526756, -10.241348)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (1, 0.88081515, 0.6541668)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
+            }
+        }
+
+        def Xform "PointLight_7"
+        {
+            float2 ui:nodegraph:node:pos = (276, 164.5)
+            int ui:nodegraph:node:stackingOrder = 4
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (1.7023833, -0.9526757, -10.241348)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (0.8076743, 1, 0.9545373)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
+            }
+        }
+    }
+
+    def "Theatre" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 0)
+        }
+        prepend references = @Theatre.usdc@
+    )
+    {
+        rel material:binding = </Root/Theatre/_materials/Material> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 4.5, 7.4505806e-7)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "env_light" (
+            active = false
+        )
+        {
+            def DomeLight "env_light" (
+                prepend references = </Root/Theatre/env_light>
+            )
+            {
+                float inputs:intensity = 1
+                asset inputs:texture:file = @./textures/color_121212.hdr@
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (0.99999994, -1.8280641e-16, -3.580282e-8, -1.9786737e-16)
+                float3 xformOp:rotateXYZ = (90, 0, 90)
+                float3 xformOp:scale = (0.9999998, 0.9999998, 0.9999998)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+        }
+
+        over "_materials"
+        {
+            over "Material"
+            {
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                over "Principled_BSDF"
+                {
+                    float inputs:clearcoatRoughness = 1
+                    color3f inputs:diffuseColor = (0.19450709, 0.024973257, 0.04623487) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:roughness = 1
+                    float inputs:specular = 0.2
+                }
+            }
+
+            over "TheatreWall"
+            {
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (0.071158886, 0.039066307, 0.041106366) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:roughness = 1
+                    float inputs:specular = 0.2
+                }
             }
         }
     }

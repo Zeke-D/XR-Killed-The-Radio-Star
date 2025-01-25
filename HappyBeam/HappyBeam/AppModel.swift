@@ -134,15 +134,18 @@ class AppModel {
             self.dimLightsAndPlayMusic()
             self.playingState = .musicStart
         case .musicStart:
-            self.playingState = .flatVideo
-        case .flatVideo:
-            self.playingState = .spatialVideo
+            let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
+            var snapEntity = Entity()
+            snapEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
+            snapEntity.spatialAudio = SpatialAudioComponent()
+            snapEntity.setPosition(value.position, relativeTo: nil)
+            snapEntity.playAudio(shinySnap)
+            spaceOrigin.addChild(snapEntity)
+            break
         case .spatialVideo:
-            self.playingState = .fullOuterSpace
+            break
         case .fullOuterSpace:
-            self.playingState = .flying
-        case .flying:
-            self.playingState = .collaborative
+            break
         case .collaborative:
             print("Done!")
         default: break
@@ -176,7 +179,6 @@ class AppModel {
         var screen = self.movieScene.findEntity(named: "Screen")!
         screen.addChild(self.mainTrackEntity)
         self.mainTrackEntity.playAudio(mainTrackSound)
-        print("Playing audio")
         
         
         // play movie after delay
@@ -189,12 +191,23 @@ class AppModel {
         let moveBack = Animation.init()
         moveBack.duration = 3
         moveBack.delay = 0
-        moveBack.direction = SIMD3<Float>(0, -0.2, 10)
+        moveBack.direction = SIMD3<Float>(0, 0, 20)
         
+        let explode = Animation.init()
+        explode.duration = 1
+        explode.delay = 0
+        explode.onStart = {
+            let theatre = self.movieScene.findEntity(named: "Theatre")!
+            for anim in theatre.availableAnimations {
+                theatre.playAnimation(anim, startsPaused: false)
+            }
+        }
+        explode.direction = SIMD3<Float>(0, 0, 20)
+
         var mc = MovieComponent()
         mc.entity = screen
         mc.animation_queue = [
-            moveUp, moveBack
+            moveUp, moveBack, explode
         ]
         screen.components.set(mc)
     }

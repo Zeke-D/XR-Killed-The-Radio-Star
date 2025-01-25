@@ -10,15 +10,157 @@
 
 def Xform "Root"
 {
+    reorder nameChildren = ["Rocket", "ParticleEmitter", "ParticleEmitter_1", "ParticleEmitter_2", "Particles"]
     def "Rocket" (
         active = true
         references = @../RocketToy2.usdz@
     )
     {
+        reorder nameChildren = ["geom", "Particles"]
         quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (10, 10, 10)
+        float3 xformOp:scale = (3, 3, 3)
         float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Xform "Particles" (
+            active = true
+        )
+        {
+            reorder nameChildren = ["ParticleEmitter", "ParticleEmitter_1", "ParticleEmitter_2"]
+            quatf xformOp:orient = (0.99999994, 0, 0, 0)
+            float3 xformOp:scale = (0.33333334, 0.33333334, 0.33333334)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Xform "ParticleEmitter" (
+                customData = {
+                    float3 rotationEulerHint = (0, 0, 3.1415927)
+                }
+            )
+            {
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (-4.371139e-8, 0, 0, 1)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0.06891941, 0.011027812, -0.041640963)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "VFXEmitter"
+                {
+                    token info:id = "RealityKit.VFXEmitter"
+
+                    def RealityKitStruct "currentState"
+                    {
+                        token emitterShape = "Point"
+
+                        def RealityKitStruct "mainEmitter"
+                        {
+                            token blendMode = "Additive"
+                            float colorEvolutionPower = 0.4
+                            float4 endColorA = (1, 0.3976593, 0, 1)
+                            float4 endColorB = (1, 0.20247415, 0.00010184136, 1)
+                            bool isLightingEnabled = 0
+                            token opacityOverLife = "EaseFadeOut"
+                            float4 startColorA = (0.025533527, 0.5595108, 1, 1)
+                            float4 startColorB = (0.014974341, 0.5880682, 1, 1)
+                            bool useEndColor = 1
+                            bool useEndColorRange = 1
+                            bool useStartColorRange = 1
+                        }
+
+                        def RealityKitStruct "spawnedEmitter"
+                        {
+                        }
+                    }
+                }
+            }
+
+            def Xform "ParticleEmitter_1" (
+                customData = {
+                    float3 rotationEulerHint = (0, 0, 3.1415927)
+                }
+            )
+            {
+                float2 ui:nodegraph:node:pos = (40, 40)
+                int ui:nodegraph:node:stackingOrder = 2
+                quatf xformOp:orient = (-4.371139e-8, 0, 0, 1)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (-0.062249552, 0.011027804, -0.03212972)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "VFXEmitter"
+                {
+                    token info:id = "RealityKit.VFXEmitter"
+
+                    def RealityKitStruct "currentState"
+                    {
+                        token emitterShape = "Point"
+
+                        def RealityKitStruct "mainEmitter"
+                        {
+                            token blendMode = "Additive"
+                            float colorEvolutionPower = 0.4
+                            float4 endColorA = (1, 0.3976593, 0, 1)
+                            float4 endColorB = (1, 0.20247415, 0.00010184136, 1)
+                            bool isLightingEnabled = 0
+                            token opacityOverLife = "EaseFadeOut"
+                            float4 startColorA = (0.025533527, 0.5595108, 1, 1)
+                            float4 startColorB = (0.014974341, 0.5880682, 1, 1)
+                            bool useEndColor = 1
+                            bool useEndColorRange = 1
+                            bool useStartColorRange = 1
+                        }
+
+                        def RealityKitStruct "spawnedEmitter"
+                        {
+                        }
+                    }
+                }
+            }
+
+            def Xform "ParticleEmitter_2" (
+                customData = {
+                    float3 rotationEulerHint = (0, 0, 3.1415927)
+                }
+            )
+            {
+                float2 ui:nodegraph:node:pos = (60, 60)
+                int ui:nodegraph:node:stackingOrder = 3
+                quatf xformOp:orient = (-4.371139e-8, 0, 0, 1)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0.00831604, 0.0110278055, 0.084089726)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "VFXEmitter"
+                {
+                    token info:id = "RealityKit.VFXEmitter"
+
+                    def RealityKitStruct "currentState"
+                    {
+                        token emitterShape = "Point"
+
+                        def RealityKitStruct "mainEmitter"
+                        {
+                            token blendMode = "Additive"
+                            float colorEvolutionPower = 0.4
+                            float4 endColorA = (1, 0.3976593, 0, 1)
+                            float4 endColorB = (1, 0.20247415, 0.00010184136, 1)
+                            bool isLightingEnabled = 0
+                            token opacityOverLife = "EaseFadeOut"
+                            float4 startColorA = (0.025533527, 0.5595108, 1, 1)
+                            float4 startColorB = (0.014974341, 0.5880682, 1, 1)
+                            bool useEndColor = 1
+                            bool useEndColorRange = 1
+                            bool useStartColorRange = 1
+                        }
+
+                        def RealityKitStruct "spawnedEmitter"
+                        {
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
