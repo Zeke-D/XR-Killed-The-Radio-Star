@@ -1,4 +1,5 @@
 import SwiftUI
+import RealityKit
 
 /// Maintains app-wide state
 @MainActor
@@ -30,6 +31,8 @@ class AppModel {
     }
     
     var playingState = PlayingState.notStarted
+    
+    var movieScene: Entity?
     
     
 }
