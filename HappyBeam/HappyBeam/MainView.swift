@@ -16,19 +16,6 @@ import AVFoundation
 struct MainView:  View {
     @Environment(AppModel.self) var appModel
     
-    @State var leftHand: Entity?
-    @StateObject private var controller: OrbController
-    
-    init(soundFile: String, x: Float, y: Float, z: Float) {
-        // Initialize our OrbController here
-        _controller = StateObject(wrappedValue: OrbController(
-            soundFile: soundFile,
-            x: x,
-            y: y,
-            z: z
-        ))
-    }
-    
     var body: some View {
         RealityView { content in
             
@@ -37,26 +24,14 @@ struct MainView:  View {
             
             let session = SpatialTrackingSession()
             await session.run(configuration)
-            self.leftHand = AnchorEntity(.hand(.left, location: .indexFingerTip))
-            content.add(self.leftHand!)
-//                let spawnedSphere = try! Entity.load(named: "xrk/AudioSphere", in: happyBeamAssetsBundle)
-//                content.add(spawnedSphere)
-
-            // The root entity.
             content.add(spaceOrigin)
-            
-            // Create a URL that points to the movie file.
-            print("Added video!")
-            
-            
             content.add(cameraRelativeAnchor)
             
-            content.add(controller.orb)
-                
         }
         .handGesture(
             MySnap(hand: .left)
                 .onChanged { value in
+                    print(value.pose)
                     if (value.pose == .postSnap) {
                         handleSnap(value: value)
                     }
