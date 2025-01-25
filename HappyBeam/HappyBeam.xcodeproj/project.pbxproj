@@ -11,6 +11,8 @@
 		0A1FD3682D4468BF0062D7B4 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = 0A1FD3672D4468BF0062D7B4 /* HappyBeamAssets */; };
 		0A1FD36A2D4468E60062D7B4 /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */; };
 		0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 0AAF2DCF2D44B2F1007412A3 /* concert.MOV */; };
+		0AAF2DD32D44C0B9007412A3 /* OSCKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0AAF2DD22D44C0B9007412A3 /* OSCKit */; };
+		0AAF2DD52D44C0B9007412A3 /* OSCKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0AAF2DD42D44C0B9007412A3 /* OSCKitCore */; };
 		321A0C13291C02B80042A987 /* HappyBeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A0C12291C02B80042A987 /* HappyBeamApp.swift */; };
 		321A0C19291C02B90042A987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 321A0C18291C02B90042A987 /* Assets.xcassets */; };
 		32BD3B68299C26E6005798DF /* GlobalEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BD3B67299C26E6005798DF /* GlobalEntities.swift */; };
@@ -74,7 +76,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AAF2DD52D44C0B9007412A3 /* OSCKitCore in Frameworks */,
 				E82F249A2D443E3800E69E98 /* (null) in Frameworks */,
+				0AAF2DD32D44C0B9007412A3 /* OSCKit in Frameworks */,
 				0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */,
 				E82F249F2D44568C00E69E98 /* SoundpipeAudioKit in Frameworks */,
 				0A1FD3682D4468BF0062D7B4 /* HappyBeamAssets in Frameworks */,
@@ -201,6 +205,8 @@
 				B36AA6142D43FC99000B742F /* HandGesture */,
 				E82F249E2D44568C00E69E98 /* SoundpipeAudioKit */,
 				0A1FD3672D4468BF0062D7B4 /* HappyBeamAssets */,
+				0AAF2DD22D44C0B9007412A3 /* OSCKit */,
+				0AAF2DD42D44C0B9007412A3 /* OSCKitCore */,
 			);
 			productName = HappyBeamX;
 			productReference = 321A0C0B291C02B80042A987 /* HappyBeam.app */;
@@ -242,6 +248,7 @@
 				B36AA6132D43FC99000B742F /* XCRemoteSwiftPackageReference "HandGesture" */,
 				E82F249D2D44568C00E69E98 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
 				0A1FD3662D4468BF0062D7B4 /* XCLocalSwiftPackageReference "Packages/HappyBeamAssets" */,
+				0AAF2DD12D44C0B9007412A3 /* XCRemoteSwiftPackageReference "OSCKit" */,
 			);
 			productRefGroup = 321A0C0C291C02B80042A987 /* Products */;
 			projectDirPath = "";
@@ -525,6 +532,14 @@
 				minimumVersion = 5.6.4;
 			};
 		};
+		0AAF2DD12D44C0B9007412A3 /* XCRemoteSwiftPackageReference "OSCKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/orchetect/OSCKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		B36AA6102D43FC86000B742F /* XCRemoteSwiftPackageReference "ARUnderstanding" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Zeke-D/ARUnderstanding";
@@ -560,6 +575,16 @@
 		0A1FD3672D4468BF0062D7B4 /* HappyBeamAssets */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HappyBeamAssets;
+		};
+		0AAF2DD22D44C0B9007412A3 /* OSCKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AAF2DD12D44C0B9007412A3 /* XCRemoteSwiftPackageReference "OSCKit" */;
+			productName = OSCKit;
+		};
+		0AAF2DD42D44C0B9007412A3 /* OSCKitCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AAF2DD12D44C0B9007412A3 /* XCRemoteSwiftPackageReference "OSCKit" */;
+			productName = OSCKitCore;
 		};
 		B36AA6112D43FC86000B742F /* ARUnderstanding */ = {
 			isa = XCSwiftPackageProductDependency;

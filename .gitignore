@@ -124,7 +124,6 @@ Dependencies/
 
 
 ### SwiftPackageManager ###
-HappyBeam/Packages
 !HappyBeam/Packages/HappyBeamAssets
 xcuserdata
 *.xcodeproj
