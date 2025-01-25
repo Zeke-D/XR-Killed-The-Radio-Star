@@ -62,6 +62,46 @@ class MovieSystem : System {
     }
 }
 
+struct AsteroidComponent: Component {
+    var rotationSpeed: Float = 1.0
+    var orbitRadius: Float = 5.0
+    var orbitSpeed: Float = 0.5
+    var currentAngle: Float = 0.0
+    // TODO: Add a property to track if the asteroid is orbiting freely or tracking player (or we can just redirect to the player instantaneously?)
+    //var isFreeOrbiting: Bool = false
+}
+
+class AsteroidSystem: System {
+    private static let query = EntityQuery(where: .has(AsteroidComponent.self))
+    
+    required init(scene: RealityKit.Scene) { }
+    
+    func update(context: SceneUpdateContext) {
+        for entity in context.entities(
+            matching: Self.query,
+            updatingSystemWhen: .rendering
+        ) {
+            var asteroidComp = entity.components[AsteroidComponent.self]!
+            
+            // Update orbit position
+            asteroidComp.currentAngle += asteroidComp.orbitSpeed * Float(context.deltaTime)
+            let x = cos(asteroidComp.currentAngle) * asteroidComp.orbitRadius
+            let z = sin(asteroidComp.currentAngle) * asteroidComp.orbitRadius
+            
+            // Set new position, potentially add y variation
+            entity.setPosition(SIMD3(x, 0, z), relativeTo: nil)
+            
+            // Add rotation
+            let rotation = simd_quatf(angle: asteroidComp.rotationSpeed * Float(context.deltaTime),
+                                    axis: SIMD3(0, 1, 0))
+            entity.orientation *= rotation
+            
+            // Update component
+            entity.components.set(asteroidComp)
+        }
+    }
+}
+
 /// Maintains app-wide state
 /// 
 @MainActor
@@ -95,6 +135,7 @@ class AppModel {
     
     var movieScene = Entity()
     var mainTrackEntity = Entity()
+    var asteroidEntity = Entity()
     
     func handleSnap(value: MySnap.Value) -> Void {
         print("From: ", self.playingState)
@@ -169,6 +210,8 @@ class AppModel {
         }
         self.movieScene.components.set(mc)
     }
+    
+    
     
     func drawMovieScene() {
         self.movieScene.setPosition(SIMD3(0, 0, -2.5), relativeTo: spaceOrigin)
