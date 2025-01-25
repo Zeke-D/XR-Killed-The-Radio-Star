@@ -3,25 +3,72 @@ import RealityKit
 import AVFoundation
 import AVKit
 
-class MovieComponent : Component {
+class Animation {
+    var start_time: Double = 0
     var duration : Double = 1.0
-    var progress : Double = 0
     var delay : Double = 0
     var start_pos : SIMD3<Float> = SIMD3()
-    var target_pos : SIMD3<Float> = SIMD3()
-    var calledStartTrigger : Bool = false
-    var calledEndTrigger : Bool = false
+    var direction : SIMD3<Float> = SIMD3()
+    
+    var calledOnStart: Bool = false
+    var onStart: () -> Void = {} // option callback to trigger when started
+    
+    required init() {}
+}
 
-    enum AnimationState {
-        case pre
-        case started
-        case ended
+class MovieComponent : Component {
+    var entity : Entity = Entity();
+    var progress : Double = 0
+    var animation_queue : [Animation] = []
+
+    func handleCurrentAnimation() {
+        guard var current_animation = self.find_current_animation()
+        else { return }
+        
+        if (current_animation.start_time == 0) {
+            current_animation.start_time = self.progress
+            current_animation.start_pos = self.entity.position(relativeTo: nil)
+        }
+        // nothing to do yet, still in delay phase
+        let time_for_animation = current_animation.start_time + current_animation.delay
+        print(progress, time_for_animation)
+        if (self.progress < time_for_animation) {
+            return
+        }
+
+        if (!current_animation.calledOnStart
+            && self.progress > current_animation.start_time + current_animation.delay) {
+            current_animation.onStart()
+            current_animation.calledOnStart = true;
+        }
+        
+        let pct = Float(
+            min(
+                max(
+                    (self.progress - current_animation.start_time - current_animation.delay) / current_animation.duration,
+                    0.0
+                ),
+                1.0
+            )
+        );
+        
+        let new_pos = current_animation.start_pos +
+            SIMD3<Float>(pct, pct, pct) * current_animation.direction;
+        
+        self.entity.setPosition(new_pos, relativeTo: nil)
     }
     
-    var state: AnimationState = .pre
-    var onStart: () -> Void = {} // option callback to trigger when started
-    var onEnd: () -> Void = {} // option callback to trigger when ended
-    func play() { self.state = .started }
+    func find_current_animation() -> Animation? {
+        var timecode = 0.0
+        for anim in self.animation_queue {
+            let total_anim_time = anim.duration + anim.delay
+            if (self.progress < timecode + total_anim_time) {
+                return anim;
+            }
+            timecode += anim.duration + anim.delay
+        }
+        return nil
+    }
 }
 
 
@@ -36,28 +83,9 @@ class MovieSystem : System {
            updatingSystemWhen: .rendering
        ) {
            var mc = entity.components[MovieComponent.self]!
-           if mc.state != .started { continue }
            mc.progress += context.deltaTime
-           
-           // call start handler
-           if (!mc.calledStartTrigger && mc.progress > mc.delay) {
-               mc.onStart()
-               mc.calledStartTrigger = true
-           }
-           
-           // finish. Should only call once because of clause earlier!
-           if (mc.progress > mc.duration + mc.delay) {
-               mc.state = .ended
-               mc.onEnd()
-           }
-           else {
-               let pct = Float(max((mc.progress - mc.delay), 0) / mc.duration);
-               let new_pos = SIMD3<Float>(pct, pct, pct) * (mc.target_pos - mc.start_pos);
-               entity.setPosition(new_pos, relativeTo: nil)
-           }
-           
-           entity.components.set(mc)
-           
+           mc.handleCurrentAnimation()
+           entity.components.set(mc) // update progress
        }
     }
 }
@@ -152,22 +180,23 @@ class AppModel {
         
         
         // play movie after delay
+        let moveUp = Animation.init()
+        moveUp.duration = 10
+        moveUp.delay = 5
+        moveUp.onStart = self.playMovie
+        moveUp.direction = SIMD3<Float>(0, 2, 0)
+        
+        let moveBack = Animation.init()
+        moveBack.duration = 3
+        moveBack.delay = 0
+        moveBack.direction = SIMD3<Float>(0, -0.2, 10)
+        
         var mc = MovieComponent()
-        mc.onStart = self.playMovie
-        mc.delay = 5
-        mc.duration = 0.1
-        mc.play()
-        mc.onEnd = {
-            var move = MovieComponent()
-            print("Calling TV Move component")
-            move.start_pos = screen.position
-            move.target_pos = screen.position + SIMD3<Float>(0, 0, 10)
-            move.duration = 10
-            move.delay = 0
-            move.play()
-            self.movieScene.components.set(move)
-        }
-        self.movieScene.components.set(mc)
+        mc.entity = screen
+        mc.animation_queue = [
+            moveUp, moveBack
+        ]
+        screen.components.set(mc)
     }
     
     func drawMovieScene() {

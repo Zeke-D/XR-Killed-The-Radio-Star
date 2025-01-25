@@ -87,7 +87,7 @@ def Xform "Root"
             double size = 0.2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (10, 6.666667, 0.015384615)
-            float3 xformOp:translate = (0, 1.8380948, -1.3114562)
+            float3 xformOp:translate = (0, 0, -1.3114562)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "RCP_BehaviorsContainer"
