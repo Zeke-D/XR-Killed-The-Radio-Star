@@ -47,6 +47,7 @@ extension HandGestures {
 
 struct ContentView: View {
     @Environment(AppModel.self) var appModel
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         ToggleImmersiveSpaceButton()
     }

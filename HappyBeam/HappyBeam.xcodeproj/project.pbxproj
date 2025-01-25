@@ -10,6 +10,7 @@
 		0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A07FBCA2D43E5B800D26F6F /* AudioKit */; };
 		0A1FD3682D4468BF0062D7B4 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = 0A1FD3672D4468BF0062D7B4 /* HappyBeamAssets */; };
 		0A1FD36A2D4468E60062D7B4 /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */; };
+		0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 0AAF2DCF2D44B2F1007412A3 /* concert.MOV */; };
 		1F8249602A16EEDA00C2F5D3 /* Cloud.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1F82495F2A16EEDA00C2F5D3 /* Cloud.usdz */; };
 		321A0C13291C02B80042A987 /* HappyBeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A0C12291C02B80042A987 /* HappyBeamApp.swift */; };
 		321A0C19291C02B90042A987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 321A0C18291C02B90042A987 /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnalyzer.swift; sourceTree = "<group>"; };
+		0AAF2DCF2D44B2F1007412A3 /* concert.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = concert.MOV; sourceTree = "<group>"; };
 		1F82495F2A16EEDA00C2F5D3 /* Cloud.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Cloud.usdz; sourceTree = "<group>"; };
 		321A0C0B291C02B80042A987 /* HappyBeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyBeam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		321A0C12291C02B80042A987 /* HappyBeamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyBeamApp.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		321A0C02291C02B70042A987 = {
 			isa = PBXGroup;
 			children = (
+				0AAF2DCF2D44B2F1007412A3 /* concert.MOV */,
 				B3D51D3D2D4460670063B603 /* SpatialTest.MP4 */,
 				B36AA6202D445DE1000B742F /* PlayerView.swift */,
 				E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */,
@@ -378,6 +381,7 @@
 				32745A162A02F4C1000035F8 /* UpdatedGrumpyScene2.usdz in Resources */,
 				B0B8C3EA2BDC363900704A2C /* Localizable.xcstrings in Resources */,
 				3299370F2A12A8B60073F0B0 /* cloudHit3.m4a in Resources */,
+				0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

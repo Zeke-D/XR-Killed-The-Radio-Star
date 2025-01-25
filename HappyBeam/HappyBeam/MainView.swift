@@ -16,6 +16,8 @@ import AVFoundation
 struct MainView:  View {
     @Environment(AppModel.self) var appModel
     
+    
+    
     var body: some View {
         RealityView { content in
             
@@ -32,6 +34,17 @@ struct MainView:  View {
             spaceOrigin.addChild(movieScene)
             appModel.movieScene = movieScene
             
+            let movieScreen = movieScene.findEntity(named: "Screen")!
+            
+            let url = Bundle.main.url(forResource: "concert", withExtension: "MOV")!
+            let player = AVPlayer(url: url)
+            let material = VideoMaterial(avPlayer: player)
+            movieScene.findEntity(named: "Screen")!.modelComponent!.materials = [material]
+
+
+            // Start playing the video.
+            player.play()
+            
 
         }
         .handGesture(
@@ -47,7 +60,7 @@ struct MainView:  View {
             
         })
         if self.appModel.playingState != .notStarted {
-            PlayerView()
+//            PlayerView()
         }
         Button("SNAP", action: {
             handleSnap(value: MySnap.Value(pose: .postSnap, chirality: .left, position: SIMD3()))
