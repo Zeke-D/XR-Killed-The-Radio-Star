@@ -43,7 +43,7 @@ class OrbController: ObservableObject {
         orb.name = "SoundOrb(\(soundFile))"
         
         // Create the audio holder
-        audioSource.spatialAudio = SpatialAudioComponent()
+        audioSource.spatialAudio = SpatialAudioComponent(gain: -20)
         orb.addChild(audioSource)
         
         // Initialize audio analyzer
