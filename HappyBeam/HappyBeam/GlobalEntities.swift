@@ -57,24 +57,3 @@ var cloudEntities: [Entity] = []
 var multiBeamMap: [String: Entity] = [:]
 
 /// Creates a beam for each player in multiplayer as they join the game and play spatially.
-@MainActor
-func initialBeam(for player: Player) async -> Entity {
-    guard let playerBeam = await loadFromRealityComposerPro(
-        named: BundleAssets.heartBlasterEntity,
-        fromSceneNamed: BundleAssets.heartBlasterScene
-    ) else {
-        fatalError("Unable to load beam from Reality Composer Pro project.")
-    }
-    
-    let handOrigin = Entity()
-    let multiBeamIntermediate = Entity()
-    handOrigin.addChild(multiBeamIntermediate)
-    multiBeamIntermediate.addChild(playerBeam)
-    
-    spaceOrigin.addChild(handOrigin)
-    
-    playerBeam.generateCollisionShapes(recursive: true)
-    playerBeam.name = "multibeam-\(player.name)"
-    
-    return handOrigin
-}

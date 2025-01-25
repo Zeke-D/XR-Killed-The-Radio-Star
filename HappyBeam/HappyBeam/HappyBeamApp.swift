@@ -31,7 +31,3 @@ struct HappyBeamApp: App {
     }
 }
 
-@MainActor
-enum HeartGestureModelContainer {
-    private(set) static var heartGestureModel = HeartGestureModel()
-}

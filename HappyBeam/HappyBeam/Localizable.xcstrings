@@ -3,6 +3,7 @@
   "strings" : {
     "(you)" : {
       "comment" : "Label next to a player's name to indicate who it is.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -38,6 +39,7 @@
     },
     "%@ (you)" : {
       "comment" : "The player's name in the game followed by the word you to indicate that fact. The name can be anything they chose.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -73,6 +75,7 @@
     },
     "%@ %@" : {
       "comment" : "Text describing the position of clouds on the screen. The first parameter is the clouds in front and the second parameter is the clouds behind the user.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -114,6 +117,7 @@
     },
     "%@ to the left" : {
       "comment" : "Describes the position of clouds in the 3D scene.\nThe first parameter is a string describing the position of the clouds.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -149,6 +153,7 @@
     },
     "%@ to the right" : {
       "comment" : "Describes the position of clouds in the 3D scene.\nThe first parameter is a string describing the position of the clouds.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -184,6 +189,7 @@
     },
     "%@ won!" : {
       "comment" : "This is an indication that a different player has won the game, referring to them by name.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -219,6 +225,7 @@
     },
     "%lld clouds above and behind you" : {
       "comment" : "Describes the position of clouds in the 3D scene.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "variations" : {
@@ -320,6 +327,7 @@
     },
     "%lld clouds above and in front of you" : {
       "comment" : "Describes the position of clouds in the 3D scene.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "variations" : {
@@ -421,6 +429,7 @@
     },
     "%lld clouds behind you" : {
       "comment" : "Describes the position of clouds in the 3D scene.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "variations" : {
@@ -522,6 +531,7 @@
     },
     "%lld clouds below and behind you" : {
       "comment" : "Describes the position of clouds in the 3D scene.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "variations" : {
@@ -623,6 +633,7 @@
     },
     "%lld clouds below and in front of you" : {
       "comment" : "Describes the position of clouds in the 3D scene.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "variations" : {
@@ -724,6 +735,7 @@
     },
     "%lld clouds in front of you" : {
       "comment" : "Describes the position of clouds in the 3D scene.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "variations" : {
@@ -825,6 +837,7 @@
     },
     "%lld seconds remaining" : {
       "comment" : "For accessibility: The time remaining in the game in seconds.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "variations" : {
@@ -925,6 +938,7 @@
       }
     },
     "Altus" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -959,6 +973,7 @@
       }
     },
     "Back" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -994,6 +1009,7 @@
     },
     "Back to Main Menu" : {
       "comment" : "An action the player can take after the game has concluded, to go back to the main menu.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1028,6 +1044,7 @@
       }
     },
     "Casting beam" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1063,6 +1080,7 @@
     },
     "Cheer up grumpy clouds by shining a happy beam with your heart." : {
       "comment" : "This text explains the purpose of the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1098,6 +1116,7 @@
     },
     "Choose how you’ll cheer up grumpy clouds." : {
       "comment" : "Asks the user about how they will want to control the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1132,6 +1151,7 @@
       }
     },
     "Cirrus" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1166,6 +1186,7 @@
       }
     },
     "Cloud" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1200,6 +1221,7 @@
       }
     },
     "Cumulus" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1235,6 +1257,7 @@
     },
     "Great job!" : {
       "comment" : "Praise for the player.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1269,6 +1292,7 @@
       }
     },
     "Grumpy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1303,6 +1327,7 @@
       }
     },
     "Grumpy Cloud Hit" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1338,6 +1363,7 @@
     },
     "Happy Beam" : {
       "comment" : "The name of the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1410,6 +1436,7 @@
 
     },
     "Hiding beam" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1444,6 +1471,7 @@
       }
     },
     "Loading assets…" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1479,6 +1507,7 @@
     },
     "Make a heart with two hands." : {
       "comment" : "A way to control the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1513,6 +1542,7 @@
       }
     },
     "Nimbus" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1548,6 +1578,7 @@
     },
     "Pause" : {
       "comment" : "Button to pause the game",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1583,6 +1614,7 @@
     },
     "Play" : {
       "comment" : "Button to play the game",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1618,6 +1650,7 @@
     },
     "Play Again" : {
       "comment" : "An action the player can take after the game has concluded, to play again.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1653,6 +1686,7 @@
     },
     "Play music" : {
       "comment" : "Button to play music",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1688,6 +1722,7 @@
     },
     "Play Solo" : {
       "comment" : "A game mode where the player plays in single-player mode.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1723,6 +1758,7 @@
     },
     "Play with Friends" : {
       "comment" : "A game mode where the player plays in multi-player mode.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1758,6 +1794,7 @@
     },
     "Project happy hearts to cheer up grumpy clouds." : {
       "comment" : "Subtitle text for the SharePlay join dialog.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1793,6 +1830,7 @@
     },
     "score" : {
       "comment" : "A string that indicates the number immediately above is the player's current score in the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1828,6 +1866,7 @@
     },
     "Score" : {
       "comment" : "For accessibility: A string that indicates this number is the player's current score in the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1869,6 +1908,7 @@
     },
     "Stop music" : {
       "comment" : "Button to stop music",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1904,6 +1944,7 @@
     },
     "Use a pinch gesture or a compatible device." : {
       "comment" : "A way to control the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1939,6 +1980,7 @@
     },
     "Waiting for all players to choose." : {
       "comment" : "Informative message about why the multi-player game has not yet started.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1974,6 +2016,7 @@
     },
     "You cheered up %lld grumpy clouds." : {
       "comment" : "This text describes the results of the players efforts in the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2009,6 +2052,7 @@
     },
     "You won!" : {
       "comment" : "This is an indication that the player has won the game.",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
