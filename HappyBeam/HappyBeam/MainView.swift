@@ -29,7 +29,7 @@ struct MainView:  View {
             content.add(spaceOrigin)
             content.add(cameraRelativeAnchor)
             let movieScene = try! await Entity(named: "xrk/MovieScene", in: happyBeamAssetsBundle)
-//            //            movieScene.findEntity(named: "Player")!.isEnabled = false
+            movieScene.findEntity(named: "Player")!.isEnabled = false
             movieScene.setPosition(SIMD3(0, 0, -2.5), relativeTo: spaceOrigin)
             spaceOrigin.addChild(movieScene)
             appModel.movieScene = movieScene
@@ -72,7 +72,7 @@ struct MainView:  View {
         switch self.appModel.playingState {
         case .notStarted:
             self.appModel.playingState = .started
-//            self.appModel.movieScene!.findEntity(named: "Player")!.isEnabled = true
+            self.appModel.movieScene!.findEntity(named: "Player")!.isEnabled = true
         case .started:
             self.appModel.playingState = .musicStart
         case .musicStart:
