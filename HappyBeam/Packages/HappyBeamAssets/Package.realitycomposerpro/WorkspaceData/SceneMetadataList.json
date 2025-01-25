@@ -213,6 +213,34 @@
       [
         "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
         "Root",
+        "Sphere"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
+        "Root",
+        "SkySphere"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
+        "Root",
+        "Video_Dock"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
+        "Root",
         "Video_Dock",
         "Player"
       ],
@@ -236,34 +264,6 @@
         "DefaultMaterial"
       ],
       {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
-        "Root",
-        "Sphere"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
-        "Root",
-        "Video_Dock"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
-        "Root",
-        "SkySphere"
-      ],
-      {
-        "disallowsFraming" : true,
         "isExpanded" : true,
         "isLocked" : false
       }

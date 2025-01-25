@@ -18,7 +18,7 @@ struct HappyBeamApp: App {
     var body: some SwiftUI.Scene {
         WindowGroup {
             VStack{
-                PlayerView()
+//                PlayerView()
                 ContentView()
                     .environment(appModel)
             }

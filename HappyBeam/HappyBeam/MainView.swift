@@ -27,11 +27,12 @@ struct MainView:  View {
             content.add(spaceOrigin)
             content.add(cameraRelativeAnchor)
             let movieScene = try! await Entity(named: "xrk/MovieScene", in: happyBeamAssetsBundle)
-            movieScene.setPosition(SIMD3(0, -1, -1), relativeTo: spaceOrigin)
-            movieScene.findEntity(named: "Player")?.isEnabled = false
+//            //            movieScene.findEntity(named: "Player")!.isEnabled = false
+            movieScene.setPosition(SIMD3(0, 0, -2.5), relativeTo: spaceOrigin)
             spaceOrigin.addChild(movieScene)
             appModel.movieScene = movieScene
             
+
         }
         .handGesture(
             MySnap(hand: .left)
@@ -42,7 +43,15 @@ struct MainView:  View {
                     }
                 }
         )
-        ToggleImmersiveSpaceButton()
+        .onChange(of: self.appModel.playingState, { old, new in
+            
+        })
+        if self.appModel.playingState != .notStarted {
+            PlayerView()
+        }
+        Button("SNAP", action: {
+            handleSnap(value: MySnap.Value(pose: .postSnap, chirality: .left, position: SIMD3()))
+        }).scaleEffect(5)
     }
     
     func handleSnap(value: MySnap.Value) -> Void {
@@ -50,7 +59,7 @@ struct MainView:  View {
         switch self.appModel.playingState {
         case .notStarted:
             self.appModel.playingState = .started
-            self.appModel.movieScene?.findEntity(named: "Player")?.isEnabled = true
+//            self.appModel.movieScene!.findEntity(named: "Player")!.isEnabled = true
         case .started:
             self.appModel.playingState = .musicStart
         case .musicStart:

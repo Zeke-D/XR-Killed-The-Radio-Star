@@ -1864,6 +1864,9 @@
     "Show Immersive Space" : {
 
     },
+    "SNAP" : {
+
+    },
     "Stop music" : {
       "comment" : "Button to stop music",
       "localizations" : {
