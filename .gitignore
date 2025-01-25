@@ -145,3 +145,6 @@ xcuserdata
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager,objective-c
 *.DS_STORE
+
+HappyBeam/HappyBeam.xcodeproj/project.xcworkspace/xcuserdata/
+HappyBeam/Packages/HappyBeamAssets/.swiftpm/xcode/xcuserdata/
