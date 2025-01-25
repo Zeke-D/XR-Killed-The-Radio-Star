@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Video_Dock", "SkySphere"]
+    reorder nameChildren = ["SkySphere", "Move", "Screen", "Ground", "ScreenTransform"]
     def "SkySphere" (
         active = true
         customData = {
@@ -19,40 +19,126 @@ def Xform "Root"
         references = @../SkySphere.usdz@
     )
     {
+        reorder nameChildren = ["SkySphere_mat", "Screen", "Ground"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+
+        over "SkySphere_mat"
+        {
+            asset inputs:SkySphere_Texture = @../NightSky.jpg@
+        }
     }
 
-    def Xform "Video_Dock"
+    def RealityKitTimeline "Move"
     {
-        reorder nameChildren = ["Player", "Cube", "Ground"]
-        double3 xformOp:translate = (0, 1, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def Xform "Player"
+        def RealityKitTrack "Track"
         {
-            reorder nameChildren = ["CustomDockingRegion", "Screen"]
-            double3 xformOp:translate = (0, 0.6, 0)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-            def Cube "Screen" (
-                active = true
-                prepend apiSchemas = ["MaterialBindingAPI"]
-            )
+            def RealityKitAction "Transform_To"
             {
-                rel material:binding = </Root/Video_Dock/Player/Screen/DefaultMaterial>
-                double size = 0.2
-                quatf xformOp:orient = (1, 0, 0, 0)
-                float3 xformOp:scale = (10, 6.666667, 0.015384615)
-                float3 xformOp:translate = (0, 0.2380948, 0)
-                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 19.619186705962562
+                uniform token info:id = "23DECCD2-0CCC-4FFE-A4AF-774CC88ADC78"
+                float3 position = (0, 1.8407302, 1.2326125)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (10, 6.666667, 0.015384615)
+                double startTime = 2.007476662027129
+                rel target = </Root/ScreenTransform/Screen>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeIn"
+                }
             }
         }
+    }
 
-        def "Ground" (
-            references = @../Ground.usda@
+    def "Ground" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        references = @../Ground.usda@
+    )
+    {
+        reorder nameChildren = ["Mesh", "Material"]
+        rel material:binding = </Root/Ground/Material> (
+            bindMaterialAs = "strongerThanDescendants"
+        )
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 1.1, 0)
+
+        over "Material"
+        {
+            over "Reflection_Diffuse"
+            {
+                int ui:nodegraph:node:stackingOrder = 218
+            }
+
+            over "Read_EmissionUV"
+            {
+                float2 ui:nodegraph:node:pos = (-25.453125, 66.01953)
+                int ui:nodegraph:node:stackingOrder = 226
+            }
+
+            over "Read_AttenuationUV"
+            {
+                float2 ui:nodegraph:node:pos = (-262.01172, 193.9336)
+                int ui:nodegraph:node:stackingOrder = 307
+            }
+        }
+    }
+
+    def Xform "ScreenTransform" (
+        active = true
+    )
+    {
+        def Cube "Screen" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
+            rel material:binding = </Root/ScreenTransform/Screen/DefaultMaterial>
+            double size = 0.2
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (10, 6.666667, 0.015384615)
+            float3 xformOp:translate = (0, 1.8380948, -0.92672354)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "RCP_BehaviorsContainer"
+            {
+                rel behaviors = </Root/ScreenTransform/Screen/OnAddedToScene>
+                uniform token info:id = "RCP.BehaviorsContainer"
+            }
+
+            def Preliminary_Behavior "OnAddedToScene"
+            {
+                rel actions = </Root/ScreenTransform/Screen/OnAddedToScene/Action>
+                uniform bool exclusive
+                rel triggers = </Root/ScreenTransform/Screen/OnAddedToScene/Trigger>
+
+                def Preliminary_Trigger "Trigger"
+                {
+                    rel affectedObjects = </Root/ScreenTransform/Screen>
+                    token info:id = "SceneTransition"
+                }
+
+                def Preliminary_Action "Action"
+                {
+                    rel affectedObjects = </Root>
+                    rel animationLibraryKey = </Root/Move>
+                    rel animationLibraryKeyOverrideKey = </Root/ScreenTransform/Screen/OnAddedToScene/Trigger>
+                    token info:id = "PlayTimeline"
+                    int loops = 0
+                    int performCount = 1
+                    token type = "serial"
+                }
+            }
         }
     }
 }
