@@ -52,7 +52,7 @@
 		B36AA6212D445DE1000B742F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AA6202D445DE1000B742F /* PlayerView.swift */; };
 		B3D51D402D44609B0063B603 /* SpatialTest.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = B3D51D3D2D4460670063B603 /* SpatialTest.MP4 */; };
 		B3D51D422D4466D10063B603 /* SweetEmotion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3D51D412D4466D10063B603 /* SweetEmotion.mp3 */; };
-		E82F249A2D443E3800E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F24992D443E3800E69E98 /* HappyBeamAssets */; };
+		E82F249A2D443E3800E69E98 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		E82F249F2D44568C00E69E98 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = E82F249E2D44568C00E69E98 /* SoundpipeAudioKit */; };
 		E82F24A32D445E8200E69E98 /* 10TO3KSWEEP.wav in Resources */ = {isa = PBXBuildFile; fileRef = E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */; };
 		E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */; };
@@ -550,7 +550,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = GV4DWFZQ4S;
+				DEVELOPMENT_TEAM = LU6L8CXVCF;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -586,7 +586,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = GV4DWFZQ4S;
+				DEVELOPMENT_TEAM = LU6L8CXVCF;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
