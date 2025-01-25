@@ -1,3 +1,4 @@
 MUSIC filter=lfs diff=lfs merge=lfs -text
 MUSIC/2-TRACK/2-MIN[[:space:]]COMMIT.wav filter=lfs diff=lfs merge=lfs -text
 MUSIC/2-TRACK/END[[:space:]]COMMIT.wav filter=lfs diff=lfs merge=lfs -text
+HappyBeam/HappyBeam/Sounds/Rocketman.wav filter=lfs diff=lfs merge=lfs -text

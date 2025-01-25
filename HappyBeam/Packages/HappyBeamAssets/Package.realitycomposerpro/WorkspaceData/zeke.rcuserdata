@@ -1,5 +1,5 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "BehaviorsPluginID",
   "openSceneRelativePaths" : [
     "Cloud.usda",
     "xrk\/MovieScene.usda",
@@ -127,6 +127,28 @@
       }
     ],
     "916F2E70-40B8-4027-B5CB-91FC2BC864F1" : [
+      {
+        "date" : 759528353.377715,
+        "title" : "Untitled",
+        "transform" : [
+          0.12170638,
+          -8.644897e-08,
+          0.99256617,
+          0,
+          0.49118668,
+          0.86896956,
+          -0.060228202,
+          0,
+          -0.8625098,
+          0.49486545,
+          0.10575918,
+          0,
+          -1.8566037,
+          2.6707428,
+          -0.37992883,
+          1
+        ]
+      },
       {
         "date" : 759521417.952819,
         "title" : "Untitled",
@@ -324,33 +346,11 @@
           0.8474335,
           1
         ]
-      },
-      {
-        "date" : 759520266.70048,
-        "title" : "Untitled",
-        "transform" : [
-          0.98901737,
-          8.678697e-08,
-          0.1477994,
-          0,
-          0.05813323,
-          0.91939926,
-          -0.38900602,
-          0,
-          -0.13588668,
-          0.39332575,
-          0.9093018,
-          0,
-          0.07498165,
-          1.7169313,
-          1.2801546,
-          1
-        ]
       }
     ]
   },
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "xrk\/Untitled Scene.usda"
+  "selectedSceneRelativePath" : "xrk\/MovieScene.usda"
 }

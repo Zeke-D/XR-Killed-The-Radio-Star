@@ -9,8 +9,9 @@ class MovieComponent : Component {
     var delay : Double = 0
     var start_pos : SIMD3<Float> = SIMD3()
     var target_pos : SIMD3<Float> = SIMD3()
-    var calledTrigger : Bool = false
-    
+    var calledStartTrigger : Bool = false
+    var calledEndTrigger : Bool = false
+
     enum AnimationState {
         case pre
         case started
@@ -18,7 +19,8 @@ class MovieComponent : Component {
     }
     
     var state: AnimationState = .pre
-    var doThing: () -> Void = {} // option callback to trigger when started
+    var onStart: () -> Void = {} // option callback to trigger when started
+    var onEnd: () -> Void = {} // option callback to trigger when ended
     func play() { self.state = .started }
 }
 
@@ -37,21 +39,23 @@ class MovieSystem : System {
            if mc.state != .started { continue }
            mc.progress += context.deltaTime
            
-           // call trigger
-           if (!mc.calledTrigger && mc.progress > mc.delay) {
-               mc.doThing()
-               mc.calledTrigger = true
+           // call start handler
+           if (!mc.calledStartTrigger && mc.progress > mc.delay) {
+               mc.onStart()
+               mc.calledStartTrigger = true
            }
            
-           // finish
+           // finish. Should only call once because of clause earlier!
            if (mc.progress > mc.duration + mc.delay) {
                mc.state = .ended
+               mc.onEnd()
            }
            else {
                let pct = Float(max((mc.progress - mc.delay), 0) / mc.duration);
                let new_pos = SIMD3<Float>(pct, pct, pct) * (mc.target_pos - mc.start_pos);
                entity.setPosition(new_pos, relativeTo: nil)
            }
+           
            entity.components.set(mc)
            
        }
@@ -141,17 +145,28 @@ class AppModel {
         self.mainTrackEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
         self.mainTrackEntity.spatialAudio = SpatialAudioComponent()
         
-        self.movieScene.findEntity(named: "Screen")!.addChild(self.mainTrackEntity)
+        var screen = self.movieScene.findEntity(named: "Screen")!
+        screen.addChild(self.mainTrackEntity)
         self.mainTrackEntity.playAudio(mainTrackSound)
         print("Playing audio")
         
         
         // play movie after delay
         var mc = MovieComponent()
-        mc.doThing = self.playMovie
+        mc.onStart = self.playMovie
         mc.delay = 5
-        mc.duration = 20
+        mc.duration = 0.1
         mc.play()
+        mc.onEnd = {
+            var move = MovieComponent()
+            print("Calling TV Move component")
+            move.start_pos = screen.position
+            move.target_pos = screen.position + SIMD3<Float>(0, 0, 10)
+            move.duration = 10
+            move.delay = 0
+            move.play()
+            self.movieScene.components.set(move)
+        }
         self.movieScene.components.set(mc)
     }
     
