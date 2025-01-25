@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["SkySphere", "Move", "Screen", "Ground", "ScreenTransform"]
+    reorder nameChildren = ["SkySphere", "Move", "Ground", "ScreenTransform", "Lights"]
     def "SkySphere" (
         active = true
         customData = {
@@ -34,29 +34,6 @@ def Xform "Root"
     {
         def RealityKitTrack "Track"
         {
-            def RealityKitAction "Transform_To"
-            {
-                string actionKind = "moveTo"
-                int blendLayer = 300
-                double duration = 19.619186705962562
-                uniform token info:id = "23DECCD2-0CCC-4FFE-A4AF-774CC88ADC78"
-                float3 position = (0, 1.8407302, 1.2326125)
-                quatf rotation = (1, 0, 0, 0)
-                float3 scale = (10, 6.666667, 0.015384615)
-                double startTime = 2.007476662027129
-                rel target = </Root/ScreenTransform/Screen>
-
-                def RealityKitStruct "transformMode"
-                {
-                    rel referenceEntity = </Root>
-                    token type = "parent"
-                }
-
-                def RealityKitStruct "timingFunction"
-                {
-                    token type = "easeIn"
-                }
-            }
         }
     }
 
@@ -103,11 +80,14 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/ScreenTransform/Screen/DefaultMaterial>
+            reorder nameChildren = ["RCP_BehaviorsContainer", "Material", "OnAddedToScene"]
+            rel material:binding = </Root/ScreenTransform/Screen/Material> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
             double size = 0.2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (10, 6.666667, 0.015384615)
-            float3 xformOp:translate = (0, 1.8380948, -0.92672354)
+            float3 xformOp:translate = (0, 1.8380948, -1.3114562)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "RCP_BehaviorsContainer"
@@ -138,6 +118,96 @@ def Xform "Root"
                     int performCount = 1
                     token type = "serial"
                 }
+            }
+
+            def Material "Material"
+            {
+                token outputs:mtlx:surface.connect = </Root/ScreenTransform/Screen/Material/PreviewSurface.outputs:out>
+                token outputs:realitykit:vertex
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (335.5, 100.5)
+
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                    float inputs:clearcoat = 1
+                    color3f inputs:diffuseColor = (0, 0, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 0.2
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (93.5, 100.5)
+                    int ui:nodegraph:node:stackingOrder = 6
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
+                }
+            }
+        }
+    }
+
+    def Xform "Lights"
+    {
+        def Xform "PointLight"
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (-1.69173, 1.5038122, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (0.8076743, 1, 0.9545373)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
+            }
+        }
+
+        def Xform "PointLight_1"
+        {
+            float2 ui:nodegraph:node:pos = (216, 104.5)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (-0.33015525, 1.5038122, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (1, 0.88081515, 0.6541668)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
+            }
+        }
+
+        def Xform "PointLight_2"
+        {
+            float2 ui:nodegraph:node:pos = (236, 124.5)
+            int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.86250377, 1.5038122, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (1, 0.88081515, 0.6541668)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
+            }
+        }
+
+        def Xform "PointLight_3"
+        {
+            float2 ui:nodegraph:node:pos = (256, 144.5)
+            int ui:nodegraph:node:stackingOrder = 3
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (1.7023833, 1.5038122, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float3 color = (0.8076743, 1, 0.9545373)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 100000
             }
         }
     }
