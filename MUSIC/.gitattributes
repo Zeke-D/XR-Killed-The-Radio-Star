@@ -1,0 +1,10 @@
+STEMS/2MINUTE/2MINUTE_BASS.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/2MINUTE/2MINUTE_DRUMS.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/2MINUTE/2MINUTE_PIANO.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/2MINUTE/2MINUTE_VOX.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/2MINUTE/2MINUTE_ACOUSTICGUITAR.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/END/END_DRUMS.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/END/END_PIANO.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/END/END_VOX.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/END/END_ACOUSTICGUITAR.mp3 filter=lfs diff=lfs merge=lfs -text
+STEMS/END/END_BASS.mp3 filter=lfs diff=lfs merge=lfs -text
