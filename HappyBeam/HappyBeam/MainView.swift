@@ -21,7 +21,6 @@ struct MainView:  View {
     @State private var player: AudioPlayer?
     @State private var timer: Timer?
     
-    let root = Entity()
     @State private var testCustomAudio : CustomAudioSource? = nil
     
     var body: some View {
@@ -32,7 +31,7 @@ struct MainView:  View {
             //            player = AudioPlayer(url: soundURL)
             
             content.add(spaceOrigin)
-            content.add(root)
+            content.add(appModel.root)
             
             content.add(cameraRelativeAnchor)
             let addExampleAudioEntity = false
@@ -43,7 +42,7 @@ struct MainView:  View {
                 // This can be any AudioKit node!
                 testCustomAudio?.setSource(source: WhiteNoise())
                 testCustomAudio?.start()
-                root.addChild(exampleAudioEntity)
+                appModel.root.addChild(exampleAudioEntity)
             }
             
             let movieScene = try! await Entity(named: "xrk/MovieScene", in: happyBeamAssetsBundle)

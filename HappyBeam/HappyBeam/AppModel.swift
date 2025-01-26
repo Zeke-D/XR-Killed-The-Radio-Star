@@ -3,6 +3,7 @@ import RealityKit
 import AVFoundation
 import AVKit
 import AudioKit
+import OSCKit
 
 class Animation {
     var start_time: Double = 0
@@ -90,8 +91,9 @@ class AnimationSystem : System {
     }
 }
 
+
 /// Maintains app-wide state
-/// 
+///
 @MainActor
 @Observable
 class AppModel {
@@ -99,13 +101,35 @@ class AppModel {
     var leftStatus: String = "---"
     var rightStatus: String = "---"
     
+    let myID = UUID()
+    let oscServer : XRKOscServer
+    
+    let root = Entity()
+    
+    static let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
+
+    
     init() {
+        oscServer = XRKOscServer(myID: myID, root: root)
         Settings.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 1)!
         Settings.channelCount = 1
         Settings.sampleRate = 48000
         Settings.bufferLength = .veryShort
+        
+        let oscClient = OSCClient()
+        oscClient.isIPv4BroadcastEnabled = true
+        Task {
+            while true {
+                try! await Task.sleep(for: .seconds(1))
+                // NOTE: message must start with a slash!!!
+                let msg = OSCMessage("/\(myID)/test", values: ["string", 123])
+                try! oscClient.send(msg, to: "255.255.255.255")
+                print("sent!")
+            }
+        }
+        
     }
-
+    
     let immersiveSpaceID = "mainView"
     enum ImmersiveSpaceState {
         case closed
