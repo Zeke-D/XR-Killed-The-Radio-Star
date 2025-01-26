@@ -392,12 +392,12 @@ class AppModel {
         setupSpatialVideoPlayers.onStart = {
             var spatialVideoWall = Entity()
             for offset in [
-                SIMD3<Float>(30, 0, 0),
-                SIMD3<Float>(0, 30, 0),
-                SIMD3<Float>(0, 0, 30),
-                SIMD3<Float>(-30, 0, 0),
-                SIMD3<Float>(0, -30, 0),
-                SIMD3<Float>(0, 0, -30),
+                SIMD3<Float>(60, 0, 0),
+                SIMD3<Float>(0, 60, 0),
+                SIMD3<Float>(0, 0, 60),
+                SIMD3<Float>(-60, 0, 0),
+                SIMD3<Float>(0, -60, 0),
+                SIMD3<Float>(0, 0, -60),
             ] {
                 spaceOrigin.addChild(spatialVideoWall)
                 spatialVideoWall.setPosition(SIMD3(), relativeTo: self.headAnchor)
@@ -406,7 +406,7 @@ class AppModel {
                 spatialVideoWall.addChild(new_screen)
                 new_screen.setPosition(self.headAnchor.position(relativeTo: nil) + offset, relativeTo: nil)
                 new_screen.look(at: self.headAnchor.position, from: new_screen.position, relativeTo: new_screen.parent)
-                new_screen.setScale(SIMD3(4,4, 1), relativeTo: new_screen)
+                new_screen.setScale(SIMD3(8,8, 1), relativeTo: new_screen)
                 Self.videoAssets[1].seek(to: .zero)
                 
                 Task {
