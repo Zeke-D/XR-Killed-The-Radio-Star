@@ -247,7 +247,7 @@ class AppModel {
         let resource = snapType.snapAudioResource()
         var snapEntity = Entity()
         snapEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
-        snapEntity.spatialAudio = SpatialAudioComponent()
+        snapEntity.spatialAudio = SpatialAudioComponent(gain: -3.0)
         snapEntity.playAudio(resource)
         return snapEntity
     }
@@ -418,12 +418,12 @@ class AppModel {
         setupSpatialVideoPlayers.onStart = {
             var spatialVideoWall = Entity()
             for offset in [
-                SIMD3<Float>(3, 0, 0),
-                SIMD3<Float>(0, 3, 0),
-                SIMD3<Float>(0, 0, 3),
-                SIMD3<Float>(-3, 0, 0),
-                SIMD3<Float>(0, -3, 0),
-                SIMD3<Float>(0, 0, -3),
+                SIMD3<Float>(15, 0, 0),
+                SIMD3<Float>(0, 15, 0),
+                SIMD3<Float>(0, 0, 15),
+                SIMD3<Float>(-15, 0, 0),
+                SIMD3<Float>(0, -15, 0),
+                SIMD3<Float>(0, 0, -15),
             ] {
                 spaceOrigin.addChild(spatialVideoWall)
                 spatialVideoWall.setPosition(SIMD3(), relativeTo: self.headAnchor)
@@ -431,8 +431,16 @@ class AppModel {
                 new_screen.components.remove(AnimationSequenceComponent.self)
                 spatialVideoWall.addChild(new_screen)
                 new_screen.setPosition(self.headAnchor.position(relativeTo: nil) + offset, relativeTo: nil)
-                new_screen.look(at: self.headAnchor.position, from: new_screen.position, relativeTo: new_screen)
+                new_screen.look(at: self.headAnchor.position, from: new_screen.position, relativeTo: new_screen.parent)
                 Self.videoAssets[1].seek(to: .zero)
+                
+                Task {
+                    while true {
+                        try? await Task.sleep(for: .seconds(10))
+                        await Self.videoAssets[1].seek(to: .zero)
+                    }
+                }
+                
                 self.playMovie(screen_entity: new_screen, player: Self.videoAssets[1])
             }
         }
