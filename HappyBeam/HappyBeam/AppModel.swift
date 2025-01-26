@@ -7,6 +7,18 @@ import OSCKit
 import Foundation
 import ARKit
 
+extension HandAnchor.Chirality {
+    @MainActor
+    func snapAudioResource() -> AudioFileResource {
+        switch self {
+        case .left:
+            AppModel.shinySnap
+        case .right:
+            AppModel.shinySnapRight
+        }
+    }
+}
+
 class Animation {
     var start_time: Double = 0
     var duration : Double = 1.0
@@ -119,6 +131,7 @@ class AppModel {
     let root = Entity()
     
     static let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
+    static let shinySnapRight = try! AudioFileResource.load(named: "SNAPWETRIGHT")
     static let eltlongjlohng_model = try! ModelEntity.load(named: "eltlongjlohng")
     
     private var oscBroadcastTask: Task<Void, Never>? // Add this property
@@ -184,12 +197,12 @@ class AppModel {
     var mainTrackEntity = Entity()
     var asteroid_container = Entity()
 
-    func makeSnapEntity(resource_name: String) -> Entity {
-        let shinySnap = try! AudioFileResource.load(named: resource_name)
+    func makeSnapEntity(snapType: HandAnchor.Chirality) -> Entity {
+        let resource = snapType.snapAudioResource()
         var snapEntity = Entity()
         snapEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
         snapEntity.spatialAudio = SpatialAudioComponent()
-        snapEntity.playAudio(shinySnap)
+        snapEntity.playAudio(resource)
         return snapEntity
     }
     
@@ -198,22 +211,22 @@ class AppModel {
         case .notStarted:
             self.drawMovieScene()
             self.playingState = .inTheater
-            let snapEntity = makeSnapEntity(resource_name: "SNAP")
+            let snapEntity = makeSnapEntity(snapType: value.chirality)
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
         case .inTheater:
             self.dimLightsAndPlayMusic()
             self.playingState = .musicStart
-            let snapEntity = makeSnapEntity(resource_name: "SNAP")
+            let snapEntity = makeSnapEntity(snapType: value.chirality)
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
         case .musicStart, .flatVideo, .spatialVideo:
-            let snapEntity = makeSnapEntity(resource_name: "shiny-snap")
+            let snapEntity = makeSnapEntity(snapType: value.chirality)
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
             break
         case .fullOuterSpace:
-            let snapEntity = makeSnapEntity(resource_name: "shiny-snap")
+            let snapEntity = makeSnapEntity(snapType: value.chirality)
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
             var anchor = self.rightIndex

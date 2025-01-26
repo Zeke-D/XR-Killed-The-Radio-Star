@@ -10,6 +10,7 @@
 		0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A07FBCA2D43E5B800D26F6F /* AudioKit */; };
 		0A1FD36A2D4468E60062D7B4 /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */; };
 		0A5EE8C62D45AE1600072F1B /* CustomAudioSoure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */; };
+		0A74B0C12D46201800498CB7 /* SNAPWETRIGHT.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */; };
 		0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 0AAF2DCF2D44B2F1007412A3 /* concert.MOV */; };
 		0AAF2DD32D44C0B9007412A3 /* OSCKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0AAF2DD22D44C0B9007412A3 /* OSCKit */; };
 		0AAF2DD52D44C0B9007412A3 /* OSCKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0AAF2DD42D44C0B9007412A3 /* OSCKitCore */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnalyzer.swift; sourceTree = "<group>"; };
 		0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAudioSoure.swift; sourceTree = "<group>"; };
+		0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SNAPWETRIGHT.mp3; path = ../SFX/SNAPWETRIGHT.mp3; sourceTree = "<group>"; };
 		0AAF2DCF2D44B2F1007412A3 /* concert.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = concert.MOV; sourceTree = "<group>"; };
 		0AEFE98F2D45D13800C6603F /* Multiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer.swift; sourceTree = "<group>"; };
 		321A0C0B291C02B80042A987 /* HappyBeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyBeam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 		321A0C02291C02B70042A987 = {
 			isa = PBXGroup;
 			children = (
+				0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */,
 				B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */,
 				E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */,
 				E8A2E6F62D460122006CE36B /* eltlongjlohng.usdz */,
@@ -296,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A74B0C12D46201800498CB7 /* SNAPWETRIGHT.mp3 in Resources */,
 				B356BF952D45D4C000AF78B5 /* HappyBeamAssets in Resources */,
 				B356BF802D45B75A00AF78B5 /* SNAP.mp3 in Resources */,
 				32C96CBF2A2FED900030AA37 /* Packages in Resources */,
@@ -473,7 +477,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = LU6L8CXVCF;
+				DEVELOPMENT_TEAM = GV4DWFZQ4S;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -509,7 +513,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = LU6L8CXVCF;
+				DEVELOPMENT_TEAM = GV4DWFZQ4S;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;

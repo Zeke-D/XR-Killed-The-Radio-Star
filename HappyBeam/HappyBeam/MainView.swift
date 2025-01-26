@@ -34,7 +34,7 @@ struct MainView:  View {
             content.add(appModel.root)
             
             content.add(cameraRelativeAnchor)
-            let addExampleAudioEntity = true
+            let addExampleAudioEntity = false
             if addExampleAudioEntity {
                 let exampleAudioEntity = Entity()
 
