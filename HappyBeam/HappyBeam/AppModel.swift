@@ -126,6 +126,10 @@ class AppModel {
     var floorAnchor: AnchorEntity = AnchorEntity()
     var headAnchor: AnchorEntity = AnchorEntity()
 
+    static var blue_metal = SimpleMaterial(color: .blue, roughness: 0, isMetallic: true);
+    static var text_on_mat = SimpleMaterial(color: .lightGray, roughness: 3, isMetallic: false);
+    static var text_off_mat = SimpleMaterial(color: .black, roughness: 3, isMetallic: false);
+    
     let myID = UUID()
     let oscServer : XRKOscServer
     
@@ -135,13 +139,37 @@ class AppModel {
     static let shinySnapRight = try! AudioFileResource.load(named: "SNAPWETRIGHT")
     static let eltlongjlohng_model = (try! ModelEntity.load(named: "xrk/eltlongjlohng", in: happyBeamAssetsBundle)).children[0]
     
+    static let audioTracks : [AudioFileResource] = [
+        try! AudioFileResource.load(named: "2MINUTE_ACOUSTICGUITAR", configuration: .init(shouldLoop: true) ),
+        try! AudioFileResource.load(named: "2MINUTE_BASS", configuration: .init(shouldLoop: true) ),
+        try! AudioFileResource.load(named: "2MINUTE_DRUMS", configuration: .init(shouldLoop: true) ),
+        try! AudioFileResource.load(named: "2MINUTE_PIANO", configuration: .init(shouldLoop: true) ),
+        try! AudioFileResource.load(named: "2MINUTE_VOX", configuration: .init(shouldLoop: true) ),
+    ]
+    
+    // text entities
+    var welcomeText = Entity()
+    var spatialVidText = Entity()
+    var spatialAudText = Entity()
+    var videoText = Entity()
+    var audioText = Entity()
+    var gestureText = Entity()
+    
     private var oscBroadcastTask: Task<Void, Never>? // Add this property
 
     var spatialStems: [AudioPlaybackController] = []
     
+    static var videoAssets = [
+        AVURLAsset(url: Bundle.main.url(forResource: "Cinematic_H264", withExtension: "mp4")!),
+//        AVURLAsset(url: Bundle.main.url(forResource: "glove", withExtension: "MOV")!),
+        AVURLAsset(url: Bundle.main.url(forResource: "concert", withExtension: "MOV")!)
+    ]
     
     
     init() {
+        Self.text_on_mat.faceCulling = .none
+        Self.text_off_mat.faceCulling = .none
+        
         oscServer = XRKOscServer(myID: myID, root: root)
         Settings.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 1)!
         Settings.channelCount = 1
@@ -230,11 +258,13 @@ class AppModel {
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
         case .musicStart, .flatVideo, .spatialVideo:
+            self.gestureText.modelComponent?.materials = [ Self.text_on_mat ]
             let snapEntity = makeSnapEntity(snapType: value.chirality)
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
             break
         case .fullOuterSpace:
+            self.gestureText.modelComponent?.materials = [ Self.text_on_mat ]
             let snapEntity = makeSnapEntity(snapType: value.chirality)
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
@@ -280,22 +310,21 @@ class AppModel {
             light.components.set(pointComponent)
         }
         
-        let mainTrackSound = try! AudioFileResource.load(named: "Rocketman")
+        let mainTrackSound = Self.audioTracks[4]
         self.mainTrackEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
         self.mainTrackEntity.spatialAudio = SpatialAudioComponent()
         
         var screen = self.movieScene.findEntity(named: "Screen")!
         screen.addChild(self.mainTrackEntity)
-        //self.mainTrackEntity.playAudio(mainTrackSound)
-        
+        self.spatialStems.append(self.mainTrackEntity.playAudio(mainTrackSound))
         
         // play movie after delay
         let moveUp = Animation.init()
         moveUp.duration = 10
         moveUp.delay = 5
         moveUp.onStart = {
-            let url = Bundle.main.url(forResource: "SpatialTest", withExtension: "MP4")!
-            self.playMovie(url: url)
+            self.playMovie(video: Self.videoAssets[0])
+            self.videoText.modelComponent?.materials = [ Self.text_on_mat ]
             self.playingState = .flatVideo
         }
         moveUp.direction = SIMD3<Float>(0, 2.75, 0)
@@ -310,12 +339,10 @@ class AppModel {
         moveBackAndPlaySpatial.delay = 0
         moveBackAndPlaySpatial.direction = SIMD3<Float>(0, 0, 4)
         moveBackAndPlaySpatial.onStart = {
-            let url = Bundle.main.url(forResource: "concert", withExtension: "MOV")!
-            self.playMovie(url: url)
+            self.playMovie(video: Self.videoAssets[1])
             self.playingState = .spatialVideo
+            self.spatialVidText.modelComponent?.materials = [ Self.text_on_mat ]
         }
-
-        
 
         let explode = Animation.init()
         explode.duration = 10
@@ -335,6 +362,14 @@ class AppModel {
         }
         
         explode.direction = SIMD3<Float>(0, -3, -80)
+        
+        let moveText = Animation(duration: 5, delay: 2, direction: SIMD3(0, 0, -0.2))
+        let welcomeDie = Animation(duration: 1, delay: 0, direction: SIMD3())
+        welcomeDie.onStart = { self.welcomeText.removeFromParent() }
+        var textMoveSequence = AnimationSequenceComponent()
+        textMoveSequence.entity = self.welcomeText
+        textMoveSequence.animation_queue = [ moveText, welcomeDie ]
+        self.welcomeText.components.set(textMoveSequence)
 
         var screenMovieSequence = AnimationSequenceComponent()
         screenMovieSequence.entity = screen
@@ -362,6 +397,8 @@ class AppModel {
         movePastPlayer.delay = 30
         movePastPlayer.onStart = {
             // play rocket sound
+            self.spatialAudText.modelComponent?.materials = [ Self.text_on_mat ]
+            self.audioText.modelComponent?.materials      = [ Self.text_on_mat ]
         }
         
         var rocketMotionSequence = AnimationSequenceComponent()
@@ -395,27 +432,30 @@ class AppModel {
         let floorPos = floorAnchor.position(relativeTo: nil)
         self.movieScene.setPosition( SIMD3(headPos.x, floorPos.y, headPos.z - 2.5), relativeTo: nil)
         
+        self.welcomeText = self.movieScene.findEntity(named: "Welcome")!
+        self.gestureText = self.movieScene.findEntity(named: "CustomGestures")!
+        self.spatialVidText = self.movieScene.findEntity(named: "Spatial")!
+        self.spatialAudText = self.movieScene.findEntity(named: "Spatial_2")!
+        self.videoText = self.movieScene.findEntity(named: "Video")!
+        self.audioText = self.movieScene.findEntity(named: "Audio")!
+        self.welcomeText.modelComponent?.materials = [ Self.text_on_mat ]
+        self.gestureText.modelComponent?.materials = [ Self.text_off_mat ]
+        self.spatialVidText.modelComponent?.materials = [ Self.text_off_mat ]
+        self.spatialAudText.modelComponent?.materials = [ Self.text_off_mat ]
+        self.videoText.modelComponent?.materials = [ Self.text_off_mat ]
+        self.audioText.modelComponent?.materials = [ Self.text_off_mat ]
+        
         spaceOrigin.addChild(rocketScene)
         
         // Setup asteroids
         Task {
             // Audio track names in order
-            let audioTracks = [
-                "2MINUTE_ACOUSTICGUITAR",
-                "2MINUTE_BASS",
-                "2MINUTE_DRUMS",
-                "2MINUTE_PIANO"
-            ]
-            
-            let vocalTrack = "2MINUTE_VOCAL"
-        
-            
             
             for i in 0..<20 {
                 let asteroid = Self.asteroid_model.clone(recursive: true)
                 
                 // Randomize the asteroid properties
-                let radius = Float.random(in: 3...18)
+                var radius = Float.random(in: 3...18)
                 let speed = Float.random(in: 0.1...0.4)
                 let rotation = Float.random(in: 0.1...0.5)
                 let startAngle = Float(i) * (2 * .pi / 10)
@@ -429,20 +469,13 @@ class AppModel {
                     let audioSource = Entity()
                     audioSource.spatialAudio = SpatialAudioComponent(gain: -3)
                     asteroid.addChild(audioSource)
+                    radius = 1;
                     
-                    let audioResource = try! AudioFileResource.load(
-                        named: audioTracks[i],
-                        configuration: .init(shouldLoop: true)
-                    )
-                        let controller = audioSource.playAudio(audioResource)
+                    let audioResource = Self.audioTracks[i]
+                    let controller = audioSource.playAudio(audioResource)
                     
                     spatialStems.append(controller)
-                    
-                    
-                    
                 }
-                
-                
                 
                 
                 // Add the asteroid component
@@ -461,9 +494,9 @@ class AppModel {
         }
     }
     
-    func playMovie(url: URL) {
+    func playMovie(video: AVAsset) {
         let movieScreen = self.movieScene.findEntity(named: "Screen")!
-        let player = AVPlayer(url: url)
+        let player = AVPlayer(playerItem: AVPlayerItem(asset: video))
         player.isMuted = true; // no sound of concert
         let material = VideoMaterial(avPlayer: player)
         movieScreen.modelComponent!.materials = [material]
@@ -494,20 +527,7 @@ class AppModel {
             height: 2.0
         )
         eltlongjlohng.components.set(component)
-        
-            //make ya boi eltlong scale bigger and bigger upon each grab and release back to the great sea
-            
-            let audioSource = Entity()
-            audioSource.spatialAudio = SpatialAudioComponent(gain: -3)
-        eltlongjlohng.addChild(audioSource)
-            
-            let audioResource = try! AudioFileResource.load(
-                named: "2MINUTE_VOX",
-                configuration: .init(shouldLoop: true)
-            )
-            let controller = audioSource.playAudio(audioResource)
-            
-            spatialStems.append(controller)
+        eltlongjlohng.addChild(self.mainTrackEntity)
         
         
         // Add to container

@@ -27,6 +27,7 @@
 		B356BF942D45CC5A00AF78B5 /* LOOPROCKET.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B356BF932D45CC5A00AF78B5 /* LOOPROCKET.mp3 */; };
 		B356BF952D45D4C000AF78B5 /* HappyBeamAssets in Resources */ = {isa = PBXBuildFile; fileRef = B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */; };
 		B35D073B2D4560EB00E24EDA /* Rocketman.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35D073A2D4560EB00E24EDA /* Rocketman.wav */; };
+		B36048DE2D467F2900C7B8D1 /* Cinematic_H264.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B36048DD2D467F2900C7B8D1 /* Cinematic_H264.mp4 */; };
 		B3676A032D459B7A00C76484 /* shiny-snap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3676A022D459B7A00C76484 /* shiny-snap.mp3 */; };
 		B36AA6122D43FC86000B742F /* ARUnderstanding in Frameworks */ = {isa = PBXBuildFile; productRef = B36AA6112D43FC86000B742F /* ARUnderstanding */; };
 		B36AA6152D43FC99000B742F /* HandGesture in Frameworks */ = {isa = PBXBuildFile; productRef = B36AA6142D43FC99000B742F /* HandGesture */; };
@@ -80,6 +81,7 @@
 		B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HappyBeamAssets; path = Packages/HappyBeamAssets; sourceTree = "<group>"; };
 		B356BF932D45CC5A00AF78B5 /* LOOPROCKET.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LOOPROCKET.mp3; path = ../../../SFX/LOOPROCKET.mp3; sourceTree = "<group>"; };
 		B35D073A2D4560EB00E24EDA /* Rocketman.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rocketman.wav; sourceTree = "<group>"; };
+		B36048DD2D467F2900C7B8D1 /* Cinematic_H264.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Cinematic_H264.mp4; path = ../VIDEOS/Cinematic_H264.mp4; sourceTree = SOURCE_ROOT; };
 		B3676A022D459B7A00C76484 /* shiny-snap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shiny-snap.mp3"; sourceTree = "<group>"; };
 		B36AA6162D440E89000B742F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B36AA6182D440F53000B742F /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */,
+				B36048DD2D467F2900C7B8D1 /* Cinematic_H264.mp4 */,
 				E84352192D462366007A34EA /* MUSIC */,
 				B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */,
 				E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */,
@@ -382,6 +385,7 @@
 				32C96CBF2A2FED900030AA37 /* Packages in Resources */,
 				E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */,
 				B3D51D422D4466D10063B603 /* SweetEmotion.mp3 in Resources */,
+				B36048DE2D467F2900C7B8D1 /* Cinematic_H264.mp4 in Resources */,
 				B3676A032D459B7A00C76484 /* shiny-snap.mp3 in Resources */,
 				B356BF942D45CC5A00AF78B5 /* LOOPROCKET.mp3 in Resources */,
 				B0CF536A2BF5E560000E4337 /* InfoPlist.xcstrings in Resources */,
