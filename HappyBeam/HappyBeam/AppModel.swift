@@ -17,7 +17,7 @@ class Animation {
     required init() {}
 }
 
-class MovieSequenceComponent : Component {
+class AnimationSequenceComponent : Component {
     var entity : Entity = Entity();
     var progress : Double = 0
     var animation_queue : [Animation] = []
@@ -32,7 +32,6 @@ class MovieSequenceComponent : Component {
         }
         // nothing to do yet, still in delay phase
         let time_for_animation = current_animation.start_time + current_animation.delay
-        print(progress, time_for_animation)
         if (self.progress < time_for_animation) {
             return
         }
@@ -73,8 +72,8 @@ class MovieSequenceComponent : Component {
 }
 
 
-class MovieSystem : System {
-    private static let query = EntityQuery(where: .has(MovieSequenceComponent.self))
+class AnimationSystem : System {
+    private static let query = EntityQuery(where: .has(AnimationSequenceComponent.self))
 
     required init(scene: RealityKit.Scene) { }
 
@@ -83,7 +82,7 @@ class MovieSystem : System {
            matching: Self.query,
            updatingSystemWhen: .rendering
        ) {
-           var mc = entity.components[MovieSequenceComponent.self]!
+           var mc = entity.components[AnimationSequenceComponent.self]!
            mc.progress += context.deltaTime
            mc.handleCurrentAnimation()
            entity.components.set(mc) // update progress
@@ -130,6 +129,7 @@ class AppModel {
     var playingState = PlayingState.notStarted
     
     var movieScene = Entity()
+    var rocketScene = Entity()
     var mainTrackEntity = Entity()
     
     func makeSnapEntity(resource_name: String) -> Entity {
@@ -204,39 +204,86 @@ class AppModel {
         let moveUp = Animation.init()
         moveUp.duration = 10
         moveUp.delay = 5
-        moveUp.onStart = self.playMovie
-        moveUp.direction = SIMD3<Float>(0, 2, 0)
+        moveUp.onStart = {
+            let url = Bundle.main.url(forResource: "concert", withExtension: "MOV")!
+            self.playMovie(url: url)
+        }
+        moveUp.direction = SIMD3<Float>(0, 2.5, 0)
         
         let moveBack = Animation.init()
         moveBack.duration = 10
         moveBack.delay = 0
-        moveBack.direction = SIMD3<Float>(0, 0, 5)
+        moveBack.direction = SIMD3<Float>(0, 0, 4)
         
+        let moveBackAndPlaySpatial = Animation.init()
+        moveBackAndPlaySpatial.duration = 10
+        moveBackAndPlaySpatial.delay = 0
+        moveBackAndPlaySpatial.direction = SIMD3<Float>(0, 0, 4)
+        moveBackAndPlaySpatial.onStart = {
+            let url = Bundle.main.url(forResource: "SpatialTest", withExtension: "MP4")!
+            self.playMovie(url: url)
+        }
+
+        
+
         let explode = Animation.init()
-        explode.duration = 0.5
+        explode.duration = 10
         explode.onStart = {
             let theatre = self.movieScene.findEntity(named: "Theatre")!
             for anim in theatre.availableAnimations {
                 theatre.playAnimation(anim, startsPaused: false)
             }
         }
+        explode.direction = SIMD3<Float>(0, -10, -80)
 
-        var mc = MovieSequenceComponent()
-        mc.entity = screen
-        mc.animation_queue = [
-            moveUp, moveBack, explode
+        var screenMovieSequence = AnimationSequenceComponent()
+        screenMovieSequence.entity = screen
+        screenMovieSequence.animation_queue = [
+            moveUp,
+            moveBack,
+            moveBackAndPlaySpatial,
+            explode
         ]
-        screen.components.set(mc)
+        screen.components.set(screenMovieSequence)
+        
+        // Setup rocket animation
+        let rocket = self.rocketScene.findEntity(named: "Rocket")!
+        rocket.setPosition(SIMD3<Float>(10, 2, -20), relativeTo: nil)
+        let rocketSound = try! AudioFileResource.load(named: )
+        var snapEntity = Entity()
+        snapEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
+        snapEntity.spatialAudio = SpatialAudioComponent()
+        snapEntity.playAudio(shinySnap)
+
+        var rocketDirection = SIMD3<Float>(-10, 2, 40)
+        rocket.look(at: rocket.position + rocketDirection, from: rocket.position, relativeTo: nil)
+        let movePastPlayer = Animation.init()
+        movePastPlayer.duration = 20
+        movePastPlayer.direction = rocketDirection
+        movePastPlayer.delay = 30
+        movePastPlayer.onStart = {
+            // play rocket sound
+            
+        }
+
+        var rocketMotionSequence = AnimationSequenceComponent()
+        rocketMotionSequence.entity = rocket
+        rocketMotionSequence.animation_queue = [
+            movePastPlayer
+        ]
+        rocket.components.set(rocketMotionSequence)
+
     }
     
     func drawMovieScene() {
-        self.movieScene.setPosition(SIMD3(0, 0, -2.5), relativeTo: spaceOrigin)
         spaceOrigin.addChild(movieScene)
+        self.movieScene.setPosition(SIMD3(0, 0, -2.5), relativeTo: spaceOrigin)
+        
+        spaceOrigin.addChild(rocketScene)
     }
     
-    func playMovie() {
+    func playMovie(url: URL) {
         let movieScreen = self.movieScene.findEntity(named: "Screen")!
-        let url = Bundle.main.url(forResource: "concert", withExtension: "MOV")!
         let player = AVPlayer(url: url)
         player.isMuted = true; // no sound of concert
         let material = VideoMaterial(avPlayer: player)
