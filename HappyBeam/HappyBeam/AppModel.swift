@@ -417,12 +417,22 @@ class AppModel {
         
         var setupSpatialVideoPlayers = Animation()
         setupSpatialVideoPlayers.onStart = {
-            for i in 1...3 {
-                var new_screen = screen.clone(recursive: false)
-                spaceOrigin.addChild(new_screen)
-                new_screen.setPosition(SIMD3<Float>(0, 0, Float(i)), relativeTo: self.headAnchor)
+            var spatialVideoWall = Entity()
+            for offset in [
+                SIMD3<Float>(3, 0, 0),
+                SIMD3<Float>(0, 3, 0),
+                SIMD3<Float>(0, 0, 3),
+                SIMD3<Float>(-3, 0, 0),
+                SIMD3<Float>(0, -3, 0),
+                SIMD3<Float>(0, 0, -3),
+            ] {
+                self.headAnchor.addChild(spatialVideoWall)
+                spatialVideoWall.setPosition(SIMD3(), relativeTo: self.headAnchor)
+                var new_screen = screen.clone(recursive: true)
+                spatialVideoWall.addChild(new_screen)
+                new_screen.setPosition(self.headAnchor.position(relativeTo: nil) + offset, relativeTo: nil)
                 new_screen.look(at: self.headAnchor.position, from: new_screen.position, relativeTo: new_screen)
-                self.playMovie(screen: new_screen, player: Self.videoAssets[1])
+                self.playMovie(screen_entity: new_screen, player: Self.videoAssets[1])
             }
         }
         
@@ -522,13 +532,13 @@ class AppModel {
     
     func playMovie(video: AVPlayer) {
         let movieScreen = self.movieScene.findEntity(named: "Screen")!
-        playMovie(screen: movieScreen, player: video)
+        playMovie(screen_entity: movieScreen, player: video)
     }
     
-    func playMovie(screen: Entity, player: AVPlayer) {
+    func playMovie(screen_entity: Entity, player: AVPlayer) {
         player.isMuted = true; // no sound of concert
         let material = VideoMaterial(avPlayer: player)
-        screen.modelComponent!.materials = [material]
+        screen_entity.modelComponent!.materials = [material]
         player.play()
     }
  
