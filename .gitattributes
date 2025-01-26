@@ -7,3 +7,4 @@ SFX/SNAP.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/SNAPWET.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/INTROROCKET.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/LOOPROCKET.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/SNAPWETRIGHT.mp3 filter=lfs diff=lfs merge=lfs -text
