@@ -144,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */,
+				E84352192D462366007A34EA /* MUSIC */,
 				B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */,
 				E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */,
 				E8A2E6F62D460122006CE36B /* eltlongjlohng.usdz */,
