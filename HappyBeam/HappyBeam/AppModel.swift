@@ -18,6 +18,11 @@ class Animation {
     var onStart: () -> Void = {} // option callback to trigger when started
     
     required init() {}
+    required init(duration: Double, delay: Double, direction: SIMD3<Float>) {
+        self.duration = duration
+        self.delay = delay
+        self.direction = direction
+    }
 }
 
 class AnimationSequenceComponent : Component {
@@ -213,10 +218,18 @@ class AppModel {
             if (value.chirality == .left) {
                 anchor = self.leftIndex
             }
-            let newMesh = MeshResource.generateSphere(radius: 0.2)
-            let newSphere = Entity()
-            newSphere.modelComponent?.mesh = newMesh
-            anchor.addChild(newSphere)
+            let newMesh = MeshResource.generateSphere(radius: 0.1)
+            let newMat = SimpleMaterial(color: .blue, roughness: 0, isMetallic: true);
+            let newSphere = ModelEntity(mesh: newMesh, materials: [newMat])
+            spaceOrigin.addChild(newSphere)
+            newSphere.setPosition(anchor.position(relativeTo: nil), relativeTo: nil)
+            let sphereSequence = AnimationSequenceComponent()
+            sphereSequence.entity = newSphere
+            let fly_up = Animation(duration: 10, delay: 0, direction: SIMD3(0, 10, 0))
+            let die = Animation(duration: 10, delay: 0, direction: SIMD3())
+            die.onStart = { newSphere.removeFromParent() }
+            sphereSequence.animation_queue = [ fly_up, die ]
+            newSphere.components.set(sphereSequence)
             break
         case .collaborative:
             print("Done!")
