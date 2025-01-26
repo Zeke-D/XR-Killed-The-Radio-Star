@@ -5,3 +5,5 @@ HappyBeam/HappyBeam/Sounds/Rocketman.wav filter=lfs diff=lfs merge=lfs -text
 SFX/*.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/SNAP.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/SNAPWET.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/INTROROCKET.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/LOOPROCKET.mp3 filter=lfs diff=lfs merge=lfs -text
