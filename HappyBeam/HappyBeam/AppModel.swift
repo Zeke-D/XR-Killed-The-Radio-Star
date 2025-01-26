@@ -210,7 +210,7 @@ class AppModel {
             self.playMovie(url: url)
             self.playingState = .flatVideo
         }
-        moveUp.direction = SIMD3<Float>(0, 2.5, 0)
+        moveUp.direction = SIMD3<Float>(0, 2.75, 0)
         
         let moveBack = Animation.init()
         moveBack.duration = 10
@@ -233,12 +233,16 @@ class AppModel {
         explode.duration = 10
         explode.onStart = {
             let theatre = self.movieScene.findEntity(named: "Theatre")!
+            self.playingState = .fullOuterSpace
             for anim in theatre.availableAnimations {
                 theatre.playAnimation(anim, startsPaused: false)
             }
-            self.playingState = .fullOuterSpace
+            Task {
+                self.createAsteroidField()
+            }
+ 
         }
-        explode.direction = SIMD3<Float>(0, -10, -80)
+        explode.direction = SIMD3<Float>(0, 3, 0)
 
         var screenMovieSequence = AnimationSequenceComponent()
         screenMovieSequence.entity = screen
@@ -266,15 +270,15 @@ class AppModel {
         movePastPlayer.delay = 30
         movePastPlayer.onStart = {
             // play rocket sound
-            
         }
-
+        
         var rocketMotionSequence = AnimationSequenceComponent()
         rocketMotionSequence.entity = rocket
         rocketMotionSequence.animation_queue = [
             movePastPlayer
         ]
         rocket.components.set(rocketMotionSequence)
+        
 
     }
     
@@ -295,18 +299,20 @@ class AppModel {
     }
     
     func createAsteroidField() {
-        print("🚀 Starting asteroid field creation")
+//        print("🚀 Starting asteroid field creation")
         
         // Register the asteroid system
         AsteroidSystem.registerSystem()
-        print("✅ Asteroid system registered")
+//        print("✅ Asteroid system registered")
+        let asteroid_model = try! ModelEntity.load(named: "Asteroid_1a")
+ 
         
         // Create 10 asteroids
         for i in 0..<20 {
-            print("🌑 Attempting to create asteroid \(i+1)")
+//            print("🌑 Attempting to create asteroid \(i+1)")
             do {
-                let asteroid = try ModelEntity.load(named: "Asteroid_1a")
-                print("✅ Successfully loaded Asteroid_1a model")
+//                print("✅ Successfully loaded Asteroid_1a model")
+                let asteroid = asteroid_model.clone(recursive: true)
                 
                 // Randomize the asteroid properties
                 let radius = Float.random(in: 3...18)
@@ -327,13 +333,13 @@ class AppModel {
                     height: height
                 )
                 asteroid.components.set(component)
-                print("✅ Added AsteroidComponent to asteroid \(i+1)")
+//                print("✅ Added AsteroidComponent to asteroid \(i+1)")
                 
                 // Add to the scene
                 spaceOrigin.addChild(asteroid)
-                print("✅ Added asteroid \(i+1) to scene at radius: \(radius), height: \(height)")
+//                print("✅ Added asteroid \(i+1) to scene at radius: \(radius), height: \(height)")
             } catch {
-                print("❌ Failed to load Asteroid_1a model: \(error)")
+//                print("❌ Failed to load Asteroid_1a model: \(error)")
             }
         }
         
