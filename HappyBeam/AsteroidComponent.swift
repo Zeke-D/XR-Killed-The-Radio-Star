@@ -24,8 +24,12 @@ class AsteroidComponent: Component {
     }
 }
 
+struct GrabbedComponent: Component {
+    
+}
+
 class AsteroidSystem: System {
-    private static let query = EntityQuery(where: .has(AsteroidComponent.self))
+    private static let query = EntityQuery(where: .has(AsteroidComponent.self) && !.has(GrabbedComponent.self))
     
     required init(scene: RealityKit.Scene) { }
     

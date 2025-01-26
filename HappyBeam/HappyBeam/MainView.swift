@@ -73,6 +73,15 @@ struct MainView:  View {
                     }
                 }
         )
+        .gesture(TapGesture().targetedToEntity(where: .has(AsteroidComponent.self))
+            .onEnded({ val in
+                val.entity.components.set(GrabbedComponent())
+                appModel.rightIndex.addChild(val.entity)
+            })
+        )
+        .onTapGesture(perform: {
+            
+        })
         Button("SNAP", action: {
             self.appModel.handleSnap(value: MySnap.Value(pose: .postSnap, chirality: .left, position: SIMD3()))
         }).scaleEffect(5)
