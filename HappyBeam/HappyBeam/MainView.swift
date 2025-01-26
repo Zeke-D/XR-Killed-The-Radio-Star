@@ -84,10 +84,21 @@ struct MainView:  View {
             .onEnded({ val in
                 if appModel.grabbedEntity != nil {
                     if appModel.grabbedEntity == val.entity {
-                        val.entity.components.remove(GrabbedComponent.self)
-                        appModel.asteroid_container.addChild(val.entity)
-                        appModel.grabbedEntity = nil
-                        val.entity.setScale(val.entity.scale * 3.0, relativeTo: val.entity.parent)
+                        if val.entity.components.has(EltonComponent.self) {
+                            // Keep the Y stretch ratio but restore normal size
+                            let currentScale = val.entity.scale
+                            let yStretchRatio = currentScale.y / currentScale.x
+                            let newScale = SIMD3<Float>(4, 4 * yStretchRatio, 4)
+                            val.entity.components.remove(GrabbedComponent.self)
+                            appModel.asteroid_container.addChild(val.entity)
+                            appModel.grabbedEntity = nil
+                            val.entity.setScale(newScale, relativeTo: nil)
+                        } else {
+                            val.entity.components.remove(GrabbedComponent.self)
+                            appModel.asteroid_container.addChild(val.entity)
+                            appModel.grabbedEntity = nil
+                            val.entity.setScale(val.entity.scale * 3.0, relativeTo: val.entity.parent)
+                        }
                     }
                     return
                 }
@@ -97,7 +108,19 @@ struct MainView:  View {
                 val.entity.setPosition(SIMD3(), relativeTo: val.entity.parent)
                 appModel.grabbedEntity = val.entity
                 
-                val.entity.setScale(val.entity.scale / 3.0, relativeTo: val.entity.parent)
+                if val.entity.components.has(EltonComponent.self) {
+                    // Scale down while maintaining Y stretch ratio
+                    let currentScale = val.entity.scale
+                    let yStretchRatio = currentScale.y / currentScale.x
+                    let newScale = SIMD3<Float>(
+                        currentScale.x * 0.3,
+                        currentScale.y * 0.3 * yStretchRatio,
+                        currentScale.z * 0.3
+                    )
+                    val.entity.setScale(newScale, relativeTo: val.entity.parent)
+                } else {
+                    val.entity.setScale(val.entity.scale / 3.0, relativeTo: val.entity.parent)
+                }
             })
         )
         Button("SNAP", action: {
