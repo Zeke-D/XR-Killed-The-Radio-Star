@@ -416,6 +416,7 @@ def Xform "Root"
             bool enableBlend = 0
             asset ibl = @../heartLight_M_heartLight_metallic.jpg@
             uniform token info:id = "RealityKit.ImageBasedLight"
+            float intensityExponent = -15
             bool isGlobalIBL = 0
         }
     }

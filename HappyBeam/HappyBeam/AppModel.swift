@@ -140,7 +140,8 @@ class AppModel {
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
     
-    
+    static let asteroid_model = try! ModelEntity.load(named: "Asteroid_1a")
+
     enum PlayingState {
         case notStarted
         case inTheater
@@ -156,7 +157,8 @@ class AppModel {
     var movieScene = Entity()
     var rocketScene = Entity()
     var mainTrackEntity = Entity()
-    
+    var asteroid_container = Entity()
+
     func makeSnapEntity(resource_name: String) -> Entity {
         let shinySnap = try! AudioFileResource.load(named: resource_name)
         var snapEntity = Entity()
@@ -232,7 +234,7 @@ class AppModel {
         moveUp.duration = 10
         moveUp.delay = 5
         moveUp.onStart = {
-            let url = Bundle.main.url(forResource: "concert", withExtension: "MOV")!
+            let url = Bundle.main.url(forResource: "SpatialTest", withExtension: "MP4")!
             self.playMovie(url: url)
             self.playingState = .flatVideo
         }
@@ -248,7 +250,7 @@ class AppModel {
         moveBackAndPlaySpatial.delay = 0
         moveBackAndPlaySpatial.direction = SIMD3<Float>(0, 0, 4)
         moveBackAndPlaySpatial.onStart = {
-            let url = Bundle.main.url(forResource: "SpatialTest", withExtension: "MP4")!
+            let url = Bundle.main.url(forResource: "concert", withExtension: "MOV")!
             self.playMovie(url: url)
             self.playingState = .spatialVideo
         }
@@ -263,12 +265,16 @@ class AppModel {
             for anim in theatre.availableAnimations {
                 theatre.playAnimation(anim, startsPaused: false)
             }
+            
+            spaceOrigin.addChild(self.mainTrackEntity)
+            
             Task {
                 self.createAsteroidField()
             }
  
         }
-        explode.direction = SIMD3<Float>(0, 3, 0)
+        
+        explode.direction = SIMD3<Float>(0, -3, -80)
 
         var screenMovieSequence = AnimationSequenceComponent()
         screenMovieSequence.entity = screen
@@ -313,32 +319,11 @@ class AppModel {
         self.movieScene.setPosition(SIMD3(0, 0, -2.5), relativeTo: spaceOrigin)
         
         spaceOrigin.addChild(rocketScene)
-    }
-    
-    func playMovie(url: URL) {
-        let movieScreen = self.movieScene.findEntity(named: "Screen")!
-        let player = AVPlayer(url: url)
-        player.isMuted = true; // no sound of concert
-        let material = VideoMaterial(avPlayer: player)
-        movieScreen.modelComponent!.materials = [material]
-        player.play()
-    }
-    
-    func createAsteroidField() {
-//        print("🚀 Starting asteroid field creation")
         
-        // Register the asteroid system
-        AsteroidSystem.registerSystem()
-//        print("✅ Asteroid system registered")
-        let asteroid_model = try! ModelEntity.load(named: "Asteroid_1a")
- 
-        
-        // Create 10 asteroids
-        for i in 0..<20 {
-//            print("🌑 Attempting to create asteroid \(i+1)")
-            do {
-//                print("✅ Successfully loaded Asteroid_1a model")
-                let asteroid = asteroid_model.clone(recursive: true)
+        // Setup asteroids
+        Task {
+            for i in 0..<20 {
+                let asteroid = Self.asteroid_model.clone(recursive: true)
                 
                 // Randomize the asteroid properties
                 let radius = Float.random(in: 3...18)
@@ -359,16 +344,30 @@ class AppModel {
                     height: height
                 )
                 asteroid.components.set(component)
-//                print("✅ Added AsteroidComponent to asteroid \(i+1)")
                 
                 // Add to the scene
-                spaceOrigin.addChild(asteroid)
-//                print("✅ Added asteroid \(i+1) to scene at radius: \(radius), height: \(height)")
-            } catch {
-//                print("❌ Failed to load Asteroid_1a model: \(error)")
+                asteroid_container.addChild(asteroid)
             }
+
         }
+
+    }
+    
+    func playMovie(url: URL) {
+        let movieScreen = self.movieScene.findEntity(named: "Screen")!
+        let player = AVPlayer(url: url)
+        player.isMuted = true; // no sound of concert
+        let material = VideoMaterial(avPlayer: player)
+        movieScreen.modelComponent!.materials = [material]
+        player.play()
+    }
+    
+    func createAsteroidField() {
         
-        print("🎯 Total entities in spaceOrigin: \(spaceOrigin.children.count)")
+        // Register the asteroid system
+        AsteroidSystem.registerSystem()
+        
+        // Create 10 asteroids
+        spaceOrigin.addChild(self.asteroid_container)
     }
 }
