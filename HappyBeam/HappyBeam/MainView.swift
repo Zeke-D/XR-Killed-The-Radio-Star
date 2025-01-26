@@ -113,9 +113,9 @@ struct MainView:  View {
                     let currentScale = val.entity.scale
                     let yStretchRatio = currentScale.y / currentScale.x
                     let newScale = SIMD3<Float>(
-                        currentScale.x * 0.3,
-                        currentScale.y * 0.3 * yStretchRatio,
-                        currentScale.z * 0.3
+                        currentScale.x * 0.03,
+                        currentScale.y * 0.03 * yStretchRatio,
+                        currentScale.z * 0.03
                     )
                     val.entity.setScale(newScale, relativeTo: val.entity.parent)
                 } else {
