@@ -124,7 +124,9 @@ class AppModel {
                 // NOTE: message must start with a slash!!!
                 let msg = OSCMessage("/\(myID)/test", values: ["string", 123])
                 try! oscClient.send(msg, to: "255.255.255.255")
-                print("sent!")
+                if debugOSC {
+                    print("sent!")
+                }
             }
         }
         
