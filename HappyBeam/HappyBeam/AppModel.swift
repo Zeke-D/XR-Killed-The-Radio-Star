@@ -276,15 +276,11 @@ class AppModel {
             let snapEntity = makeSnapEntity(snapType: value.chirality)
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
-            var anchor = self.rightIndex
-            if (value.chirality == .left) {
-                anchor = self.leftIndex
-            }
             let newMesh = MeshResource.generateSphere(radius: 0.1)
             let newMat = SimpleMaterial(color: .blue, roughness: 0, isMetallic: true);
             let newSphere = ModelEntity(mesh: newMesh, materials: [newMat])
             spaceOrigin.addChild(newSphere)
-            newSphere.setPosition(anchor.position(relativeTo: nil), relativeTo: nil)
+            newSphere.setPosition(value.position, relativeTo: nil)
             let sphereSequence = AnimationSequenceComponent()
             sphereSequence.entity = newSphere
             let fly_up = Animation(duration: 10, delay: 0, direction: SIMD3(0, 10, 0))
@@ -295,7 +291,7 @@ class AppModel {
                 
             var particles = self.snapParticle.clone(recursive: false)
             spaceOrigin.addChild(particles)
-            particles.setPosition(anchor.position(relativeTo: nil), relativeTo: nil)
+            particles.setPosition(value.position, relativeTo: nil)
             break
         case .collaborative:
             print("Done!")
