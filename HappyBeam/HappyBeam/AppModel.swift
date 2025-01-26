@@ -2,6 +2,7 @@ import SwiftUI
 import RealityKit
 import AVFoundation
 import AVKit
+import AudioKit
 
 class Animation {
     var start_time: Double = 0
@@ -98,6 +99,13 @@ class AppModel {
     var gesture: HandGestures = .clapping
     var leftStatus: String = "---"
     var rightStatus: String = "---"
+    
+    init() {
+        Settings.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 1)!
+        Settings.channelCount = 1
+        Settings.sampleRate = 48000
+        Settings.bufferLength = .veryShort
+    }
 
     let immersiveSpaceID = "mainView"
     enum ImmersiveSpaceState {

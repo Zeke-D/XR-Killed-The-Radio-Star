@@ -13,6 +13,8 @@
 		0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 0AAF2DCF2D44B2F1007412A3 /* concert.MOV */; };
 		0AAF2DD32D44C0B9007412A3 /* OSCKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0AAF2DD22D44C0B9007412A3 /* OSCKit */; };
 		0AAF2DD52D44C0B9007412A3 /* OSCKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0AAF2DD42D44C0B9007412A3 /* OSCKitCore */; };
+		0A5EE8C62D45AE1600072F1B /* CustomAudioSoure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */; };
+		1F8249602A16EEDA00C2F5D3 /* Cloud.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1F82495F2A16EEDA00C2F5D3 /* Cloud.usdz */; };
 		321A0C13291C02B80042A987 /* HappyBeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A0C12291C02B80042A987 /* HappyBeamApp.swift */; };
 		321A0C19291C02B90042A987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 321A0C18291C02B90042A987 /* Assets.xcassets */; };
 		32BD3B68299C26E6005798DF /* GlobalEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BD3B67299C26E6005798DF /* GlobalEntities.swift */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnalyzer.swift; sourceTree = "<group>"; };
 		0AAF2DCF2D44B2F1007412A3 /* concert.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = concert.MOV; sourceTree = "<group>"; };
+		0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAudioSoure.swift; sourceTree = "<group>"; };
+		1F82495F2A16EEDA00C2F5D3 /* Cloud.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Cloud.usdz; sourceTree = "<group>"; };
 		321A0C0B291C02B80042A987 /* HappyBeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyBeam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		321A0C12291C02B80042A987 /* HappyBeamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyBeamApp.swift; sourceTree = "<group>"; };
 		321A0C18291C02B90042A987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -133,6 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				322D5A842A057FBB003A32F3 /* Sounds */,
+				32BD3B6B299C2790005798DF /* USDZs */,
+				324F3043298AC8B900200F22 /* Views */,
+				32791FAF2A30CEF3000290A2 /* Gameplay */,
+				0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */,
 				321A0C12291C02B80042A987 /* HappyBeamApp.swift */,
 				B36AA61A2D4413F6000B742F /* ContentView.swift */,
 				B36AA61E2D443441000B742F /* MySnap.swift */,
@@ -297,6 +305,7 @@
 			files = (
 				0A1FD36A2D4468E60062D7B4 /* AudioAnalyzer.swift in Sources */,
 				B36AA61F2D443441000B742F /* MySnap.swift in Sources */,
+				0A5EE8C62D45AE1600072F1B /* CustomAudioSoure.swift in Sources */,
 				B36AA6172D440E91000B742F /* MainView.swift in Sources */,
 				B36AA61B2D4413F6000B742F /* ContentView.swift in Sources */,
 				321A0C13291C02B80042A987 /* HappyBeamApp.swift in Sources */,
