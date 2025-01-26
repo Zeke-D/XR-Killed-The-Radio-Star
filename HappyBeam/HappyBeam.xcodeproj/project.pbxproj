@@ -44,6 +44,11 @@
 		E82F24BA2D45BFF600E69E98 /* Asteroid.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E82F24B92D45BFF600E69E98 /* Asteroid.usdz */; };
 		E82F24BC2D45C5F000E69E98 /* AsteroidComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */; };
 		E82F24BF2D45C6A300E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F24BE2D45C6A300E69E98 /* HappyBeamAssets */; };
+		E843521A2D4623E7007A34EA /* 2MINUTE_ACOUSTICGUITAR.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E843520B2D462366007A34EA /* 2MINUTE_ACOUSTICGUITAR.mp3 */; };
+		E843521B2D4623E7007A34EA /* 2MINUTE_BASS.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E843520C2D462366007A34EA /* 2MINUTE_BASS.mp3 */; };
+		E843521C2D4623E7007A34EA /* 2MINUTE_DRUMS.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E843520D2D462366007A34EA /* 2MINUTE_DRUMS.mp3 */; };
+		E843521D2D4623E7007A34EA /* 2MINUTE_PIANO.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E843520E2D462366007A34EA /* 2MINUTE_PIANO.mp3 */; };
+		E843521E2D4623E7007A34EA /* 2MINUTE_VOX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E843520F2D462366007A34EA /* 2MINUTE_VOX.mp3 */; };
 		E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */; };
 		E8847F862D4429DA007562A3 /* OrbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F842D4429DA007562A3 /* OrbController.swift */; };
 		E8847F872D4429DA007562A3 /* SoundOrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F852D4429DA007562A3 /* SoundOrbView.swift */; };
@@ -88,6 +93,19 @@
 		E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 10TO3KSWEEP.wav; sourceTree = "<group>"; };
 		E82F24B92D45BFF600E69E98 /* Asteroid.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Asteroid.usdz; sourceTree = "<group>"; };
 		E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidComponent.swift; sourceTree = "<group>"; };
+		E84352082D462366007A34EA /* 2-MIN COMMIT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "2-MIN COMMIT.wav"; sourceTree = "<group>"; };
+		E84352092D462366007A34EA /* END COMMIT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "END COMMIT.wav"; sourceTree = "<group>"; };
+		E843520B2D462366007A34EA /* 2MINUTE_ACOUSTICGUITAR.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2MINUTE_ACOUSTICGUITAR.mp3; sourceTree = "<group>"; };
+		E843520C2D462366007A34EA /* 2MINUTE_BASS.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2MINUTE_BASS.mp3; sourceTree = "<group>"; };
+		E843520D2D462366007A34EA /* 2MINUTE_DRUMS.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2MINUTE_DRUMS.mp3; sourceTree = "<group>"; };
+		E843520E2D462366007A34EA /* 2MINUTE_PIANO.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2MINUTE_PIANO.mp3; sourceTree = "<group>"; };
+		E843520F2D462366007A34EA /* 2MINUTE_VOX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2MINUTE_VOX.mp3; sourceTree = "<group>"; };
+		E84352112D462366007A34EA /* END_ACOUSTICGUITAR.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = END_ACOUSTICGUITAR.mp3; sourceTree = "<group>"; };
+		E84352122D462366007A34EA /* END_BASS.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = END_BASS.mp3; sourceTree = "<group>"; };
+		E84352132D462366007A34EA /* END_DRUMS.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = END_DRUMS.mp3; sourceTree = "<group>"; };
+		E84352142D462366007A34EA /* END_PIANO.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = END_PIANO.mp3; sourceTree = "<group>"; };
+		E84352152D462366007A34EA /* END_VOX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = END_VOX.mp3; sourceTree = "<group>"; };
+		E84352182D462366007A34EA /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MONOSTEM.mp3; sourceTree = "<group>"; };
 		E8847F842D4429DA007562A3 /* OrbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbController.swift; sourceTree = "<group>"; };
 		E8847F852D4429DA007562A3 /* SoundOrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundOrbView.swift; sourceTree = "<group>"; };
@@ -218,6 +236,59 @@
 			path = .;
 			sourceTree = "<group>";
 		};
+		E843520A2D462366007A34EA /* 2-TRACK */ = {
+			isa = PBXGroup;
+			children = (
+				E84352082D462366007A34EA /* 2-MIN COMMIT.wav */,
+				E84352092D462366007A34EA /* END COMMIT.wav */,
+			);
+			path = "2-TRACK";
+			sourceTree = "<group>";
+		};
+		E84352102D462366007A34EA /* 2MINUTE */ = {
+			isa = PBXGroup;
+			children = (
+				E843520B2D462366007A34EA /* 2MINUTE_ACOUSTICGUITAR.mp3 */,
+				E843520C2D462366007A34EA /* 2MINUTE_BASS.mp3 */,
+				E843520D2D462366007A34EA /* 2MINUTE_DRUMS.mp3 */,
+				E843520E2D462366007A34EA /* 2MINUTE_PIANO.mp3 */,
+				E843520F2D462366007A34EA /* 2MINUTE_VOX.mp3 */,
+			);
+			path = 2MINUTE;
+			sourceTree = "<group>";
+		};
+		E84352162D462366007A34EA /* END */ = {
+			isa = PBXGroup;
+			children = (
+				E84352112D462366007A34EA /* END_ACOUSTICGUITAR.mp3 */,
+				E84352122D462366007A34EA /* END_BASS.mp3 */,
+				E84352132D462366007A34EA /* END_DRUMS.mp3 */,
+				E84352142D462366007A34EA /* END_PIANO.mp3 */,
+				E84352152D462366007A34EA /* END_VOX.mp3 */,
+			);
+			path = END;
+			sourceTree = "<group>";
+		};
+		E84352172D462366007A34EA /* STEMS */ = {
+			isa = PBXGroup;
+			children = (
+				E84352102D462366007A34EA /* 2MINUTE */,
+				E84352162D462366007A34EA /* END */,
+			);
+			path = STEMS;
+			sourceTree = "<group>";
+		};
+		E84352192D462366007A34EA /* MUSIC */ = {
+			isa = PBXGroup;
+			children = (
+				E843520A2D462366007A34EA /* 2-TRACK */,
+				E84352172D462366007A34EA /* STEMS */,
+				E84352182D462366007A34EA /* .gitattributes */,
+			);
+			name = MUSIC;
+			path = ../MUSIC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -300,6 +371,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A74B0C12D46201800498CB7 /* SNAPWETRIGHT.mp3 in Resources */,
+				E843521A2D4623E7007A34EA /* 2MINUTE_ACOUSTICGUITAR.mp3 in Resources */,
+				E843521B2D4623E7007A34EA /* 2MINUTE_BASS.mp3 in Resources */,
+				E843521C2D4623E7007A34EA /* 2MINUTE_DRUMS.mp3 in Resources */,
+				E843521D2D4623E7007A34EA /* 2MINUTE_PIANO.mp3 in Resources */,
+				E843521E2D4623E7007A34EA /* 2MINUTE_VOX.mp3 in Resources */,
 				B356BF952D45D4C000AF78B5 /* HappyBeamAssets in Resources */,
 				B356BF802D45B75A00AF78B5 /* SNAP.mp3 in Resources */,
 				32C96CBF2A2FED900030AA37 /* Packages in Resources */,

@@ -136,7 +136,10 @@ class AppModel {
     
     private var oscBroadcastTask: Task<Void, Never>? // Add this property
 
-
+    var spatialStems: [AudioPlaybackController] = []
+    
+    
+    
     init() {
         oscServer = XRKOscServer(myID: myID, root: root)
         Settings.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 1)!
@@ -190,7 +193,10 @@ class AppModel {
         case collaborative
     }
     
+    // initial playingstate
     var playingState = PlayingState.notStarted
+//    var playingState = PlayingState.spatialVideo
+    
     
     var movieScene = Entity()
     var rocketScene = Entity()
@@ -277,7 +283,7 @@ class AppModel {
         
         var screen = self.movieScene.findEntity(named: "Screen")!
         screen.addChild(self.mainTrackEntity)
-        self.mainTrackEntity.playAudio(mainTrackSound)
+        //self.mainTrackEntity.playAudio(mainTrackSound)
         
         
         // play movie after delay
@@ -390,6 +396,14 @@ class AppModel {
         
         // Setup asteroids
         Task {
+            // Audio track names in order
+            let audioTracks = [
+                "2MINUTE_ACOUSTICGUITAR",
+                "2MINUTE_BASS",
+                "2MINUTE_DRUMS",
+                "2MINUTE_PIANO"
+            ]
+            
             for i in 0..<20 {
                 let asteroid = Self.asteroid_model.clone(recursive: true)
                 
@@ -397,11 +411,29 @@ class AppModel {
                 let radius = Float.random(in: 3...18)
                 let speed = Float.random(in: 0.1...0.4)
                 let rotation = Float.random(in: 0.1...0.5)
-                let startAngle = Float(i) * (2 * .pi / 10) // I think it would be fun to get crazier angles
+                let startAngle = Float(i) * (2 * .pi / 10)
                 let height = Float.random(in: -2...4)
                 
                 // Scale down the asteroid
                 asteroid.scale = SIMD3<Float>(repeating: 0.3)
+                
+                // Add spatial audio for first 4 asteroids using OrbController pattern
+                if i < 4 {
+                    let audioSource = Entity()
+                    audioSource.spatialAudio = SpatialAudioComponent(gain: -3)
+                    asteroid.addChild(audioSource)
+                    
+                    let audioResource = try! AudioFileResource.load(
+                        named: audioTracks[i],
+                        configuration: .init(shouldLoop: true)
+                    )
+                        let controller = audioSource.playAudio(audioResource)
+                    
+                    spatialStems.append(controller)
+                    
+                    
+                    
+                }
                 
                 // Add the asteroid component
                 let component = AsteroidComponent(
@@ -416,9 +448,7 @@ class AppModel {
                 // Add to the scene
                 asteroid_container.addChild(asteroid)
             }
-
         }
-
     }
     
     func playMovie(url: URL) {
