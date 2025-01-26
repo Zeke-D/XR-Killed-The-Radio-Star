@@ -131,7 +131,6 @@ class AppModel {
     static var text_off_mat = SimpleMaterial(color: .black, roughness: 3, isMetallic: false);
     
     let myID = UUID()
-    let oscServer : XRKOscServer
     
     let root = Entity()
     
@@ -179,35 +178,10 @@ class AppModel {
         Self.text_on_mat.faceCulling = .none
         Self.text_off_mat.faceCulling = .none
         
-        oscServer = XRKOscServer(myID: myID, root: root)
         Settings.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 1)!
         Settings.channelCount = 1
         Settings.sampleRate = 48000
         Settings.bufferLength = .veryShort
-        
-        let oscClient = OSCClient()
-//        oscClient.isIPv4BroadcastEnabled = true
-        func randomString(length: Int) -> String {
-            let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-            return String((0..<length).compactMap { _ in characters.randomElement() })
-        }
-
-        oscBroadcastTask = Task {
-            while true {
-                try! await Task.sleep(for: .milliseconds(500))
-                // NOTE: message must start with a slash!!!
-                let msg = OSCMessage("/\(myID)/test", values: ["string", randomString(length: 10) ])
-//                for i in 1..<4 {
-//                    try! oscClient.send(msg, to: "192.168.0.10\(i)")
-//                }
-                try! oscClient.send(msg, to: "10.0.0.7")
-                try! oscClient.send(msg, to: "10.0.0.121")
-
-                if debugOSC {
-                    print("sent!")
-                }
-            }
-        }
         
     }
     
