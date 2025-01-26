@@ -84,20 +84,38 @@ struct MainView:  View {
             .onEnded({ val in
                 if appModel.grabbedEntity != nil {
                     if appModel.grabbedEntity == val.entity {
-                        val.entity.components.remove(GrabbedComponent.self)
-                        appModel.asteroid_container.addChild(val.entity)
-                        appModel.grabbedEntity = nil
-                        val.entity.setScale(val.entity.scale * 3.0, relativeTo: val.entity.parent)
+                        if val.entity.components.has(EltonComponent.self) {
+                            // Just remove grabbed component and keep current scale
+                            val.entity.components.remove(GrabbedComponent.self)
+                            appModel.asteroid_container.addChild(val.entity)
+                            appModel.grabbedEntity = nil
+                        } else {
+                            val.entity.components.remove(GrabbedComponent.self)
+                            appModel.asteroid_container.addChild(val.entity)
+                            appModel.grabbedEntity = nil
+                            val.entity.setScale(val.entity.scale * 3.0, relativeTo: val.entity.parent)
+                        }
                     }
                     return
                 }
                 
+                // Handle grabbing
                 val.entity.components.set(GrabbedComponent())
                 appModel.rightIndex.addChild(val.entity)
                 val.entity.setPosition(SIMD3(), relativeTo: val.entity.parent)
                 appModel.grabbedEntity = val.entity
                 
-                val.entity.setScale(val.entity.scale / 3.0, relativeTo: val.entity.parent)
+                if val.entity.components.has(EltonComponent.self) {
+                    // Scale only the Y component while maintaining position
+                    let currentScale = val.entity.scale
+                    val.entity.setScale(SIMD3<Float>(
+                        currentScale.x,
+                        currentScale.y * 1.3,
+                        currentScale.z
+                    ), relativeTo: val.entity.parent)
+                } else {
+                    val.entity.setScale(val.entity.scale / 3.0, relativeTo: val.entity.parent)
+                }
             })
         )
         Button("SNAP", action: {

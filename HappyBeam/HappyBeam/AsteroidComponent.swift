@@ -42,4 +42,8 @@ class AsteroidSystem: System {
             entity.components[AsteroidComponent.self] = asteroid
         }
     }
-} 
+}
+
+// struct GrabbedComponent: Component {
+//     var currentEltlongStretchFactor: Float = 1.0
+// } 
