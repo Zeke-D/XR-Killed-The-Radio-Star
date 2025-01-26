@@ -162,9 +162,15 @@ class AppModel {
     var spatialStems: [AudioPlaybackController] = []
     
     static var videoAssets = [
-        AVURLAsset(url: Bundle.main.url(forResource: "Cinematic_H264", withExtension: "mp4")!),
+        AVPlayer(playerItem:
+            AVPlayerItem(
+                asset: AVURLAsset(
+                    url: Bundle.main.url(forResource: "Cinematic_H264", withExtension: "mp4")!
+                )
+            )
+        ),
 //        AVURLAsset(url: Bundle.main.url(forResource: "glove", withExtension: "MOV")!),
-        AVURLAsset(url: Bundle.main.url(forResource: "concert", withExtension: "MOV")!)
+        AVPlayer(playerItem: AVPlayerItem(asset: AVURLAsset(url: Bundle.main.url(forResource: "concert", withExtension: "MOV")!)))
     ]
     
     
@@ -409,10 +415,22 @@ class AppModel {
             self.audioText.modelComponent?.materials      = [ Self.text_on_mat ]
         }
         
+        var setupSpatialVideoPlayers = Animation()
+        setupSpatialVideoPlayers.onStart = {
+            for i in 1...3 {
+                var new_screen = screen.clone(recursive: false)
+                spaceOrigin.addChild(new_screen)
+                new_screen.setPosition(SIMD3<Float>(0, 0, Float(i)), relativeTo: self.headAnchor)
+                new_screen.look(at: self.headAnchor.position, from: new_screen.position, relativeTo: new_screen)
+                self.playMovie(screen: new_screen, player: Self.videoAssets[1])
+            }
+        }
+        
         var rocketMotionSequence = AnimationSequenceComponent()
         rocketMotionSequence.entity = rocket
         rocketMotionSequence.animation_queue = [
-            movePastPlayer
+            movePastPlayer,
+            setupSpatialVideoPlayers
         ]
         rocket.components.set(rocketMotionSequence)
     }
@@ -502,15 +520,18 @@ class AppModel {
         }
     }
     
-    func playMovie(video: AVAsset) {
+    func playMovie(video: AVPlayer) {
         let movieScreen = self.movieScene.findEntity(named: "Screen")!
-        let player = AVPlayer(playerItem: AVPlayerItem(asset: video))
-        player.isMuted = true; // no sound of concert
-        let material = VideoMaterial(avPlayer: player)
-        movieScreen.modelComponent!.materials = [material]
-        player.play()
+        playMovie(screen: movieScreen, player: video)
     }
     
+    func playMovie(screen: Entity, player: AVPlayer) {
+        player.isMuted = true; // no sound of concert
+        let material = VideoMaterial(avPlayer: player)
+        screen.modelComponent!.materials = [material]
+        player.play()
+    }
+ 
     func createAsteroidField() {
         // Register the asteroid system
         AsteroidSystem.registerSystem()
