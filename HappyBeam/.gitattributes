@@ -23,3 +23,5 @@ textures/Asteroid1a_Color_2K.png filter=lfs diff=lfs merge=lfs -text
 textures/Asteroid1a_Metallic_2K.png filter=lfs diff=lfs merge=lfs -text
 textures/Asteroid1a_Normal_OpenGL_2K.png filter=lfs diff=lfs merge=lfs -text
 textures/Asteroid1a_Roughness_2K.png filter=lfs diff=lfs merge=lfs -text
+textures/Elton_John_2023.png filter=lfs diff=lfs merge=lfs -text
+Packages/HappyBeamAssets/Sources/HappyBeamAssets/HappyBeamAssets.rkassets/xrk/textures/Elton_John_2023.png filter=lfs diff=lfs merge=lfs -text

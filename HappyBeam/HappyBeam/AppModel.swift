@@ -133,7 +133,7 @@ class AppModel {
     
     static let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
     static let shinySnapRight = try! AudioFileResource.load(named: "SNAPWETRIGHT")
-    static let eltlongjlohng_model = try! ModelEntity.load(named: "eltlongjlohng")
+    static let eltlongjlohng_model = (try! ModelEntity.load(named: "xrk/eltlongjlohng", in: happyBeamAssetsBundle)).children[0]
     
     private var oscBroadcastTask: Task<Void, Never>? // Add this property
 
