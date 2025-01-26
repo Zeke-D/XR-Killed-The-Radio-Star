@@ -300,7 +300,9 @@ class AppModel {
         }
     }
     
+    var musicStartTime: TimeInterval = 0
     func dimLightsAndPlayMusic() {
+        musicStartTime = Date().timeIntervalSinceReferenceDate
         // dim lights
         print("Dimming lights")
         let scene = self.movieScene.scene!
@@ -320,7 +322,7 @@ class AppModel {
         }
         
         self.mainTrackEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
-        self.mainTrackEntity.spatialAudio = SpatialAudioComponent(gain: 2.0)
+        self.mainTrackEntity.spatialAudio = SpatialAudioComponent(gain: 15.0)
         
         var screen = self.movieScene.findEntity(named: "Screen")!
         screen.addChild(self.mainTrackEntity)
@@ -547,6 +549,8 @@ class AppModel {
         // Register the asteroid system
         AsteroidSystem.registerSystem()
         
+        
+        
         // Create the eltlongjlohng entity
         let eltlongjlohng = Self.eltlongjlohng_model.clone(recursive: true)
         
@@ -570,7 +574,12 @@ class AppModel {
 //        eltlongjlohng.addChild(self.mainTrackEntity)
         
         // silence single main track
-        mainTrackEntity.components[SpatialAudioComponent.self]?.gain = -100.0
+        Task {
+            try? await Task.sleep(for: .seconds(3))
+            await MainActor.run(body: {
+                mainTrackEntity.components[SpatialAudioComponent.self]?.gain = -100.0
+            })
+        }
         
         let audioSource = Entity()
         audioSource.spatialAudio = SpatialAudioComponent()
@@ -580,6 +589,14 @@ class AppModel {
         let controller = audioSource.playAudio(audioResource)
         
         spatialStems.append(controller)
+        
+        // skip main track
+        for i in 1..<self.spatialStems.count {
+            // sync the spatial audio with the main audio track
+            self.spatialStems[i].seek(to: .seconds(Date().timeIntervalSinceReferenceDate - musicStartTime))
+        }
+        audioSource.spatialAudio?.distanceAttenuation = .rolloff(factor: 0.3)
+        
 
         
         // Add to container
