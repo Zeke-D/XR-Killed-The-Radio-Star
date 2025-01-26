@@ -122,7 +122,6 @@ class AppModel {
         case flatVideo
         case spatialVideo
         case fullOuterSpace
-        case flying
         case collaborative
     }
     
@@ -207,6 +206,7 @@ class AppModel {
         moveUp.onStart = {
             let url = Bundle.main.url(forResource: "concert", withExtension: "MOV")!
             self.playMovie(url: url)
+            self.playingState = .flatVideo
         }
         moveUp.direction = SIMD3<Float>(0, 2.5, 0)
         
@@ -222,6 +222,7 @@ class AppModel {
         moveBackAndPlaySpatial.onStart = {
             let url = Bundle.main.url(forResource: "SpatialTest", withExtension: "MP4")!
             self.playMovie(url: url)
+            self.playingState = .spatialVideo
         }
 
         
@@ -233,6 +234,7 @@ class AppModel {
             for anim in theatre.availableAnimations {
                 theatre.playAnimation(anim, startsPaused: false)
             }
+            self.playingState = .fullOuterSpace
         }
         explode.direction = SIMD3<Float>(0, -10, -80)
 
@@ -249,13 +251,12 @@ class AppModel {
         // Setup rocket animation
         let rocket = self.rocketScene.findEntity(named: "Rocket")!
         rocket.setPosition(SIMD3<Float>(10, 2, -20), relativeTo: nil)
-        let rocketSound = try! AudioFileResource.load(named: )
-        var snapEntity = Entity()
-        snapEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
-        snapEntity.spatialAudio = SpatialAudioComponent()
-        snapEntity.playAudio(shinySnap)
+        let rocketSound = try! AudioFileResource.load(named: "LOOPROCKET", configuration: .init(shouldLoop: true)
+        )
+        rocket.spatialAudio = SpatialAudioComponent()
+        rocket.playAudio(rocketSound)
 
-        var rocketDirection = SIMD3<Float>(-10, 2, 40)
+        var rocketDirection = SIMD3<Float>(-20, 0, 40)
         rocket.look(at: rocket.position + rocketDirection, from: rocket.position, relativeTo: nil)
         let movePastPlayer = Animation.init()
         movePastPlayer.duration = 20

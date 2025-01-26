@@ -22,7 +22,8 @@
 		B0B8C3EA2BDC363900704A2C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B0B8C3E92BDC363900704A2C /* Localizable.xcstrings */; };
 		B0CF536A2BF5E560000E4337 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B0CF53692BF5E560000E4337 /* InfoPlist.xcstrings */; };
 		B356BF802D45B75A00AF78B5 /* SNAP.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B356BF7F2D45B75A00AF78B5 /* SNAP.mp3 */; };
-		B356BF872D45B95C00AF78B5 /* HappyBeamAssets in Resources */ = {isa = PBXBuildFile; fileRef = B356BF812D45B88100AF78B5 /* HappyBeamAssets */; };
+		B356BF902D45CBE200AF78B5 /* HappyBeamAssets in Resources */ = {isa = PBXBuildFile; fileRef = B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */; };
+		B356BF942D45CC5A00AF78B5 /* LOOPROCKET.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B356BF932D45CC5A00AF78B5 /* LOOPROCKET.mp3 */; };
 		B35D073B2D4560EB00E24EDA /* Rocketman.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35D073A2D4560EB00E24EDA /* Rocketman.wav */; };
 		B3676A032D459B7A00C76484 /* shiny-snap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3676A022D459B7A00C76484 /* shiny-snap.mp3 */; };
 		B36AA6122D43FC86000B742F /* ARUnderstanding in Frameworks */ = {isa = PBXBuildFile; productRef = B36AA6112D43FC86000B742F /* ARUnderstanding */; };
@@ -64,7 +65,8 @@
 		B0B8C3E92BDC363900704A2C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B0CF53692BF5E560000E4337 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B356BF7F2D45B75A00AF78B5 /* SNAP.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SNAP.mp3; sourceTree = "<group>"; };
-		B356BF812D45B88100AF78B5 /* HappyBeamAssets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HappyBeamAssets; path = Packages/HappyBeamAssets; sourceTree = "<group>"; };
+		B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HappyBeamAssets; path = Packages/HappyBeamAssets; sourceTree = "<group>"; };
+		B356BF932D45CC5A00AF78B5 /* LOOPROCKET.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LOOPROCKET.mp3; path = ../../../SFX/LOOPROCKET.mp3; sourceTree = "<group>"; };
 		B35D073A2D4560EB00E24EDA /* Rocketman.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rocketman.wav; sourceTree = "<group>"; };
 		B3676A022D459B7A00C76484 /* shiny-snap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shiny-snap.mp3"; sourceTree = "<group>"; };
 		B36AA6162D440E89000B742F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -113,7 +115,7 @@
 		321A0C02291C02B70042A987 = {
 			isa = PBXGroup;
 			children = (
-				B356BF812D45B88100AF78B5 /* HappyBeamAssets */,
+				B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */,
 				0AAF2DCF2D44B2F1007412A3 /* concert.MOV */,
 				B3D51D3D2D4460670063B603 /* SpatialTest.MP4 */,
 				E82F24B92D45BFF600E69E98 /* Asteroid_1a.usdz */,
@@ -174,6 +176,7 @@
 		322D5A842A057FBB003A32F3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				B356BF932D45CC5A00AF78B5 /* LOOPROCKET.mp3 */,
 				E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */,
 				E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */,
 				B3D51D412D4466D10063B603 /* SweetEmotion.mp3 */,
@@ -286,12 +289,13 @@
 				E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */,
 				B3D51D422D4466D10063B603 /* SweetEmotion.mp3 in Resources */,
 				B3676A032D459B7A00C76484 /* shiny-snap.mp3 in Resources */,
+				B356BF942D45CC5A00AF78B5 /* LOOPROCKET.mp3 in Resources */,
 				B0CF536A2BF5E560000E4337 /* InfoPlist.xcstrings in Resources */,
 				B35D073B2D4560EB00E24EDA /* Rocketman.wav in Resources */,
 				E82F24A32D445E8200E69E98 /* 10TO3KSWEEP.wav in Resources */,
 				321A0C19291C02B90042A987 /* Assets.xcassets in Resources */,
+				B356BF902D45CBE200AF78B5 /* HappyBeamAssets in Resources */,
 				B3D51D402D44609B0063B603 /* SpatialTest.MP4 in Resources */,
-				B356BF872D45B95C00AF78B5 /* HappyBeamAssets in Resources */,
 				B0B8C3EA2BDC363900704A2C /* Localizable.xcstrings in Resources */,
 				E82F24BA2D45BFF600E69E98 /* Asteroid_1a.usdz in Resources */,
 				0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */,
