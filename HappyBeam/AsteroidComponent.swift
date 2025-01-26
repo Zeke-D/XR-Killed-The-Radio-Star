@@ -24,6 +24,10 @@ class AsteroidComponent: Component {
     }
 }
 
+struct EltonComponent: Component {
+    
+}
+
 struct GrabbedComponent: Component {
     
 }

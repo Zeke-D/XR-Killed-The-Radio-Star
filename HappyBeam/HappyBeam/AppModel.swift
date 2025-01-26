@@ -407,6 +407,10 @@ class AppModel {
                 "2MINUTE_PIANO"
             ]
             
+            let vocalTrack = "2MINUTE_VOCAL"
+        
+            
+            
             for i in 0..<20 {
                 let asteroid = Self.asteroid_model.clone(recursive: true)
                 
@@ -437,6 +441,9 @@ class AppModel {
                     
                     
                 }
+                
+                
+                
                 
                 // Add the asteroid component
                 let component = AsteroidComponent(
@@ -470,9 +477,13 @@ class AppModel {
         // Create the eltlongjlohng entity
         let eltlongjlohng = Self.eltlongjlohng_model.clone(recursive: true)
         
+        eltlongjlohng.components.set(EltonComponent())
+        
         // Scale and position it
         eltlongjlohng.scale = SIMD3<Float>(repeating: 0.5)
         eltlongjlohng.position = SIMD3<Float>(0, 2, -10) // Adjust position as needed
+        
+       
         
         // Add asteroid component for orbital motion
         let component = AsteroidComponent(
@@ -483,6 +494,21 @@ class AppModel {
             height: 2.0
         )
         eltlongjlohng.components.set(component)
+        
+            //make ya boi eltlong scale bigger and bigger upon each grab and release back to the great sea
+            
+            let audioSource = Entity()
+            audioSource.spatialAudio = SpatialAudioComponent(gain: -3)
+        eltlongjlohng.addChild(audioSource)
+            
+            let audioResource = try! AudioFileResource.load(
+                named: "2MINUTE_VOX",
+                configuration: .init(shouldLoop: true)
+            )
+            let controller = audioSource.playAudio(audioResource)
+            
+            spatialStems.append(controller)
+        
         
         // Add to container
         asteroid_container.addChild(eltlongjlohng)
