@@ -123,7 +123,9 @@ class AppModel {
                 try! await Task.sleep(for: .seconds(1))
                 // NOTE: message must start with a slash!!!
                 let msg = OSCMessage("/\(myID)/test", values: ["string", 123])
-                try! oscClient.send(msg, to: "255.255.255.255")
+                for i in 1..<4 {
+                    try! oscClient.send(msg, to: "192.168.0.10\(i)")
+                }
                 if debugOSC {
                     print("sent!")
                 }
