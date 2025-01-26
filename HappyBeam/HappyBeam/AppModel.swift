@@ -143,10 +143,12 @@ class AppModel {
                 try! await Task.sleep(for: .milliseconds(500))
                 // NOTE: message must start with a slash!!!
                 let msg = OSCMessage("/\(myID)/test", values: ["string", randomString(length: 10) ])
-                for i in 1..<4 {
-                    try! oscClient.send(msg, to: "192.168.0.10\(i)")
-                }
+//                for i in 1..<4 {
+//                    try! oscClient.send(msg, to: "192.168.0.10\(i)")
+//                }
                 try! oscClient.send(msg, to: "10.0.0.7")
+                try! oscClient.send(msg, to: "10.0.0.121")
+
                 if debugOSC {
                     print("sent!")
                 }
