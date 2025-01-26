@@ -8,3 +8,10 @@ SFX/SNAPWET.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/INTROROCKET.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/LOOPROCKET.mp3 filter=lfs diff=lfs merge=lfs -text
 SFX/SNAPWETRIGHT.mp3 filter=lfs diff=lfs merge=lfs -text
+VIDEOS/Cinematic_H264.mp4 filter=lfs diff=lfs merge=lfs -text
+SFX/WALL6.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/WALL3.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/WALL4.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/WALL5.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/WALL1.mp3 filter=lfs diff=lfs merge=lfs -text
+SFX/WALL2.mp3 filter=lfs diff=lfs merge=lfs -text
