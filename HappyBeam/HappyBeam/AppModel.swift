@@ -114,6 +114,7 @@ class AppModel {
     let root = Entity()
     
     static let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
+    static let eltlongjlohng_model = try! ModelEntity.load(named: "eltlongjlohng")
     
     private var oscBroadcastTask: Task<Void, Never>? // Add this property
 
