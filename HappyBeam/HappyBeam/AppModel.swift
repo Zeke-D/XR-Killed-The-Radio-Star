@@ -5,6 +5,7 @@ import AVKit
 import AudioKit
 import OSCKit
 import Foundation
+import ARKit
 
 class Animation {
     var start_time: Double = 0
@@ -102,6 +103,11 @@ class AppModel {
     var leftStatus: String = "---"
     var rightStatus: String = "---"
     
+    var leftIndex: AnchorEntity = AnchorEntity()
+    var rightIndex: AnchorEntity = AnchorEntity()
+    var floorAnchor: AnchorEntity = AnchorEntity()
+    var headAnchor: AnchorEntity = AnchorEntity()
+
     let myID = UUID()
     let oscServer : XRKOscServer
     
@@ -181,36 +187,41 @@ class AppModel {
     }
     
     func handleSnap(value: MySnap.Value) -> Void {
-        print("From: ", self.playingState)
         switch self.playingState {
         case .notStarted:
             self.drawMovieScene()
             self.playingState = .inTheater
-            var snapEntity = makeSnapEntity(resource_name: "SNAP")
+            let snapEntity = makeSnapEntity(resource_name: "SNAP")
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
         case .inTheater:
             self.dimLightsAndPlayMusic()
             self.playingState = .musicStart
-            var snapEntity = makeSnapEntity(resource_name: "SNAP")
+            let snapEntity = makeSnapEntity(resource_name: "SNAP")
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
-        case .musicStart:
-            self.playingState = .spatialVideo
-            var snapEntity = makeSnapEntity(resource_name: "shiny-snap")
+        case .musicStart, .flatVideo, .spatialVideo:
+            let snapEntity = makeSnapEntity(resource_name: "shiny-snap")
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
-        case .spatialVideo:
-            createAsteroidField()
             break
         case .fullOuterSpace:
-            self.playingState = .collaborative
+            let snapEntity = makeSnapEntity(resource_name: "shiny-snap")
+            snapEntity.setPosition(value.position, relativeTo: nil)
+            spaceOrigin.addChild(snapEntity)
+            var anchor = self.rightIndex
+            if (value.chirality == .left) {
+                anchor = self.leftIndex
+            }
+            let newMesh = MeshResource.generateSphere(radius: 0.2)
+            let newSphere = Entity()
+            newSphere.modelComponent?.mesh = newMesh
+            anchor.addChild(newSphere)
             break
         case .collaborative:
             print("Done!")
         default: break
         }
-        print("To: ", self.playingState)
     }
     
     func dimLightsAndPlayMusic() {
@@ -322,13 +333,30 @@ class AppModel {
             movePastPlayer
         ]
         rocket.components.set(rocketMotionSequence)
-        
-
     }
     
     func drawMovieScene() {
+        
+        self.headAnchor = AnchorEntity(.head)
+        self.headAnchor.anchoring.trackingMode = .once
+
+        self.floorAnchor = AnchorEntity(.plane(.horizontal, classification: .floor, minimumBounds: [0.5, 0.5]))
+        self.floorAnchor.anchoring.trackingMode = .once
+        
+        self.leftIndex = AnchorEntity(.hand(.left, location: .indexFingerTip))
+        self.leftIndex.anchoring.trackingMode = .continuous
+        
+        self.rightIndex = AnchorEntity(.hand(.right, location: .indexFingerTip))
+        self.rightIndex.anchoring.trackingMode = .continuous
+
+        spaceOrigin.addChild(headAnchor)
+        spaceOrigin.addChild(floorAnchor)
+        spaceOrigin.addChild(leftIndex)
+        spaceOrigin.addChild(rightIndex)
         spaceOrigin.addChild(movieScene)
-        self.movieScene.setPosition(SIMD3(0, 0, -2.5), relativeTo: spaceOrigin)
+        let headPos = headAnchor.position(relativeTo:nil)
+        let floorPos = floorAnchor.position(relativeTo: nil)
+        self.movieScene.setPosition( SIMD3(headPos.x, floorPos.y, headPos.z - 2.5), relativeTo: nil)
         
         spaceOrigin.addChild(rocketScene)
         
