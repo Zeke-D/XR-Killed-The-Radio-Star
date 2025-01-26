@@ -758,6 +758,45 @@
       }
     ]
   },
+  "B6CBE02C-C97D-4F5B-91BF-7881656C81B6" : {
+    "objectMetadataList" : [
+      [
+        "B6CBE02C-C97D-4F5B-91BF-7881656C81B6",
+        "Transform",
+        "Sphere"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B6CBE02C-C97D-4F5B-91BF-7881656C81B6",
+        "Transform",
+        "_materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B6CBE02C-C97D-4F5B-91BF-7881656C81B6",
+        "Transform",
+        "Camera"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B6CBE02C-C97D-4F5B-91BF-7881656C81B6",
+        "Transform_1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "D69CB11A-0917-4549-A10A-6B5515B8FF7A" : {
     "objectMetadataList" : [
       [
