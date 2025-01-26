@@ -48,12 +48,23 @@ struct MainView:  View {
             
             let movieScene = try! await Entity(named: "xrk/MovieScene", in: happyBeamAssetsBundle)
             appModel.movieScene = movieScene
-            MovieSystem.registerSystem()
+            
+            let rocketScene = try! await Entity(named: "xrk/Rocket", in: happyBeamAssetsBundle)
+            appModel.rocketScene = rocketScene
+            
+            AnimationSystem.registerSystem()
         }
         .handGesture(
             MySnap(hand: .left)
                 .onChanged { value in
-                    print(value.pose)
+                    if (value.pose == .postSnap) {
+                        self.appModel.handleSnap(value: value)
+                    }
+                }
+        )
+        .handGesture(
+            MySnap(hand: .right)
+                .onChanged { value in
                     if (value.pose == .postSnap) {
                         self.appModel.handleSnap(value: value)
                     }

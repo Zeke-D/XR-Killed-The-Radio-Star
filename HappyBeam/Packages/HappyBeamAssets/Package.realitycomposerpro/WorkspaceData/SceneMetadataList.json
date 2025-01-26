@@ -213,6 +213,16 @@
       [
         "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
         "Root",
+        "Rocket",
+        "geom"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
+        "Root",
         "Video_Dock",
         "Player"
       ],
@@ -224,8 +234,8 @@
       [
         "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
         "Root",
-        "Rocket",
-        "Particles"
+        "ActualGeo",
+        "geom"
       ],
       {
         "isExpanded" : true,
@@ -265,6 +275,16 @@
         "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
         "Root",
         "Rocket"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6F0356C3-A010-42E9-AD64-DBC18EB5CB70",
+        "Root",
+        "Rocket",
+        "ActualGeo"
       ],
       {
         "isExpanded" : true,
