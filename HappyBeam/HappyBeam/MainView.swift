@@ -37,6 +37,7 @@ struct MainView:  View {
             let addExampleAudioEntity = false
             if addExampleAudioEntity {
                 let exampleAudioEntity = Entity()
+                exampleAudioEntity.components.set(SpatialAudioComponent())
                 // Modify the entity here with location, gain, etc.
                 testCustomAudio = CustomAudioSource(entity: exampleAudioEntity)
                 // This can be any AudioKit node!

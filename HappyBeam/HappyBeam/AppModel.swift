@@ -4,6 +4,7 @@ import AVFoundation
 import AVKit
 import AudioKit
 import OSCKit
+import Foundation
 
 class Animation {
     var start_time: Double = 0
@@ -107,6 +108,9 @@ class AppModel {
     let root = Entity()
     
     static let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
+    
+    private var oscBroadcastTask: Task<Void, Never>? // Add this property
+
 
     
     init() {
@@ -117,15 +121,21 @@ class AppModel {
         Settings.bufferLength = .veryShort
         
         let oscClient = OSCClient()
-        oscClient.isIPv4BroadcastEnabled = true
-        Task {
+//        oscClient.isIPv4BroadcastEnabled = true
+        func randomString(length: Int) -> String {
+            let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            return String((0..<length).compactMap { _ in characters.randomElement() })
+        }
+
+        oscBroadcastTask = Task {
             while true {
-                try! await Task.sleep(for: .seconds(1))
+                try! await Task.sleep(for: .milliseconds(10))
                 // NOTE: message must start with a slash!!!
-                let msg = OSCMessage("/\(myID)/test", values: ["string", 123])
+                let msg = OSCMessage("/\(myID)/test", values: ["string", randomString(length: 10) ])
                 for i in 1..<4 {
                     try! oscClient.send(msg, to: "192.168.0.10\(i)")
                 }
+                try! oscClient.send(msg, to: "10.0.0.7")
                 if debugOSC {
                     print("sent!")
                 }
