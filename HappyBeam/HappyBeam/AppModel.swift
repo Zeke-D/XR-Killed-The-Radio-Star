@@ -138,7 +138,8 @@ class AppModel {
     static let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
     static let shinySnapRight = try! AudioFileResource.load(named: "SNAPWETRIGHT")
     static let eltlongjlohng_model = (try! ModelEntity.load(named: "xrk/eltlongjlohng", in: happyBeamAssetsBundle)).children[0]
-    
+    static var mainTrackAudio = try! AudioFileResource.load(named: "Rocketman", configuration: .init(shouldLoop: true) )
+
     static let audioTracks : [AudioFileResource] = [
         try! AudioFileResource.load(named: "2MINUTE_ACOUSTICGUITAR", configuration: .init(shouldLoop: true) ),
         try! AudioFileResource.load(named: "2MINUTE_BASS", configuration: .init(shouldLoop: true) ),
@@ -318,13 +319,12 @@ class AppModel {
             light.components.set(pointComponent)
         }
         
-        let mainTrackSound = Self.audioTracks[4]
         self.mainTrackEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
-        self.mainTrackEntity.spatialAudio = SpatialAudioComponent()
+        self.mainTrackEntity.spatialAudio = SpatialAudioComponent(gain: 2.0)
         
         var screen = self.movieScene.findEntity(named: "Screen")!
         screen.addChild(self.mainTrackEntity)
-        self.spatialStems.append(self.mainTrackEntity.playAudio(mainTrackSound))
+        self.spatialStems.append(self.mainTrackEntity.playAudio(Self.mainTrackAudio))
         
         // play movie after delay
         let moveUp = Animation.init()
@@ -422,12 +422,14 @@ class AppModel {
                 SIMD3<Float>(0, -3, 0),
                 SIMD3<Float>(0, 0, -3),
             ] {
-                self.headAnchor.addChild(spatialVideoWall)
+                spaceOrigin.addChild(spatialVideoWall)
                 spatialVideoWall.setPosition(SIMD3(), relativeTo: self.headAnchor)
                 var new_screen = screen.clone(recursive: true)
+                new_screen.components.remove(AnimationSequenceComponent.self)
                 spatialVideoWall.addChild(new_screen)
                 new_screen.setPosition(self.headAnchor.position(relativeTo: nil) + offset, relativeTo: nil)
                 new_screen.look(at: self.headAnchor.position, from: new_screen.position, relativeTo: new_screen)
+                Self.videoAssets[1].seek(to: .zero)
                 self.playMovie(screen_entity: new_screen, player: Self.videoAssets[1])
             }
         }
@@ -496,8 +498,10 @@ class AppModel {
                 // Scale down the asteroid
                 asteroid.scale = SIMD3<Float>(repeating: 0.3)
                 
+//                mainTrackEntity.components[SpatialAudioComponent.self]?.gain = 0.0
+                
                 // Add spatial audio for first 4 asteroids using OrbController pattern
-                if (i % 5) < 4 {
+                if i < 4 {
                     let audioSource = Entity()
                     audioSource.spatialAudio = SpatialAudioComponent(gain: -3)
                     asteroid.addChild(audioSource)
@@ -507,6 +511,7 @@ class AppModel {
                     let controller = audioSource.playAudio(audioResource)
                     
                     spatialStems.append(controller)
+                } else {
                 }
                 
                 
@@ -562,8 +567,20 @@ class AppModel {
             height: 2.0
         )
         eltlongjlohng.components.set(component)
-        eltlongjlohng.addChild(self.mainTrackEntity)
+//        eltlongjlohng.addChild(self.mainTrackEntity)
         
+        // silence single main track
+        mainTrackEntity.components[SpatialAudioComponent.self]?.gain = -100.0
+        
+        let audioSource = Entity()
+        audioSource.spatialAudio = SpatialAudioComponent()
+        eltlongjlohng.addChild(audioSource)
+        
+        let audioResource = Self.audioTracks[4]
+        let controller = audioSource.playAudio(audioResource)
+        
+        spatialStems.append(controller)
+
         
         // Add to container
         asteroid_container.addChild(eltlongjlohng)
