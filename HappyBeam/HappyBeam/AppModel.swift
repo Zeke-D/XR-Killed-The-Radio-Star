@@ -323,6 +323,7 @@ class AppModel {
         
         self.mainTrackEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
         self.mainTrackEntity.spatialAudio = SpatialAudioComponent(gain: 15.0)
+        self.mainTrackEntity.spatialAudio?.distanceAttenuation = .rolloff(factor: 0.4)
         
         var screen = self.movieScene.findEntity(named: "Screen")!
         screen.addChild(self.mainTrackEntity)
@@ -575,7 +576,7 @@ class AppModel {
         
         // silence single main track
         Task {
-            try? await Task.sleep(for: .seconds(3))
+            try? await Task.sleep(for: .seconds(8))
             await MainActor.run(body: {
                 mainTrackEntity.components[SpatialAudioComponent.self]?.gain = -100.0
             })
@@ -595,7 +596,7 @@ class AppModel {
             // sync the spatial audio with the main audio track
             self.spatialStems[i].seek(to: .seconds(Date().timeIntervalSinceReferenceDate - musicStartTime))
         }
-        audioSource.spatialAudio?.distanceAttenuation = .rolloff(factor: 0.3)
+        audioSource.spatialAudio?.distanceAttenuation = .rolloff(factor: 0.1)
         
 
         
