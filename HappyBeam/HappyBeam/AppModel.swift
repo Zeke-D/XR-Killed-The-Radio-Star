@@ -118,7 +118,6 @@ class AppModel {
     private var oscBroadcastTask: Task<Void, Never>? // Add this property
 
 
-    
     init() {
         oscServer = XRKOscServer(myID: myID, root: root)
         Settings.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 1)!
@@ -158,7 +157,7 @@ class AppModel {
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
     
-    static let asteroid_model = try! ModelEntity.load(named: "Asteroid_1a")
+    static let asteroid_model = try! ModelEntity.load(named: "Asteroid")
 
     enum PlayingState {
         case notStarted
@@ -403,11 +402,30 @@ class AppModel {
     }
     
     func createAsteroidField() {
-        
         // Register the asteroid system
         AsteroidSystem.registerSystem()
         
-        // Create 10 asteroids
+        // Create the eltlongjlohng entity
+        let eltlongjlohng = Self.eltlongjlohng_model.clone(recursive: true)
+        
+        // Scale and position it
+        eltlongjlohng.scale = SIMD3<Float>(repeating: 0.5)
+        eltlongjlohng.position = SIMD3<Float>(0, 2, -10) // Adjust position as needed
+        
+        // Add asteroid component for orbital motion
+        let component = AsteroidComponent(
+            radius: 15.0,
+            speed: 0.2,
+            rotation: 0.3,
+            startAngle: 0,
+            height: 2.0
+        )
+        eltlongjlohng.components.set(component)
+        
+        // Add to container
+        asteroid_container.addChild(eltlongjlohng)
+        
+        // Create asteroids
         spaceOrigin.addChild(self.asteroid_container)
     }
 }

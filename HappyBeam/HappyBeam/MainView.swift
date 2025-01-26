@@ -34,9 +34,10 @@ struct MainView:  View {
             content.add(appModel.root)
             
             content.add(cameraRelativeAnchor)
-            let addExampleAudioEntity = false
+            let addExampleAudioEntity = true
             if addExampleAudioEntity {
                 let exampleAudioEntity = Entity()
+
                 appModel.root.addChild(exampleAudioEntity)
                 exampleAudioEntity.components.set(SpatialAudioComponent())
                 // Modify the entity here with location, gain, etc.
