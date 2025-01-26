@@ -326,13 +326,14 @@ class AppModel {
             self.playMovie(video: Self.videoAssets[0])
             self.videoText.modelComponent?.materials = [ Self.text_on_mat ]
             self.playingState = .flatVideo
+            self.spatialVidText.isEnabled = false
         }
-        moveUp.direction = SIMD3<Float>(0, 2.75, 0)
+        moveUp.direction = SIMD3<Float>(0, 3.3, 0)
         
         let moveBack = Animation.init()
         moveBack.duration = 10
         moveBack.delay = 0
-        moveBack.direction = SIMD3<Float>(0, 0, 4)
+        moveBack.direction = SIMD3<Float>(0, 0, 3.5)
         
         let moveBackAndPlaySpatial = Animation.init()
         moveBackAndPlaySpatial.duration = 10
@@ -342,6 +343,7 @@ class AppModel {
             self.playMovie(video: Self.videoAssets[1])
             self.playingState = .spatialVideo
             self.spatialVidText.modelComponent?.materials = [ Self.text_on_mat ]
+            self.spatialVidText.isEnabled = true
         }
 
         let explode = Animation.init()
@@ -465,13 +467,13 @@ class AppModel {
                 asteroid.scale = SIMD3<Float>(repeating: 0.3)
                 
                 // Add spatial audio for first 4 asteroids using OrbController pattern
-                if i < 4 {
+                if (i % 5) < 4 {
                     let audioSource = Entity()
                     audioSource.spatialAudio = SpatialAudioComponent(gain: -3)
                     asteroid.addChild(audioSource)
-                    radius = 1;
+                    radius = 2;
                     
-                    let audioResource = Self.audioTracks[i]
+                    let audioResource = Self.audioTracks[i % 5]
                     let controller = audioSource.playAudio(audioResource)
                     
                     spatialStems.append(controller)
@@ -513,14 +515,14 @@ class AppModel {
         eltlongjlohng.components.set(EltonComponent())
         
         // Scale and position it
-        eltlongjlohng.scale = SIMD3<Float>(repeating: 0.5)
+        eltlongjlohng.scale = SIMD3<Float>(repeating: 4)
         eltlongjlohng.position = SIMD3<Float>(0, 2, -10) // Adjust position as needed
         
        
         
         // Add asteroid component for orbital motion
         let component = AsteroidComponent(
-            radius: 15.0,
+            radius: 40.0,
             speed: 0.2,
             rotation: 0.3,
             startAngle: 0,
