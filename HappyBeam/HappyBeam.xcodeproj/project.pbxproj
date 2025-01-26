@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A07FBCA2D43E5B800D26F6F /* AudioKit */; };
-		0A1FD3682D4468BF0062D7B4 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = 0A1FD3672D4468BF0062D7B4 /* HappyBeamAssets */; };
 		0A1FD36A2D4468E60062D7B4 /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */; };
 		0A5EE8C62D45AE1600072F1B /* CustomAudioSoure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */; };
 		0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 0AAF2DCF2D44B2F1007412A3 /* concert.MOV */; };
@@ -40,6 +39,8 @@
 		E82F249F2D44568C00E69E98 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = E82F249E2D44568C00E69E98 /* SoundpipeAudioKit */; };
 		E82F24A32D445E8200E69E98 /* 10TO3KSWEEP.wav in Resources */ = {isa = PBXBuildFile; fileRef = E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */; };
 		E82F24BA2D45BFF600E69E98 /* Asteroid_1a.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E82F24B92D45BFF600E69E98 /* Asteroid_1a.usdz */; };
+		E82F24BC2D45C5F000E69E98 /* AsteroidComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */; };
+		E82F24BF2D45C6A300E69E98 /* HappyBeamAssets in Frameworks */ = {isa = PBXBuildFile; productRef = E82F24BE2D45C6A300E69E98 /* HappyBeamAssets */; };
 		E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */; };
 		E8847F862D4429DA007562A3 /* OrbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F842D4429DA007562A3 /* OrbController.swift */; };
 		E8847F872D4429DA007562A3 /* SoundOrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8847F852D4429DA007562A3 /* SoundOrbView.swift */; };
@@ -80,6 +81,7 @@
 		E82F24A02D4458A700E69E98 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioAnalyzer.swift; path = HappyBeam/AudioAnalyzer.swift; sourceTree = "<group>"; };
 		E82F24A22D445E8200E69E98 /* 10TO3KSWEEP.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 10TO3KSWEEP.wav; sourceTree = "<group>"; };
 		E82F24B92D45BFF600E69E98 /* Asteroid_1a.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Asteroid_1a.usdz; sourceTree = "<group>"; };
+		E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidComponent.swift; sourceTree = "<group>"; };
 		E87A5B532D44308500D2BB31 /* MONOSTEM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MONOSTEM.mp3; sourceTree = "<group>"; };
 		E8847F842D4429DA007562A3 /* OrbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbController.swift; sourceTree = "<group>"; };
 		E8847F852D4429DA007562A3 /* SoundOrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundOrbView.swift; sourceTree = "<group>"; };
@@ -91,11 +93,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AAF2DD52D44C0B9007412A3 /* OSCKitCore in Frameworks */,
+				E82F24BF2D45C6A300E69E98 /* HappyBeamAssets in Frameworks */,
 				E82F249A2D443E3800E69E98 /* (null) in Frameworks */,
 				0AAF2DD32D44C0B9007412A3 /* OSCKit in Frameworks */,
 				0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */,
 				E82F249F2D44568C00E69E98 /* SoundpipeAudioKit in Frameworks */,
-				0A1FD3682D4468BF0062D7B4 /* HappyBeamAssets in Frameworks */,
 				B36AA6152D43FC99000B742F /* HandGesture in Frameworks */,
 				B36AA6122D43FC86000B742F /* ARUnderstanding in Frameworks */,
 			);
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				B356BF8F2D45CBE200AF78B5 /* HappyBeamAssets */,
+				E82F24BB2D45C5F000E69E98 /* AsteroidComponent.swift */,
 				0AAF2DCF2D44B2F1007412A3 /* concert.MOV */,
 				B3D51D3D2D4460670063B603 /* SpatialTest.MP4 */,
 				E82F24B92D45BFF600E69E98 /* Asteroid_1a.usdz */,
@@ -225,9 +228,9 @@
 				B36AA6112D43FC86000B742F /* ARUnderstanding */,
 				B36AA6142D43FC99000B742F /* HandGesture */,
 				E82F249E2D44568C00E69E98 /* SoundpipeAudioKit */,
-				0A1FD3672D4468BF0062D7B4 /* HappyBeamAssets */,
 				0AAF2DD22D44C0B9007412A3 /* OSCKit */,
 				0AAF2DD42D44C0B9007412A3 /* OSCKitCore */,
+				E82F24BE2D45C6A300E69E98 /* HappyBeamAssets */,
 			);
 			productName = HappyBeamX;
 			productReference = 321A0C0B291C02B80042A987 /* HappyBeam.app */;
@@ -269,6 +272,7 @@
 				B36AA6132D43FC99000B742F /* XCRemoteSwiftPackageReference "HandGesture" */,
 				E82F249D2D44568C00E69E98 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
 				0AAF2DD12D44C0B9007412A3 /* XCRemoteSwiftPackageReference "OSCKit" */,
+				E82F24BD2D45C6A300E69E98 /* XCLocalSwiftPackageReference "Packages/HappyBeamAssets" */,
 			);
 			productRefGroup = 321A0C0C291C02B80042A987 /* Products */;
 			projectDirPath = "";
@@ -319,6 +323,7 @@
 				B36AA6192D440F59000B742F /* AppModel.swift in Sources */,
 				E8847F862D4429DA007562A3 /* OrbController.swift in Sources */,
 				E8847F872D4429DA007562A3 /* SoundOrbView.swift in Sources */,
+				E82F24BC2D45C5F000E69E98 /* AsteroidComponent.swift in Sources */,
 				32BD3B6A299C2729005798DF /* Extensions.swift in Sources */,
 				B36AA6212D445DE1000B742F /* PlayerView.swift in Sources */,
 				32BD3B68299C26E6005798DF /* GlobalEntities.swift in Sources */,
@@ -543,6 +548,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		E82F24BD2D45C6A300E69E98 /* XCLocalSwiftPackageReference "Packages/HappyBeamAssets" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/HappyBeamAssets;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		0A07FBC92D43E5B800D26F6F /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -592,10 +604,6 @@
 			package = 0A07FBC92D43E5B800D26F6F /* XCRemoteSwiftPackageReference "AudioKit" */;
 			productName = AudioKit;
 		};
-		0A1FD3672D4468BF0062D7B4 /* HappyBeamAssets */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = HappyBeamAssets;
-		};
 		0AAF2DD22D44C0B9007412A3 /* OSCKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0AAF2DD12D44C0B9007412A3 /* XCRemoteSwiftPackageReference "OSCKit" */;
@@ -620,6 +628,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E82F249D2D44568C00E69E98 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */;
 			productName = SoundpipeAudioKit;
+		};
+		E82F24BE2D45C6A300E69E98 /* HappyBeamAssets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HappyBeamAssets;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

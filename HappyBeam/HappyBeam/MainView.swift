@@ -53,6 +53,7 @@ struct MainView:  View {
             appModel.rocketScene = rocketScene
             
             AnimationSystem.registerSystem()
+            AsteroidSystem.registerSystem()
         }
         .handGesture(
             MySnap(hand: .left)
