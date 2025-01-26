@@ -6,6 +6,7 @@ import AudioKit
 import OSCKit
 import Foundation
 import ARKit
+import HappyBeamAssets
 
 extension HandAnchor.Chirality {
     @MainActor
@@ -181,7 +182,7 @@ class AppModel {
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
     
-    static let asteroid_model = try! ModelEntity.load(named: "Asteroid")
+    static let asteroid_model = try! ModelEntity.load(named: "Asteroid_1a", in: happyBeamAssetsBundle)
 
     enum PlayingState {
         case notStarted

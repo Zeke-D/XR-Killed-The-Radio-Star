@@ -73,8 +73,11 @@ struct MainView:  View {
                     }
                 }
         )
-        .gesture(TapGesture().targetedToEntity(where: .has(AsteroidComponent.self))
+        .gesture(TapGesture()
+//            .targetedToEntity(where: .has(AsteroidComponent.self) && !.has(GrabbedComponent.self))
+            .targetedToAnyEntity()
             .onEnded({ val in
+                print("tapped \(val.entity)")
                 val.entity.components.set(GrabbedComponent())
                 appModel.rightIndex.addChild(val.entity)
             })
