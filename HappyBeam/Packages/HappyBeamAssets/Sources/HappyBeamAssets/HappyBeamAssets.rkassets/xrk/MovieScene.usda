@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["SkySphere", "Move", "Ground", "ScreenTransform", "Lights"]
+    reorder nameChildren = ["SkySphere", "Move", "Ground", "ScreenTransform", "Lights", "Theatre", "IBL"]
     def "SkySphere" (
         active = true
         customData = {
@@ -88,7 +88,7 @@ def Xform "Root"
             double size = 0.2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (20, 13.333334, 0.03076923)
-            float3 xformOp:translate = (0, -0.50631905, -8.206028)
+            float3 xformOp:translate = (0, -0.50631905, -7.082741)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "RCP_BehaviorsContainer"
@@ -290,15 +290,15 @@ def Xform "Root"
         customData = {
             float3 rotationEulerHint = (1.5707964, 0, 0)
         }
-        prepend references = @Theatre.usdc@
+        references = @Theatre.usdc@
     )
     {
         rel material:binding = </Root/Theatre/_materials/Material> (
             bindMaterialAs = "weakerThanDescendants"
         )
         quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 4.5, 7.4505806e-7)
+        float3 xformOp:scale = (0.7, 0.7, 0.7)
+        float3 xformOp:translate = (0, 3.6242728, 6.7055225e-7)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "env_light" (
@@ -349,6 +349,74 @@ def Xform "Root"
                     float inputs:specular = 0.2
                 }
             }
+        }
+
+        over "Cube_001"
+        {
+            def RealityKitComponent "ImageBasedLightReceiver"
+            {
+                rel iblEntity = </Root/IBL>
+                uniform token info:id = "RealityKit.ImageBasedLightReceiver"
+            }
+        }
+
+        over "Cube_002"
+        {
+            def RealityKitComponent "ImageBasedLightReceiver"
+            {
+                rel iblEntity = </Root/IBL>
+                uniform token info:id = "RealityKit.ImageBasedLightReceiver"
+            }
+        }
+
+        over "Cube_003"
+        {
+            def RealityKitComponent "ImageBasedLightReceiver"
+            {
+                rel iblEntity = </Root/IBL>
+                uniform token info:id = "RealityKit.ImageBasedLightReceiver"
+            }
+        }
+
+        over "Cube_005"
+        {
+            def RealityKitComponent "ImageBasedLightReceiver"
+            {
+                rel iblEntity = </Root/IBL>
+                uniform token info:id = "RealityKit.ImageBasedLightReceiver"
+            }
+        }
+
+        over "Cube"
+        {
+            def RealityKitComponent "ImageBasedLightReceiver"
+            {
+                rel iblEntity = </Root/IBL>
+                uniform token info:id = "RealityKit.ImageBasedLightReceiver"
+            }
+        }
+
+        over "Cube_004"
+        {
+            def RealityKitComponent "ImageBasedLightReceiver"
+            {
+                rel iblEntity = </Root/IBL>
+                uniform token info:id = "RealityKit.ImageBasedLightReceiver"
+            }
+        }
+    }
+
+    def Xform "IBL" (
+        active = true
+    )
+    {
+        def RealityKitComponent "ImageBasedLight"
+        {
+            token blendMode = "single"
+            bool enableBlend = 0
+            asset ibl = @../heartLight_M_heartLight_metallic.jpg@
+            uniform token info:id = "RealityKit.ImageBasedLight"
+            bool isGlobalIBL = 0
         }
     }
 }

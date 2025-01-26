@@ -324,16 +324,6 @@
       },
       [
         "916F2E70-40B8-4027-B5CB-91FC2BC864F1",
-        "Root",
-        "Theatre",
-        "_materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "916F2E70-40B8-4027-B5CB-91FC2BC864F1",
         "Root"
       ],
       {
@@ -361,7 +351,7 @@
       [
         "916F2E70-40B8-4027-B5CB-91FC2BC864F1",
         "Root",
-        "Theatre"
+        "ScreenTransform"
       ],
       {
         "isExpanded" : true,
@@ -370,7 +360,7 @@
       [
         "916F2E70-40B8-4027-B5CB-91FC2BC864F1",
         "Root",
-        "ScreenTransform"
+        "Theatre"
       ],
       {
         "isExpanded" : true,

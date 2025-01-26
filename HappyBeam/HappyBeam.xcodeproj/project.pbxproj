@@ -20,6 +20,7 @@
 		32C96CBF2A2FED900030AA37 /* Packages in Resources */ = {isa = PBXBuildFile; fileRef = 32C96CBE2A2FED900030AA37 /* Packages */; };
 		B0B8C3EA2BDC363900704A2C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B0B8C3E92BDC363900704A2C /* Localizable.xcstrings */; };
 		B0CF536A2BF5E560000E4337 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B0CF53692BF5E560000E4337 /* InfoPlist.xcstrings */; };
+		B356BF802D45B75A00AF78B5 /* SNAP.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B356BF7F2D45B75A00AF78B5 /* SNAP.mp3 */; };
 		B35D073B2D4560EB00E24EDA /* Rocketman.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35D073A2D4560EB00E24EDA /* Rocketman.wav */; };
 		B3676A032D459B7A00C76484 /* shiny-snap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3676A022D459B7A00C76484 /* shiny-snap.mp3 */; };
 		B36AA6122D43FC86000B742F /* ARUnderstanding in Frameworks */ = {isa = PBXBuildFile; productRef = B36AA6112D43FC86000B742F /* ARUnderstanding */; };
@@ -58,6 +59,7 @@
 		9823BBED79461E85755AF17F /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		B0B8C3E92BDC363900704A2C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B0CF53692BF5E560000E4337 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		B356BF7F2D45B75A00AF78B5 /* SNAP.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SNAP.mp3; sourceTree = "<group>"; };
 		B35D073A2D4560EB00E24EDA /* Rocketman.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rocketman.wav; sourceTree = "<group>"; };
 		B3676A022D459B7A00C76484 /* shiny-snap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shiny-snap.mp3"; sourceTree = "<group>"; };
 		B36AA6162D440E89000B742F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				B3D51D412D4466D10063B603 /* SweetEmotion.mp3 */,
 				B35D073A2D4560EB00E24EDA /* Rocketman.wav */,
 				B3676A022D459B7A00C76484 /* shiny-snap.mp3 */,
+				B356BF7F2D45B75A00AF78B5 /* SNAP.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B356BF802D45B75A00AF78B5 /* SNAP.mp3 in Resources */,
 				32C96CBF2A2FED900030AA37 /* Packages in Resources */,
 				E87A5B542D44308500D2BB31 /* MONOSTEM.mp3 in Resources */,
 				B3D51D422D4466D10063B603 /* SweetEmotion.mp3 in Resources */,

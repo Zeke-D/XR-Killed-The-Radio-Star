@@ -16,7 +16,7 @@ class Animation {
     required init() {}
 }
 
-class MovieComponent : Component {
+class MovieSequenceComponent : Component {
     var entity : Entity = Entity();
     var progress : Double = 0
     var animation_queue : [Animation] = []
@@ -73,7 +73,7 @@ class MovieComponent : Component {
 
 
 class MovieSystem : System {
-    private static let query = EntityQuery(where: .has(MovieComponent.self))
+    private static let query = EntityQuery(where: .has(MovieSequenceComponent.self))
 
     required init(scene: RealityKit.Scene) { }
 
@@ -82,7 +82,7 @@ class MovieSystem : System {
            matching: Self.query,
            updatingSystemWhen: .rendering
        ) {
-           var mc = entity.components[MovieComponent.self]!
+           var mc = entity.components[MovieSequenceComponent.self]!
            mc.progress += context.deltaTime
            mc.handleCurrentAnimation()
            entity.components.set(mc) // update progress
@@ -124,22 +124,33 @@ class AppModel {
     var movieScene = Entity()
     var mainTrackEntity = Entity()
     
+    func makeSnapEntity(resource_name: String) -> Entity {
+        let shinySnap = try! AudioFileResource.load(named: resource_name)
+        var snapEntity = Entity()
+        snapEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
+        snapEntity.spatialAudio = SpatialAudioComponent()
+        snapEntity.playAudio(shinySnap)
+        return snapEntity
+    }
+    
     func handleSnap(value: MySnap.Value) -> Void {
         print("From: ", self.playingState)
         switch self.playingState {
         case .notStarted:
             self.drawMovieScene()
             self.playingState = .inTheater
+            var snapEntity = makeSnapEntity(resource_name: "SNAP")
+            snapEntity.setPosition(value.position, relativeTo: nil)
+            spaceOrigin.addChild(snapEntity)
         case .inTheater:
             self.dimLightsAndPlayMusic()
             self.playingState = .musicStart
-        case .musicStart:
-            let shinySnap = try! AudioFileResource.load(named: "shiny-snap")
-            var snapEntity = Entity()
-            snapEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
-            snapEntity.spatialAudio = SpatialAudioComponent()
+            var snapEntity = makeSnapEntity(resource_name: "SNAP")
             snapEntity.setPosition(value.position, relativeTo: nil)
-            snapEntity.playAudio(shinySnap)
+            spaceOrigin.addChild(snapEntity)
+        case .musicStart:
+            var snapEntity = makeSnapEntity(resource_name: "shiny-snap")
+            snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
             break
         case .spatialVideo:
@@ -189,22 +200,20 @@ class AppModel {
         moveUp.direction = SIMD3<Float>(0, 2, 0)
         
         let moveBack = Animation.init()
-        moveBack.duration = 3
+        moveBack.duration = 10
         moveBack.delay = 0
-        moveBack.direction = SIMD3<Float>(0, 0, 20)
+        moveBack.direction = SIMD3<Float>(0, 0, 5)
         
         let explode = Animation.init()
-        explode.duration = 1
-        explode.delay = 0
+        explode.duration = 0.5
         explode.onStart = {
             let theatre = self.movieScene.findEntity(named: "Theatre")!
             for anim in theatre.availableAnimations {
                 theatre.playAnimation(anim, startsPaused: false)
             }
         }
-        explode.direction = SIMD3<Float>(0, 0, 20)
 
-        var mc = MovieComponent()
+        var mc = MovieSequenceComponent()
         mc.entity = screen
         mc.animation_queue = [
             moveUp, moveBack, explode
