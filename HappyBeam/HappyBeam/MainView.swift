@@ -20,7 +20,6 @@ struct MainView:  View {
     @State private var engine = AudioEngine()
     @State private var player: AudioPlayer?
     @State private var timer: Timer?
-    @State private var isAudioSetup = false
     
     let root = Entity()
     @State private var testCustomAudio : CustomAudioSource? = nil
