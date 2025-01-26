@@ -129,7 +129,7 @@ class AppModel {
 
         oscBroadcastTask = Task {
             while true {
-                try! await Task.sleep(for: .milliseconds(10))
+                try! await Task.sleep(for: .milliseconds(500))
                 // NOTE: message must start with a slash!!!
                 let msg = OSCMessage("/\(myID)/test", values: ["string", randomString(length: 10) ])
                 for i in 1..<4 {

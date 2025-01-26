@@ -16,6 +16,7 @@ class CustomAudioSource {
     private var input : (any Node)? = nil
     let entity : Entity
     var controller: AudioGeneratorController? = nil
+    var source: (any Node)? = nil
     
     init(entity: Entity) {
         self.entity = entity
@@ -29,6 +30,8 @@ class CustomAudioSource {
     }
     
     func setSource(source: any Node) {
+        print(source.outputFormat)
+        self.source = source
         self.input = source
         engine.output = source
     }

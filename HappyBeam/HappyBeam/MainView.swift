@@ -37,13 +37,14 @@ struct MainView:  View {
             let addExampleAudioEntity = false
             if addExampleAudioEntity {
                 let exampleAudioEntity = Entity()
+                appModel.root.addChild(exampleAudioEntity)
                 exampleAudioEntity.components.set(SpatialAudioComponent())
                 // Modify the entity here with location, gain, etc.
                 testCustomAudio = CustomAudioSource(entity: exampleAudioEntity)
                 // This can be any AudioKit node!
-                testCustomAudio?.setSource(source: WhiteNoise())
+                let square = Oscillator(waveform: Table(.square), amplitude: 0.1)
+                testCustomAudio?.setSource(source: square)
                 testCustomAudio?.start()
-                appModel.root.addChild(exampleAudioEntity)
             }
             
             let movieScene = try! await Entity(named: "xrk/MovieScene", in: happyBeamAssetsBundle)
