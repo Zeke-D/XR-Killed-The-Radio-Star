@@ -155,6 +155,8 @@ class AppModel {
     var audioText = Entity()
     var gestureText = Entity()
     
+    var snapParticle = Entity()
+    
     private var oscBroadcastTask: Task<Void, Never>? // Add this property
 
     var spatialStems: [AudioPlaybackController] = []
@@ -284,6 +286,10 @@ class AppModel {
             die.onStart = { newSphere.removeFromParent() }
             sphereSequence.animation_queue = [ fly_up, die ]
             newSphere.components.set(sphereSequence)
+                
+            var particles = self.snapParticle.clone(recursive: false)
+            spaceOrigin.addChild(particles)
+            particles.setPosition(anchor.position(relativeTo: nil), relativeTo: nil)
             break
         case .collaborative:
             print("Done!")

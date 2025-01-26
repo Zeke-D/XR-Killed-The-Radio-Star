@@ -15,6 +15,9 @@ struct HappyBeamApp: App {
     @State private var immersionState: ImmersionStyle = .mixed
     
     var body: some SwiftUI.Scene {
+        WindowGroup {
+            ContentView().environment(appModel)
+        }
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             MainView().environment(appModel)
             //            SoundOrbView(soundFile: "MONOSTEM.mp3", x: 0, y: 1.5, z: -1)

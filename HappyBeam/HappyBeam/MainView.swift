@@ -54,8 +54,14 @@ struct MainView:  View {
             let rocketScene = try! await Entity(named: "xrk/Rocket", in: happyBeamAssetsBundle)
             appModel.rocketScene = rocketScene
             
+            let particleScene = try! await Entity(named: "xrk/particle", in: happyBeamAssetsBundle)
+            appModel.snapParticle = particleScene.findEntity(named: "SnapParticle")!;
+
             AnimationSystem.registerSystem()
             AsteroidSystem.registerSystem()
+            
+            self.appModel.drawMovieScene()
+            self.appModel.playingState = .inTheater
         }
         .handGesture(
             MySnap(hand: .left)

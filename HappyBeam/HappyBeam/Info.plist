@@ -6,8 +6,6 @@
 	<string>Track your hands to detect a heart gesture.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
-		<key>UIApplicationPreferredDefaultSceneSessionRole</key>
-		<string>UISceneSessionRoleImmersiveSpaceApplication</string>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<true/>
 	</dict>
