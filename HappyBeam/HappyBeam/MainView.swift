@@ -49,6 +49,7 @@ struct MainView:  View {
             let movieScene = try! await Entity(named: "xrk/MovieScene", in: happyBeamAssetsBundle)
             appModel.movieScene = movieScene
             MovieSystem.registerSystem()
+            AsteroidSystem.registerSystem()
         }
         .handGesture(
             MySnap(hand: .left)

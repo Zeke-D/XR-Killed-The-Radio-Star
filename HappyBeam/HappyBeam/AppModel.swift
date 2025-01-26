@@ -157,13 +157,15 @@ class AppModel {
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
         case .musicStart:
+            self.playingState = .spatialVideo
             var snapEntity = makeSnapEntity(resource_name: "shiny-snap")
             snapEntity.setPosition(value.position, relativeTo: nil)
             spaceOrigin.addChild(snapEntity)
-            break
         case .spatialVideo:
+            createAsteroidField()
             break
         case .fullOuterSpace:
+            self.playingState = .collaborative
             break
         case .collaborative:
             print("Done!")
@@ -244,4 +246,49 @@ class AppModel {
         player.play()
     }
     
+    func createAsteroidField() {
+        print("🚀 Starting asteroid field creation")
+        
+        // Register the asteroid system
+        AsteroidSystem.registerSystem()
+        print("✅ Asteroid system registered")
+        
+        // Create 10 asteroids
+        for i in 0..<20 {
+            print("🌑 Attempting to create asteroid \(i+1)")
+            do {
+                let asteroid = try ModelEntity.load(named: "Asteroid_1a")
+                print("✅ Successfully loaded Asteroid_1a model")
+                
+                // Randomize the asteroid properties
+                let radius = Float.random(in: 3...18)
+                let speed = Float.random(in: 0.1...0.4)
+                let rotation = Float.random(in: 0.1...0.5)
+                let startAngle = Float(i) * (2 * .pi / 10) // I think it would be fun to get crazier angles
+                let height = Float.random(in: -2...4)
+                
+                // Scale down the asteroid
+                asteroid.scale = SIMD3<Float>(repeating: 0.3)
+                
+                // Add the asteroid component
+                let component = AsteroidComponent(
+                    radius: radius,
+                    speed: speed,
+                    rotation: rotation,
+                    startAngle: startAngle,
+                    height: height
+                )
+                asteroid.components.set(component)
+                print("✅ Added AsteroidComponent to asteroid \(i+1)")
+                
+                // Add to the scene
+                spaceOrigin.addChild(asteroid)
+                print("✅ Added asteroid \(i+1) to scene at radius: \(radius), height: \(height)")
+            } catch {
+                print("❌ Failed to load Asteroid_1a model: \(error)")
+            }
+        }
+        
+        print("🎯 Total entities in spaceOrigin: \(spaceOrigin.children.count)")
+    }
 }
