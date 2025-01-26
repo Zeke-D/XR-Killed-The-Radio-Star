@@ -414,6 +414,15 @@
       [
         "916F2E70-40B8-4027-B5CB-91FC2BC864F1",
         "Root",
+        "TextParent"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "916F2E70-40B8-4027-B5CB-91FC2BC864F1",
+        "Root",
         "Video_Dock",
         "Ground",
         "Material"

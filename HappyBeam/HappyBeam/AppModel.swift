@@ -182,7 +182,7 @@ class AppModel {
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
     
-    static let asteroid_model = try! ModelEntity.load(named: "Asteroid_1a", in: happyBeamAssetsBundle)
+    static let asteroid_model = (try! ModelEntity.load(named: "Asteroid_1a", in: happyBeamAssetsBundle)).children[0]
 
     enum PlayingState {
         case notStarted
@@ -203,6 +203,8 @@ class AppModel {
     var rocketScene = Entity()
     var mainTrackEntity = Entity()
     var asteroid_container = Entity()
+    
+    var grabbedEntity: Entity? = nil
 
     func makeSnapEntity(snapType: HandAnchor.Chirality) -> Entity {
         let resource = snapType.snapAudioResource()

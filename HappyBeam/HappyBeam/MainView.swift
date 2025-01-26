@@ -74,17 +74,26 @@ struct MainView:  View {
                 }
         )
         .gesture(TapGesture()
-//            .targetedToEntity(where: .has(AsteroidComponent.self) && !.has(GrabbedComponent.self))
-            .targetedToAnyEntity()
+            .targetedToEntity(where: .has(AsteroidComponent.self))
             .onEnded({ val in
-                print("tapped \(val.entity)")
+                if appModel.grabbedEntity != nil {
+                    if appModel.grabbedEntity == val.entity {
+                        val.entity.components.remove(GrabbedComponent.self)
+                        appModel.asteroid_container.addChild(val.entity)
+                        appModel.grabbedEntity = nil
+                        val.entity.setScale(val.entity.scale * 3.0, relativeTo: val.entity.parent)
+                    }
+                    return
+                }
+                
                 val.entity.components.set(GrabbedComponent())
                 appModel.rightIndex.addChild(val.entity)
+                val.entity.setPosition(SIMD3(), relativeTo: val.entity.parent)
+                appModel.grabbedEntity = val.entity
+                
+                val.entity.setScale(val.entity.scale / 3.0, relativeTo: val.entity.parent)
             })
         )
-        .onTapGesture(perform: {
-            
-        })
         Button("SNAP", action: {
             self.appModel.handleSnap(value: MySnap.Value(pose: .postSnap, chirality: .left, position: SIMD3()))
         }).scaleEffect(5)
