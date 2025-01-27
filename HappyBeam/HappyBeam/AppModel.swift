@@ -169,9 +169,31 @@ class AppModel {
                 )
             )
         ),
-//        AVURLAsset(url: Bundle.main.url(forResource: "glove", withExtension: "MOV")!),
         AVPlayer(playerItem: AVPlayerItem(asset: AVURLAsset(url: Bundle.main.url(forResource: "concert", withExtension: "MOV")!)))
     ]
+    
+    static var videoAsssetQueue = AVQueuePlayer(items: [
+        AVPlayerItem(
+            asset: AVURLAsset(
+                url: Bundle.main.url(forResource: "Cinematic_H264", withExtension: "mp4")!
+            )
+        ),
+        AVPlayerItem(
+            asset: AVURLAsset(
+                url: Bundle.main.url(forResource: "concert", withExtension: "MOV")!
+            )
+        )
+    ])
+    
+    
+    static var travelSpatialItem: AVPlayerItem = AVPlayerItem(
+        asset: AVURLAsset(url: Bundle.main.url(forResource: "TRAVELSPATIAL", withExtension: "mov")!))
+    static var loopingReelPlayer = AVQueuePlayer(
+        items: [ travelSpatialItem ]
+        
+    )
+    static var spatialVideoReel =
+    AVPlayerLooper(player: loopingReelPlayer, templateItem: travelSpatialItem)
     
     
     init() {
@@ -194,7 +216,7 @@ class AppModel {
     var immersiveSpaceState = ImmersiveSpaceState.closed
     
     static let asteroid_model = (try! ModelEntity.load(named: "Asteroid_1a", in: happyBeamAssetsBundle)).children[0]
-
+    
     enum PlayingState {
         case notStarted
         case inTheater
@@ -207,7 +229,7 @@ class AppModel {
     
     // initial playingstate
     var playingState = PlayingState.notStarted
-//    var playingState = PlayingState.spatialVideo
+    //    var playingState = PlayingState.spatialVideo
     
     
     var movieScene = Entity()
@@ -216,7 +238,7 @@ class AppModel {
     var asteroid_container = Entity()
     
     var grabbedEntity: Entity? = nil
-
+    
     func makeSnapEntity(snapType: HandAnchor.Chirality) -> Entity {
         let resource = snapType.snapAudioResource()
         var snapEntity = Entity()
@@ -263,7 +285,7 @@ class AppModel {
             die.onStart = { newSphere.removeFromParent() }
             sphereSequence.animation_queue = [ fly_up, die ]
             newSphere.components.set(sphereSequence)
-                
+            
             var particles = self.snapParticle.clone(recursive: false)
             spaceOrigin.addChild(particles)
             particles.setPosition(value.position, relativeTo: nil)
@@ -296,7 +318,7 @@ class AppModel {
         }
         
         self.mainTrackEntity.orientation = .init(angle: .pi, axis: [0, 1, 0])
-        self.mainTrackEntity.spatialAudio = SpatialAudioComponent(gain: 15.0)
+        self.mainTrackEntity.spatialAudio = SpatialAudioComponent(gain: 25.0)
         self.mainTrackEntity.spatialAudio?.distanceAttenuation = .rolloff(factor: 0.4)
         
         var screen = self.movieScene.findEntity(named: "Screen")!
@@ -308,7 +330,7 @@ class AppModel {
         moveUp.duration = 10
         moveUp.delay = 5
         moveUp.onStart = {
-            self.playMovie(video: Self.videoAssets[0])
+            self.playMovie(video: Self.videoAsssetQueue)
             self.videoText.modelComponent?.materials = [ Self.text_on_mat ]
             self.playingState = .flatVideo
             self.spatialVidText.isEnabled = false
@@ -325,12 +347,12 @@ class AppModel {
         moveBackAndPlaySpatial.delay = 0
         moveBackAndPlaySpatial.direction = SIMD3<Float>(0, 0, 4)
         moveBackAndPlaySpatial.onStart = {
-            self.playMovie(video: Self.videoAssets[1])
+//            self.playMovie(video: Self.videoAssets[1])
             self.playingState = .spatialVideo
             self.spatialVidText.modelComponent?.materials = [ Self.text_on_mat ]
             self.spatialVidText.isEnabled = true
         }
-
+        
         let explode = Animation.init()
         explode.duration = 10
         explode.onStart = {
@@ -345,7 +367,7 @@ class AppModel {
             Task {
                 self.createAsteroidField()
             }
- 
+            
         }
         
         explode.direction = SIMD3<Float>(0, -3, -80)
@@ -357,7 +379,7 @@ class AppModel {
         textMoveSequence.entity = self.welcomeText
         textMoveSequence.animation_queue = [ moveText, welcomeDie ]
         self.welcomeText.components.set(textMoveSequence)
-
+        
         var screenMovieSequence = AnimationSequenceComponent()
         screenMovieSequence.entity = screen
         screenMovieSequence.animation_queue = [
@@ -375,7 +397,7 @@ class AppModel {
         )
         rocket.spatialAudio = SpatialAudioComponent()
         rocket.playAudio(rocketSound)
-
+        
         var rocketDirection = SIMD3<Float>(-20, 0, 40)
         rocket.look(at: rocket.position + rocketDirection, from: rocket.position, relativeTo: nil)
         let movePastPlayer = Animation.init()
@@ -406,17 +428,32 @@ class AppModel {
                 spatialVideoWall.addChild(new_screen)
                 new_screen.setPosition(self.headAnchor.position(relativeTo: nil) + offset, relativeTo: nil)
                 new_screen.look(at: self.headAnchor.position, from: new_screen.position, relativeTo: new_screen.parent)
-                new_screen.setScale(SIMD3(8,8, 1), relativeTo: new_screen)
-                Self.videoAssets[1].seek(to: .zero)
+                new_screen.setScale(SIMD3(16,16, 1), relativeTo: new_screen)
+//                Self.videoAssets[1].seek(to: .zero)
                 
+//                var replaySequence = AnimationSequenceComponent()
+//                replaySequence.entity = new_screen
+//                var replay = Animation(duration: 1, delay: 5, direction: SIMD3())
+//                replay.onStart = {
+//                    Self.loopingReelPlayer.seek(to: .zero)
+//                    // reset sequence
+//                    replaySequence.progress = 0
+//                    // reset animation
+//                    replay.start_time = 0
+//                    replay.calledOnStart = false
+//                    replaySequence.animation_queue = [ replay ]
+//                }
+//                replaySequence.animation_queue = [ replay ]
+//                new_screen.components.set(replaySequence)
+//
                 Task {
                     while true {
-                        try? await Task.sleep(for: .seconds(10))
-                        await Self.videoAssets[1].seek(to: .zero)
+                        try? await Task.sleep(for: .seconds(98))
+                        await Self.loopingReelPlayer.seek(to: .zero)
                     }
                 }
-                
-                self.playMovie(screen_entity: new_screen, player: Self.videoAssets[1])
+                self.playMovie(screen_entity: new_screen, player: Self.loopingReelPlayer)
+//                Self.videoAsssetQueue.play()
             }
         }
         
@@ -433,7 +470,7 @@ class AppModel {
         
         self.headAnchor = AnchorEntity(.head)
         self.headAnchor.anchoring.trackingMode = .once
-
+        
         self.floorAnchor = AnchorEntity(.plane(.horizontal, classification: .floor, minimumBounds: [0.5, 0.5]))
         self.floorAnchor.anchoring.trackingMode = .once
         
@@ -442,7 +479,7 @@ class AppModel {
         
         self.rightIndex = AnchorEntity(.hand(.right, location: .indexFingerTip))
         self.rightIndex.anchoring.trackingMode = .continuous
-
+        
         spaceOrigin.addChild(headAnchor)
         spaceOrigin.addChild(floorAnchor)
         spaceOrigin.addChild(leftIndex)
@@ -484,12 +521,12 @@ class AppModel {
                 // Scale down the asteroid
                 asteroid.scale = SIMD3<Float>(repeating: 0.3)
                 
-//                mainTrackEntity.components[SpatialAudioComponent.self]?.gain = 0.0
+                //                mainTrackEntity.components[SpatialAudioComponent.self]?.gain = 0.0
                 
                 // Add spatial audio for first 4 asteroids using OrbController pattern
                 if i < 4 {
                     let audioSource = Entity()
-                    audioSource.spatialAudio = SpatialAudioComponent(gain: -3)
+                    audioSource.spatialAudio = SpatialAudioComponent(gain: -1.5)
                     asteroid.addChild(audioSource)
                     radius = 2;
                     
@@ -528,7 +565,7 @@ class AppModel {
         screen_entity.modelComponent!.materials = [material]
         player.play()
     }
- 
+    
     func createAsteroidField() {
         // Register the asteroid system
         AsteroidSystem.registerSystem()
@@ -544,7 +581,7 @@ class AppModel {
         eltlongjlohng.scale = SIMD3<Float>(repeating: 4)
         eltlongjlohng.position = SIMD3<Float>(0, 2, -10) // Adjust position as needed
         
-       
+        
         
         // Add asteroid component for orbital motion
         let component = AsteroidComponent(
@@ -555,7 +592,7 @@ class AppModel {
             height: 2.0
         )
         eltlongjlohng.components.set(component)
-//        eltlongjlohng.addChild(self.mainTrackEntity)
+        //        eltlongjlohng.addChild(self.mainTrackEntity)
         
         // silence single main track
         Task {
@@ -581,7 +618,7 @@ class AppModel {
         }
         audioSource.spatialAudio?.distanceAttenuation = .rolloff(factor: 0.1)
         
-
+        
         
         // Add to container
         asteroid_container.addChild(eltlongjlohng)

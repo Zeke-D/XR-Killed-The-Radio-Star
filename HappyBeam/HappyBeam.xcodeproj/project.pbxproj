@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A07FBCB2D43E5B800D26F6F /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A07FBCA2D43E5B800D26F6F /* AudioKit */; };
+		0A0906392D47F598005ED07B /* TRAVELSPATIAL.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0A0906382D47F598005ED07B /* TRAVELSPATIAL.mov */; };
 		0A1FD36A2D4468E60062D7B4 /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */; };
 		0A5EE8C62D45AE1600072F1B /* CustomAudioSoure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */; };
 		0A74B0C12D46201800498CB7 /* SNAPWETRIGHT.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */; };
@@ -57,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0906382D47F598005ED07B /* TRAVELSPATIAL.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = TRAVELSPATIAL.mov; path = ../VIDEOS/TRAVELSPATIAL.mov; sourceTree = "<group>"; };
 		0A1FD3692D4468E60062D7B4 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnalyzer.swift; sourceTree = "<group>"; };
 		0A5EE8C52D45AE1500072F1B /* CustomAudioSoure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAudioSoure.swift; sourceTree = "<group>"; };
 		0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SNAPWETRIGHT.mp3; path = ../SFX/SNAPWETRIGHT.mp3; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		321A0C02291C02B70042A987 = {
 			isa = PBXGroup;
 			children = (
+				0A0906382D47F598005ED07B /* TRAVELSPATIAL.mov */,
 				0A74B0C02D46201800498CB7 /* SNAPWETRIGHT.mp3 */,
 				B36048DD2D467F2900C7B8D1 /* Cinematic_H264.mp4 */,
 				E84352192D462366007A34EA /* MUSIC */,
@@ -397,6 +400,7 @@
 				E8A2E6F72D460122006CE36B /* eltlongjlohng.usdz in Resources */,
 				E82F24BA2D45BFF600E69E98 /* Asteroid.usdz in Resources */,
 				0AAF2DD02D44B2F1007412A3 /* concert.MOV in Resources */,
+				0A0906392D47F598005ED07B /* TRAVELSPATIAL.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

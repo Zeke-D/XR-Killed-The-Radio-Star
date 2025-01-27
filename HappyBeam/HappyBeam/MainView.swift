@@ -84,19 +84,17 @@ struct MainView:  View {
             .onEnded({ val in
                 if appModel.grabbedEntity != nil {
                     if appModel.grabbedEntity == val.entity {
+                        val.entity.components.remove(GrabbedComponent.self)
+                        appModel.asteroid_container.addChild(val.entity)
+                        appModel.grabbedEntity = nil
+
                         if val.entity.components.has(EltonComponent.self) {
                             // Keep the Y stretch ratio but restore normal size
                             let currentScale = val.entity.scale
                             let yStretchRatio = currentScale.y / currentScale.x
                             let newScale = SIMD3<Float>(4, 4 * yStretchRatio, 4)
-                            val.entity.components.remove(GrabbedComponent.self)
-                            appModel.asteroid_container.addChild(val.entity)
-                            appModel.grabbedEntity = nil
                             val.entity.setScale(newScale, relativeTo: nil)
                         } else {
-                            val.entity.components.remove(GrabbedComponent.self)
-                            appModel.asteroid_container.addChild(val.entity)
-                            appModel.grabbedEntity = nil
                             val.entity.setScale(val.entity.scale * 3.0, relativeTo: val.entity.parent)
                         }
                     }

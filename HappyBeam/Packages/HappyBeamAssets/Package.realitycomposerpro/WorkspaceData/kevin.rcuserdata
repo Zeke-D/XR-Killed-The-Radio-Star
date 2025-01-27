@@ -2,7 +2,7 @@
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
     "Cloud.usda",
-    "xrk\/Untitled Scene.usda"
+    "xrk\/eltlongjlohng.usdc"
   ],
   "recentIdentifiers" : {
     "6F0356C3-A010-42E9-AD64-DBC18EB5CB70" : [
@@ -231,10 +231,34 @@
           1
         ]
       }
+    ],
+    "E4583AA6-2401-4DB3-AC36-C47CD1676234" : [
+      {
+        "date" : 759698182.871978,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          -0,
+          0,
+          -0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          3.6135316e-07,
+          2.9503198,
+          2.7302723,
+          1
+        ]
+      }
     ]
   },
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "xrk\/Untitled Scene.usda"
+  "selectedSceneRelativePath" : "xrk\/eltlongjlohng.usdc"
 }
